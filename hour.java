@@ -11,12 +11,6 @@ public class hour {
 
     private static void time(double hour, double min) {
         int countDay = 0, countHour = 0;
-        if (hour >= 24) {
-            while (hour >= 24) {
-                hour -= 24;
-                countDay++;
-            }
-        }
         if (min >= 60) {
             while (min >= 60) {
                 min -= 60;
@@ -24,6 +18,13 @@ public class hour {
                 hour += countHour;
             }
         }
+        if (hour >= 24) {
+            while (hour >= 24) {
+                hour -= 24;
+                countDay++;
+            }
+        }
+
         System.out.printf("%d day %.0f hour and %.0f min ", countDay, hour, min);
     }
 }
