@@ -3,8 +3,8 @@ package Task;
 public class hour {
     public static void main(String[] args) {
 
-        double hour = 48;
-        double min = 60;
+        double hour = 0;
+        double min = 600;
 
         time(hour, min);
     }
@@ -15,8 +15,8 @@ public class hour {
             while (min >= 60) {
                 min -= 60;
                 countHour++;
-                hour += countHour;
             }
+            hour += countHour;
         }
         if (hour >= 24) {
             while (hour >= 24) {
