@@ -24,7 +24,6 @@ public class hour {
                 countDay++;
             }
         }
-
         System.out.printf("%d day %.0f hour and %.0f min ", countDay, hour, min);
     }
 }
