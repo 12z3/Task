@@ -1,13 +1,6 @@
 package Task;
 
 public class hour {
-    public static void main(String[] args) {
-
-        double hour = 5 * 24;
-        double min = 100 * 60;
-
-        time(hour, min);
-    }
 
     private static void time(double hour, double min) {
         int countDay = 0, countHour = 0;
@@ -25,5 +18,12 @@ public class hour {
             }
         }
         System.out.printf("%d day %.0f hour and %.0f min ", countDay, hour, min);
+    }
+    public static void main(String[] args) {
+
+        double hour = 5 * 24;
+        double min = 24 * 60;
+
+        time(hour, min);
     }
 }
