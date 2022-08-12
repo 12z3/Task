@@ -3,8 +3,8 @@ package Task;
 public class hour {
     public static void main(String[] args) {
 
-        double hour = 0;
-        double min = 600;
+        double hour = 5 * 24;
+        double min = 100 * 60;
 
         time(hour, min);
     }
