@@ -17,12 +17,12 @@ public class SpentTime {
                 countDay++;
             }
         }
-        System.out.printf("%02d day %02d hour and %02d min ", countDay, hour, min);
+        System.out.printf("%02d day %02d hour and %02d min ", countDay, hour, min);     // 15 day 05 hour and 15 min
     }
     public static void main(String[] args) {
 
         int hour = 15 * 24;
-        int min = 1 * 63;
+        int min = 5 * 63;
 
         spentTime(hour, min);
     }
