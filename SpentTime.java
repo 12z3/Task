@@ -2,7 +2,7 @@ package Task;
 
 public class SpentTime {
 
-    private static void spentTime(double hour, double min) {
+    private static void spentTime(int hour, int min) {
         int countDay = 0, countHour = 0;
         if (min >= 60) {
             while (min >= 60) {
@@ -17,12 +17,12 @@ public class SpentTime {
                 countDay++;
             }
         }
-        System.out.printf("%d day %.0f hour and %.0f min ", countDay, hour, min);
+        System.out.printf("%02d day %02d hour and %02d min ", countDay, hour, min);
     }
     public static void main(String[] args) {
 
-        double hour = 5 * 24;
-        double min = 24 * 60;
+        int hour = 15 * 24;
+        int min = 1 * 63;
 
         spentTime(hour, min);
     }
