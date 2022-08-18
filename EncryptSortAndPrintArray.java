@@ -7,6 +7,7 @@ public class EncryptSortAndPrintArray {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        // Unsolved !!!
 
         char[] letters = {'a', 'e', 'i', 'o', 'u', 'y'};
         int n = scanner.nextInt();
