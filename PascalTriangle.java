@@ -1,5 +1,7 @@
 package Task;
 
+import java.util.Scanner;
+
 public class PascalTriangle {
     /**
      * @Problem: The triangle may be constructed in the following manner:
@@ -33,11 +35,13 @@ public class PascalTriangle {
      * 1 12 66 220 495 792 924 792 495 220 66 12 1
      */
 
-    public static void main(String[] args) {
-        int n = 15;
-        int[][] a = new int[n][n];
+    public static void pascalTriangle() {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        int k = n + 2;
+        int[][] a = new int[k][k];
 
-        for (int row = 1; row < n - 1; row++) {
+        for (int row = 1; row < k - 1; row++) {
             for (int col = 1; col < row + 1; col++) {
                 a[row][1] = 1;
                 if (row > 1) {
@@ -48,5 +52,9 @@ public class PascalTriangle {
             }
             System.out.println();
         }
+    }
+
+    public static void main(String[] args) {
+        pascalTriangle();
     }
 }
