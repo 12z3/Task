@@ -1,6 +1,9 @@
 package Task;
+
 import training.Methods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 public class IncreasingSubsequence extends Methods {
 
@@ -19,12 +22,25 @@ public class IncreasingSubsequence extends Methods {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        String[] input = scanner.nextLine().split(" ");
-        int[] arrInput = new int[input.length];
+        //String[] input = scanner.nextLine().split(" ");
+        //int[] arrInput = new int[input.length];
+        List<Integer> inputL = new ArrayList<>(List.of(7, 3, 5, 8, -1, 0, 6, 7));
+        List<Integer> result = new ArrayList<>();
 
-        for (int i = 0; i < arrInput.length; i++) {
-            arrInput[i] = Integer.parseInt(input[i]);
+        for (int i = 0; i < inputL.size(); i++) {
+
+            int a = inputL.get(i);
+            for (int j = i + 1; j < inputL.size(); j++) {
+                int b = inputL.get(j);
+                if (a < b){
+                    result.add(a);
+                    result.add(b);
+                    System.out.println(result);
+                }
+            }
         }
+
+
 
 
 
