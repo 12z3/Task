@@ -9,17 +9,18 @@ public class aboutDigits {
         int number = 12345;
         int x = number, digit = 0, digit1 = 0;
 
-        String[] numbers = String.valueOf(number).split("");
-
         while ( number > 0){
             digit = (digit * 10) + number % 10;
             number = number/10;
         }
         System.out.println(x + " -> " + digit);
+
+        String[] numbers = String.valueOf(number).split("");
         System.out.print("numbers[] = ");
 
         for (String el: numbers) System.out.print(el);
         System.out.println();
+
         for (String el: numbers){
             digit1 = (digit1 * 10) + Integer.parseInt(el);
         }
