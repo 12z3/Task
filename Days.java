@@ -7,8 +7,7 @@ public class Days {
         Scanner scan = new Scanner(System.in);
 
         /**
-         В зависимост от въведените ден и месец
-         пресмята денят след 5 дни.
+         @Idea: В зависимост от въведените ден и месец пресмята денят след 5 дни.
          */
 
         System.out.print("Input Day: ");
