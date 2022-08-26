@@ -13,10 +13,10 @@ public class aboutDigits {
             digit = (digit * 10) + number % 10;
             number = number / 10;
         }
-        System.out.println(x + " -> " + digit);
+        System.out.println("digit = " + digit);
 
-        String[] numbers = String.valueOf(number).split("");
-        
+        String[] numbers = String.valueOf(x).split("");
+
         System.out.print("numbers[] = ");
         for (String el : numbers) System.out.print(el);
         System.out.println();
