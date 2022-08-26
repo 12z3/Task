@@ -16,8 +16,8 @@ public class aboutDigits {
         System.out.println(x + " -> " + digit);
 
         String[] numbers = String.valueOf(number).split("");
+        
         System.out.print("numbers[] = ");
-
         for (String el : numbers) System.out.print(el);
         System.out.println();
 
