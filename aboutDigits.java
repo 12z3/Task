@@ -1,12 +1,15 @@
 package Task;
 
 public class aboutDigits {
+    /**
+     * @Idea: Как се генерира число от друго число.
+     */
+
     public static void main(String[] args) {
         int number = 12345;
+        int x = number, digit = 0, digit1 = 0;
+
         String[] numbers = String.valueOf(number).split("");
-        int x = number;
-        int digit = 0;
-        int digit1 = 0;
 
         while ( number > 0){
             digit = (digit * 10) + number % 10;
