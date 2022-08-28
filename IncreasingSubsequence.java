@@ -1,18 +1,16 @@
 package Task;
 
 import training.Methods;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
 public class IncreasingSubsequence extends Methods {
 
-    // -> Unsolved...
-    
     /**
      * @Problem: Read a list of integers and find the longest increasing subsequence (LIS).
      * If several such exist, print the leftmost.
-     *
+     * <p>
      * 1	                                  -> 1
      * 7 3 5 8 -1 0 6 7	                      -> 3 5 6 7
      * 1 2 5 3 5 2 4 1	                      -> 1 2 3 5
@@ -28,22 +26,23 @@ public class IncreasingSubsequence extends Methods {
         //int[] arrInput = new int[input.length];
         List<Integer> inputL = new ArrayList<>(List.of(7, 3, 5, 8, -1, 0, 6, 7));
         List<Integer> result = new ArrayList<>();
+        StringBuilder stb = new StringBuilder();
 
         for (int i = 0; i < inputL.size(); i++) {
-
-            int a = inputL.get(i);
+            stb.delete(0, stb.length());
+            stb.append(inputL.get(i));
             for (int j = i + 1; j < inputL.size(); j++) {
-                int b = inputL.get(j);
-                if (a < b){
-                    result.add(a);
-                    result.add(b);
-                    System.out.println(result);
+                result.remove(inputL.get(i));
+                result.remove(inputL.get(j));
+                if (inputL.get(i) < inputL.get(j)) {
+                    stb.append(inputL.get(j));
+                    result.add(inputL.get(i));
+                    result.add(inputL.get(j));
                 }
             }
+            // System.out.println(stb);
+            System.out.println(result);
         }
-
-
-
 
 
     }
