@@ -3,6 +3,7 @@ package Task;
 import training.Methods;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
@@ -27,7 +28,7 @@ public class IncreasingSubsequence extends Methods {
         List<Integer> input = new ArrayList<>(List.of
                 (11, 12, 13, 3, 14, 4, 15, 5, 6, 7, 8, 7, 16, 9, 8));            // 3 4 5 6 7 8 16
         increasingSubsequence(input);                                          // 3, 14, 4, 15, 5, 6, 7, 8, 7, 9, 8 - My
-    }
+    }                                                                          // 3, 4, 5, 6, 7, 7, 8, 8, 9, 14, 15, 16
 
     private static void increasingSubsequence(List<Integer> input) {
         List<Integer> result;
@@ -45,15 +46,16 @@ public class IncreasingSubsequence extends Methods {
             //int last = a;
             for (int j = i + 1; j < input.size(); j++) {
                 int last = a;
-                if (last < input.get(j) && input.get(j) != max) {
+                if (last < input.get(j)) {
                     last = input.get(j);
                     result.add(last);
+                    Collections.sort(result);
                 }
             }
             res.add(result);
         }
 
-        for (List el: res){
+        for (List el : res) {
             System.out.println(el);
         }
     }
