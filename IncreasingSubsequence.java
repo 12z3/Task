@@ -66,7 +66,7 @@ public class IncreasingSubsequence extends Methods {
                 return el;
             }
         }
-        return new ArrayList();
+        return new ArrayList(List.of(0));
     }
 }
 
