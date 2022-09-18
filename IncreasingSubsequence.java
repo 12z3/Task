@@ -26,14 +26,15 @@ public class IncreasingSubsequence extends Methods {
         //List<Integer> input = new ArrayList<>(List.of(7, 3, 5, 8, -1, 0, 6, 7));
         List<Integer> input = new ArrayList<>(List.of
                 (11, 12, 13, 3, 14, 4, 15, 5, 6, 7, 8, 7, 16, 9, 8));            // 3 4 5 6 7 8 16
-        System.out.println(increasingSubsequence(input));                      // 3, 14, 4, 15, 5, 6, 7, 8, 7, 9, 8 - My
-    }                                                                          // 3, 4, 5, 6, 7, 7, 8, 8, 9, 14, 15, 16
+        System.out.println(increasingSubsequence(input));                     // 3, 14, 4, 15, 5, 6, 7, 8, 7, 9, 8 - My
+    }
 
     private static List increasingSubsequence(List<Integer> input) {
         List<Integer> result;
         List<List<Integer>> res = new ArrayList<>();
         int max = Integer.MIN_VALUE;
 
+        input.add(-100);
         for (int i = 0; i < input.size(); i++) {
             if (input.get(i) > max) max = input.get(i);
         }
@@ -42,15 +43,17 @@ public class IncreasingSubsequence extends Methods {
             result = new ArrayList<>();
             int a = input.get(i);
             result.add(a);
-            //int last = a;
-            for (int j = i + 1; j < input.size(); j++) {
-                int last = a;
+            //int last = a;                                                      // 3, 14, 15, 16
+            for (int j = i + 1; j < input.size() - 1; j++) {
+                int last = a;                                                   // 3, 14, 4, 15, 5, 6, 7, 8, 7, 9, 8
+                int next = input.get(j + 1);
                 if (last < input.get(j)) {
                     last = input.get(j);
                     result.add(last);
                 }
             }
             res.add(result);
+            System.out.println(result);
         }
          return  getResult(res);
     }
