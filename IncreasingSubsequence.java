@@ -26,14 +26,13 @@ public class IncreasingSubsequence extends Methods {
         //List<Integer> input = new ArrayList<>(List.of(7, 3, 5, 8, -1, 0, 6, 7));
         List<Integer> input = new ArrayList<>(List.of
                 (11, 12, 13, 3, 14, 4, 15, 5, 6, 7, 8, 7, 16, 9, 8));            // 3 4 5 6 7 8 16
-        increasingSubsequence(input);
+        increasingSubsequence(input);                                          // 3, 14, 4, 15, 5, 6, 7, 8, 7, 9, 8 - My
     }
 
     private static void increasingSubsequence(List<Integer> input) {
-        List<Integer> result = new ArrayList<>();
+        List<Integer> result;
         List<List<Integer>> res = new ArrayList<>();
-        StringBuilder stb = new StringBuilder();
-        int max = Integer.MIN_VALUE, maxSize = Integer.MIN_VALUE;
+        int max = Integer.MIN_VALUE;
 
         for (int i = 0; i < input.size(); i++) {
             if (input.get(i) > max) max = input.get(i);
