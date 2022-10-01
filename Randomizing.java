@@ -18,7 +18,7 @@ public class Randomizing {
     }
 
     private static void randomizing(List<Integer> list) {
-        List<Integer> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();                           //  Помни досега генерираните числа
         int min = 0, stopCriteria = 0, max = list.size() - 1;
 
         while (true) {
@@ -28,13 +28,13 @@ public class Randomizing {
                 System.out.print(list.get(random) + " ");
                 numbers.add(list.get(random));
                 stopCriteria++;
-                if (stopCriteria == list.size()) return;
+                if (stopCriteria == list.size()) break;
             }
         }
     }
 
-    private static boolean isMatch(List<Integer> numbers, int digit) {
-        for (int el : numbers) {
+    private static boolean isMatch(List<Integer> numbers, int digit) {         // Търси за съвпадение на текущото и
+        for (int el : numbers) {                                               // ... генерираните до момента числа
             if (el == digit) return true;
         }
         return false;
@@ -47,7 +47,6 @@ public class Randomizing {
             int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
             swap(list, i, randomIndex);
         }
-
         for (int el : list) System.out.print(el + " ");
     }
 
