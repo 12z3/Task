@@ -6,6 +6,7 @@ import java.util.List;
 public class Randomizing {
     /**
      * @Problem: <a href="https://www.youtube.com/watch?v=H57pSYrPv-g">...</a>
+     * Time: 38:46
      */
 
     public static void main(String[] args) {
