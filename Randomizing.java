@@ -45,11 +45,15 @@ public class Randomizing {
 
         for (int i = 0; i < list.size(); i++) {
             int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
-            int tmp = list.get(i);
-            list.set(i, list.get(randomIndex));
-            list.set(randomIndex, tmp);
+            swap(list, i, randomIndex);
         }
 
         for (int el : list) System.out.print(el + " ");
+    }
+
+    private static void swap(List<Integer> list, int i, int randomIndex) {
+        int tmp = list.get(i);
+        list.set(i, list.get(randomIndex));
+        list.set(randomIndex, tmp);
     }
 }
