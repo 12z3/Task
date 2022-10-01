@@ -51,9 +51,9 @@ public class Randomizing {
         for (int el : list) System.out.print(el + " ");
     }
 
-    private static void swap(List<Integer> list, int i, int randomIndex) {
-        int tmp = list.get(i);
-        list.set(i, list.get(randomIndex));
-        list.set(randomIndex, tmp);
+    private static void swap(List<Integer> list, int pos1, int pos2) {
+        int tmp = list.get(pos1);
+        list.set(pos1, list.get(pos2));
+        list.set(pos2, tmp);
     }
 }
