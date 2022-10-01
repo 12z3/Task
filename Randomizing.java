@@ -19,7 +19,7 @@ public class Randomizing {
 
     private static void randomizing(List<Integer> list) {
         List<Integer> numbers = new ArrayList<>();
-        int min = 0, count = 0,
+        int min = 0, stopCriteria = 0,
                 previously = 0, max = list.size() - 1;
 
         while (true) {
@@ -28,8 +28,8 @@ public class Randomizing {
             if (!isCheck(numbers, list.get(random))) {
                 System.out.print(list.get(random) + " ");
                 numbers.add(list.get(random));
-                count++;
-                if (count == list.size()) return;
+                stopCriteria++;
+                if (stopCriteria == list.size()) return;
             }
         }
     }
