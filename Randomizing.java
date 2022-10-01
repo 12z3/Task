@@ -19,8 +19,7 @@ public class Randomizing {
 
     private static void randomizing(List<Integer> list) {
         List<Integer> numbers = new ArrayList<>();
-        int min = 0, stopCriteria = 0,
-                previously = 0, max = list.size() - 1;
+        int min = 0, stopCriteria = 0, max = list.size() - 1;
 
         while (true) {
             int random = (int) (Math.random() * ((max - min) + 1)) + min;
