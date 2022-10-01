@@ -14,7 +14,7 @@ public class Randomizing {
         List<Integer> list = new ArrayList<>(List.of(10, 5, 56, 8, 98));
         randomizing(list);
         System.out.println();
-        shifting(list);
+        randomizingWithShifting(list);
     }
 
     private static void randomizing(List<Integer> list) {
@@ -40,7 +40,7 @@ public class Randomizing {
         return false;
     }
 
-    private static void shifting(List<Integer> list) {
+    private static void randomizingWithShifting(List<Integer> list) {
         int min = 0, max = list.size() - 1;
 
         for (int i = 0; i < list.size(); i++) {
