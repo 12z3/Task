@@ -24,14 +24,14 @@ public class Random {
          */
 
         System.out.print("First: ");
-        randomGen(10,5);
+        randomGen(10, 5);
         System.out.println();
         System.out.print("Second: ");
         //randomGeN(10,5);
     }
 
 
-    public static void randomGeN(int max, int min){
+    public static void randomGeN(int max, int min) {
         Random ranGen = new Random();
         for (int i = 0; i < 20; i++) {
             int random = (int) ((Math.random() * max) + min);
