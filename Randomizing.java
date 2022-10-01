@@ -10,7 +10,7 @@ public class Randomizing {
         randomizing(list);
     }
 
-    private static boolean isCheck(List<Integer> numbers, int digit) {
+    private static boolean isMatch(List<Integer> numbers, int digit) {
         for (int el : numbers) {
             if (el == digit) return true;
         }
@@ -24,7 +24,7 @@ public class Randomizing {
         while (true) {
             int random = (int) (Math.random() * ((max - min) + 1)) + min;
 
-            if (!isCheck(numbers, list.get(random))) {
+            if (!isMatch(numbers, list.get(random))) {
                 System.out.print(list.get(random) + " ");
                 numbers.add(list.get(random));
                 stopCriteria++;
