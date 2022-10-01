@@ -19,6 +19,8 @@ public class Random {
          * double random = Math.random() * 49 + 1;
          * or
          * int random = (int )(Math.random() * 50 + 1);
+         *
+         * int random = (int)(Math.random() * ((max - min) + 1)) + min; <- ПРАВИЛНИЯТ НАЧИН.
          */
 
         System.out.print("First: ");
