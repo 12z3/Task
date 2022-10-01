@@ -42,9 +42,9 @@ public class Randomizing {
 
     private static void shifting(List<Integer> list) {
         int min = 0, max = list.size() - 1;
-        int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
 
         for (int i = 0; i < list.size(); i++) {
+            int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
             int tmp = list.get(i);
             list.set(i, list.get(randomIndex));
             list.set(randomIndex, tmp);
