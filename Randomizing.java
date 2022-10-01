@@ -3,7 +3,7 @@ package hackerRank;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Randomizing {
+public class RandomizingMy {
     public static void main(String[] args) {
 
         List<Integer> list = new ArrayList<>(List.of(10, 5, 56, 8, 98));
