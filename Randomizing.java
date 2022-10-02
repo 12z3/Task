@@ -28,7 +28,7 @@ public class Randomizing {
 
     private static <T> void randomizing(List<T> list) {
         Random random = new Random();
-        List<T> numbers = new ArrayList<>();
+        List<T> elements = new ArrayList<>();
         int min = 0, stopCriteria = 0, max = list.size() - 1;
 
         while (true) {
@@ -36,17 +36,17 @@ public class Randomizing {
             int randomIndex = random.nextInt(list.size());
             T currentElement = list.get(randomIndex);
 
-            if (!isContained(numbers, currentElement)) {
+            if (!isContained(elements, currentElement)) {
                 System.out.print(list.get(randomIndex) + " ");
-                numbers.add(currentElement);
+                elements.add(currentElement);
                 stopCriteria++;
                 if (stopCriteria == list.size()) break;
             }
         }
     }
 
-    private static <T> boolean isContained(List<T> numbers, T currentElement) {
-        for (T el : numbers) {
+    private static <T> boolean isContained(List<T> elements, T currentElement) {
+        for (T el : elements) {
             if (el.equals(currentElement)) return true;
         }
         return false;
