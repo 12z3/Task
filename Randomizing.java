@@ -10,7 +10,6 @@ public class Randomizing {
      * Time: 38:46
      * @randomizingWithShifting(list): Разменя местата на текущият елемент -
      * - с число на което индекса му е произволно генериран.
-     *
      * @randomizing: Избира елемент чийто индекс е произволен, записва го в масив.
      * Генерира втори елемент и проверява дали е наличен в масива. Ако не е наличен го печата записва го в масива.
      */
@@ -27,15 +26,15 @@ public class Randomizing {
         randomizingWithShifting(listStr);
     }
 
-    private static void randomizing(List<Integer> list) {
+    private static <T> void randomizing(List<T> list) {
         Random random = new Random();
-        List<Integer> numbers = new ArrayList<>();
+        List<T> numbers = new ArrayList<>();
         int min = 0, stopCriteria = 0, max = list.size() - 1;
 
         while (true) {
             int randomIndex1 = (int) (Math.random() * ((max - min) + 1)) + min;
             int randomIndex = random.nextInt(list.size());
-            int currentElement = list.get(randomIndex);
+            T currentElement = list.get(randomIndex);
 
             if (!isContained(numbers, currentElement)) {
                 System.out.print(list.get(randomIndex) + " ");
@@ -46,9 +45,9 @@ public class Randomizing {
         }
     }
 
-    private static boolean isContained(List<Integer> numbers, int currentElement) {
-        for (int el : numbers) {
-            if (el == currentElement) return true;
+    private static <T> boolean isContained(List<T> numbers, T currentElement) {
+        for (T el : numbers) {
+            if (el.equals(currentElement)) return true;
         }
         return false;
     }
