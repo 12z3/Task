@@ -26,9 +26,9 @@ public class LongestSubstringSolution {
             stb.append(str.charAt(i));
 
             for (int j = i + 1; j < str.length(); j++) {
-                boolean isContained = false;
-                isContained = isContainedInSTB(str, i, stb, j);
-                if (isContained) {
+                boolean isCriteriaFalse = false;
+                isCriteriaFalse = isThisContainedInSTB(str, i, stb, j);
+                if (isCriteriaFalse) {
                     stb.delete(0, stb.length());
                     break;
                 } else addToSTB(str, stb, j);
@@ -46,7 +46,7 @@ public class LongestSubstringSolution {
     }
 
 
-    private static boolean isContainedInSTB(String str, int index, StringBuilder stb, int currentIndex) {
+    private static boolean isThisContainedInSTB(String str, int index, StringBuilder stb, int currentIndex) {
         boolean isContainsInSB = false;
         if (str.charAt(index) != str.charAt(currentIndex)) {
             for (int k = 0; k < stb.length(); k++) {
