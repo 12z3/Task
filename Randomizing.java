@@ -37,7 +37,7 @@ public class Randomizing {
             T currentElement = list.get(randomIndex);
 
             if (!isContained(elements, currentElement)) {
-                System.out.print(list.get(randomIndex) + " ");
+                System.out.print(currentElement + " ");
                 elements.add(currentElement);
                 stopCriteria++;
                 if (stopCriteria == list.size()) break;
