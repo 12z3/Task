@@ -17,11 +17,14 @@ public class Randomizing {
 
     public static void main(String[] args) {
 
-        List<Integer> list = new ArrayList<>(List.of(10, 5, 56, 8, 98));
+        List<Integer> listInt = new ArrayList<>(List.of(10, 5, 56, 8, 98));
+        List<Character> listCh = new ArrayList<>(List.of('a', 'b', 'c', 'd', 'f'));
+        List<String> listStr = new ArrayList<>(List.of("Удрйй...", "Бах Го.", "Опаа.", "У бре,", "Не моЕ ли ..."));
 
-        randomizing(list);
+
+        randomizing(listInt);
         System.out.println();
-        randomizingWithShifting(list);
+        randomizingWithShifting(listStr);
     }
 
     private static void randomizing(List<Integer> list) {
