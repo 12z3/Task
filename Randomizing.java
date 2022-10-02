@@ -2,40 +2,50 @@ package hackerRank;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Randomizing {
     /**
      * @Problem: <a href="https://www.youtube.com/watch?v=H57pSYrPv-g">...</a>
      * Time: 38:46
+     * @randomizingWithShifting(list): Разменя местата на текущият елемент -
+     * - с число на което индекса му е произволно генериран.
+     *
+     * @randomizing: Избира елемент чийто индекс е произволен, записва го в масив.
+     * Генерира втори елемент и проверява дали е наличен в масива. Ако не е наличен го печата записва го в масива.
      */
 
     public static void main(String[] args) {
 
         List<Integer> list = new ArrayList<>(List.of(10, 5, 56, 8, 98));
+
         randomizing(list);
         System.out.println();
         randomizingWithShifting(list);
     }
 
     private static void randomizing(List<Integer> list) {
-        List<Integer> numbers = new ArrayList<>();                           //  Помни досега генерираните числа
+        Random random = new Random();
+        List<Integer> numbers = new ArrayList<>();
         int min = 0, stopCriteria = 0, max = list.size() - 1;
 
         while (true) {
-            int random = (int) (Math.random() * ((max - min) + 1)) + min;
+            int randomIndex1 = (int) (Math.random() * ((max - min) + 1)) + min;
+            int randomIndex = random.nextInt(list.size());
+            int currentElement = list.get(randomIndex);
 
-            if (!isMatch(numbers, list.get(random))) {
-                System.out.print(list.get(random) + " ");
-                numbers.add(list.get(random));
+            if (!isContained(numbers, currentElement)) {
+                System.out.print(list.get(randomIndex) + " ");
+                numbers.add(currentElement);
                 stopCriteria++;
                 if (stopCriteria == list.size()) break;
             }
         }
     }
 
-    private static boolean isMatch(List<Integer> numbers, int digit) {         // Търси за съвпадение на текущото и
-        for (int el : numbers) {                                               // ... генерираните до момента числа
-            if (el == digit) return true;
+    private static boolean isContained(List<Integer> numbers, int currentElement) {
+        for (int el : numbers) {
+            if (el == currentElement) return true;
         }
         return false;
     }
@@ -47,6 +57,7 @@ public class Randomizing {
             int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
             swap(list, i, randomIndex);
         }
+
         for (int el : list) System.out.print(el + " ");
     }
 
