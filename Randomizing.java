@@ -50,7 +50,7 @@ public class Randomizing {
         return false;
     }
 
-    private static void randomizingWithShifting(List<Integer> list) {
+    private static <T> void randomizingWithShifting(List<T> list) {
         int min = 0, max = list.size() - 1;
 
         for (int i = 0; i < list.size(); i++) {
@@ -58,11 +58,11 @@ public class Randomizing {
             swap(list, i, randomIndex);
         }
 
-        for (int el : list) System.out.print(el + " ");
+        for (T el : list) System.out.print(el + " ");
     }
 
-    private static void swap(List<Integer> list, int pos1, int pos2) {
-        int tmp = list.get(pos1);
+    private static <T> void swap(List<T> list, int pos1, int pos2) {
+        T tmp = list.get(pos1);
         list.set(pos1, list.get(pos2));
         list.set(pos2, tmp);
     }
