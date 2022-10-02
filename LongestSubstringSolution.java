@@ -13,7 +13,7 @@ public class LongestSubstringSolution {
          * @longestSubstringSolution1:
          */
 
-        String str1 = "abcvxztabcfghliopbb";
+        String str1 = "abcvxztabcfghliopb";
         String str = "aabccbaabcd";
 
         //longestSubstringSolution(str);
@@ -21,7 +21,6 @@ public class LongestSubstringSolution {
     }
 
     private static void longestSubstringSolution1(String str) {
-
         for (int i = 0; i < str.length(); i++) {
             StringBuilder stb = new StringBuilder();
             stb.append(str.charAt(i));
@@ -32,12 +31,10 @@ public class LongestSubstringSolution {
                 if (isContained) {
                     stb.delete(0, stb.length());
                     break;
-                }
-                addToSTB(str, stb, j);
+                } else addToSTB(str, stb, j);
             }
             if (stb.length() != 0) System.out.print(stb + " ");
         }
-
     }
 
     private static void addToSTB(String str, StringBuilder stb, int currentIndex) {
