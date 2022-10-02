@@ -26,20 +26,21 @@ public class LongestSubstringSolution {
             count = 0;
             if (i == 0) stb.append(str.charAt(i));
             for (int j = i + 1; j < str.length(); j++) {
+                boolean isContainsInSB = false;
                 if (str.charAt(i) != str.charAt(j)) {
                     for (int k = 0; k < stb.length(); k++) {
-                        if (str.charAt(j) != stb.charAt(k)){
-                            stb.append(str.charAt(j));
-                            count++;
-                        } else break;
+                        isContainsInSB = false;
+                        if (str.charAt(j) == stb.charAt(k)){
+                            isContainsInSB = true;
+                            break;
+                        }
                     }
                 }
-
+                if (isContainsInSB) break;
             }
         }
         System.out.println(stb);
     }
-
 
     private static void longestSubstringSolution(String str) {
         StringBuilder stb = new StringBuilder();
