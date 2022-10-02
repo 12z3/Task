@@ -6,9 +6,11 @@ public class LongestSubstringSolution {
          * @Problem: https://www.youtube.com/watch?v=GS9TyovoU4c
          * Търси най-дългият низ от неповтарящи се символи.
          *
-         * Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
+         * @longestSubstringSolution: Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
          * В противен случай разпечатай stb и го изтрий.
          * Добави i-та буква към стринга stb и повтори всичко отново.
+         *
+         * @longestSubstringSolution1:
          */
 
         String str1 = "abcvxztabcfghliopbb";
@@ -19,36 +21,45 @@ public class LongestSubstringSolution {
     }
 
     private static void longestSubstringSolution1(String str) {
-        StringBuilder stb1 = new StringBuilder();
-        int countI, maxLength = Integer.MIN_VALUE;
-        boolean isBreak = false;
 
         for (int i = 0; i < str.length(); i++) {
             StringBuilder stb = new StringBuilder();
             stb.append(str.charAt(i));
-            countI = 1;
+
             for (int j = i + 1; j < str.length(); j++) {
-                boolean isContainsInSB = false;
-                if (str.charAt(i) != str.charAt(j)) {
-                    for (int k = 0; k < stb.length(); k++) {
-                        if (str.charAt(j) == stb.charAt(k)) {
-                            isContainsInSB = true;
-                            break;
-                        }
-                    }
-                } else isContainsInSB = true;
-                if (isContainsInSB) {
+                boolean isContained = false;
+                isContained = isContainedInSTB(str, i, stb, j);
+                if (isContained) {
                     stb.delete(0, stb.length());
                     break;
                 }
-                if (stb.length() >= 1) {
-                    stb.append(str.charAt(j));
-                    countI++;
-                }
+                addToSTB(str, stb, j);
             }
             if (stb.length() != 0) System.out.print(stb + " ");
         }
 
+    }
+
+    private static void addToSTB(String str, StringBuilder stb, int currentIndex) {
+        int countI = 1;
+        if (stb.length() >= 1) {
+            stb.append(str.charAt(currentIndex));
+            countI++;
+        }
+    }
+
+
+    private static boolean isContainedInSTB(String str, int index, StringBuilder stb, int currentIndex) {
+        boolean isContainsInSB = false;
+        if (str.charAt(index) != str.charAt(currentIndex)) {
+            for (int k = 0; k < stb.length(); k++) {
+                if (str.charAt(currentIndex) == stb.charAt(k)) {
+                    isContainsInSB = true;
+                    break;
+                }
+            }
+        } else isContainsInSB = true;
+        return isContainsInSB;
     }
 
     private static void longestSubstringSolution(String str) {
