@@ -27,6 +27,7 @@ public class LongestSubstringSolution {
     }
 
     private static void longestSubstringSolution1(String str) {
+        System.out.printf("In: %s -> %d%n", str, str.length());
         List<Integer> counts = new ArrayList<>();
         List<String> strings = new ArrayList<>();
         int max = Integer.MIN_VALUE;
@@ -65,7 +66,7 @@ public class LongestSubstringSolution {
                 maxString = strings.get(i);
             }
         }
-        System.out.printf("%s -> %d ", maxString, max);
+        System.out.printf("Out: %s -> %d ", maxString, max);
     }
 
     private static void addToSTB(String str, StringBuilder stb, int nextIndex) {
