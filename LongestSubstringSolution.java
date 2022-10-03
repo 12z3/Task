@@ -45,8 +45,7 @@ public class LongestSubstringSolution {
                         counts.add(countSize);
                         strings.add(String.valueOf(stb));
                         stb.delete(0, stb.length());
-                    }
-                    break;
+                    } else break;
                 } else {
                     addToSTB(str, stb, nextIndex);
                     countSize++;
@@ -74,7 +73,6 @@ public class LongestSubstringSolution {
         }
     }
 
-
     private static boolean isThisContainedInSTB(String str, int index, StringBuilder stb, int nextIndex) {
         boolean isContainedInSB = false;
         if (str.charAt(index) != str.charAt(nextIndex)) {
@@ -87,6 +85,7 @@ public class LongestSubstringSolution {
         } else isContainedInSB = true;
         return isContainedInSB;
     }
+
 
     private static void longestSubstringSolution(String str) {
         StringBuilder stb = new StringBuilder();
