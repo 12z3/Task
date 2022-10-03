@@ -9,26 +9,27 @@ public class LongestSubstringSolution {
          * @Problem: https://www.youtube.com/watch?v=GS9TyovoU4c
          * Търси най-дългият низ от неповтарящи се символи.
          *
-         * @longestSubstringSolution: Сравнява ги Последователно.
-         * Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
-         * В противен случай разпечатай stb и го изтрий.
-         * Добави i-та буква към стринга stb и повтори всичко отново.
-         *
-         * @longestSubstringSolution1: Взима "а" сравнява я с всяка една от следващите "x".
+         * @longestSubstringSolution: Взима "а" сравнява я с всяка една от следващите "x".
          * Ако "x" не се съдържа в "а" добава "x" към "а"
          * В противен случай ги трие. И това се повтаря за всяка една буква.
          * Не отчита приноса на последната буква ако съвпада с предпоследната.
+         *
+         * @longestSubstringSolution1: Сравнява ги Последователно.
+         * Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
+         * В противен случай разпечатай stb и го изтрий.
+         * Добави i-та буква към стринга stb и повтори всичко отново.
          */
 
         String str = "aabcvxztabfghlioop";
         String str1 = "aabcvxztabfghliopp";
         String str2 = "aabccbaabcd";
 
+
         longestSubstringSolution(str);
-        //longestSubstringSolution1(str);
+        longestSubstringSolution1(str2);
     }
 
-    private static void longestSubstringSolution1(String str) {
+    private static void longestSubstringSolution(String str) {
         System.out.printf("In: %s -> %d%n", str, str.length());
 
         List<Integer> counts = new ArrayList<>();
@@ -92,7 +93,7 @@ public class LongestSubstringSolution {
     }
 
 
-    private static void longestSubstringSolution(String str) {
+    private static void longestSubstringSolution1(String str) {
         StringBuilder stb = new StringBuilder();
         for (int i = 0; i < str.length() - 1; i++) {
             boolean isMatch = false;
