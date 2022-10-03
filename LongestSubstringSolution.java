@@ -76,16 +76,16 @@ public class LongestSubstringSolution {
 
 
     private static boolean isThisContainedInSTB(String str, int index, StringBuilder stb, int nextIndex) {
-        boolean isContainsInSB = false;
+        boolean isContainedInSB = false;
         if (str.charAt(index) != str.charAt(nextIndex)) {
             for (int k = 0; k < stb.length(); k++) {
                 if (str.charAt(nextIndex) == stb.charAt(k)) {
-                    isContainsInSB = true;
+                    isContainedInSB = true;
                     break;
                 }
             }
-        } else isContainsInSB = true;
-        return isContainsInSB;
+        } else isContainedInSB = true;
+        return isContainedInSB;
     }
 
     private static void longestSubstringSolution(String str) {
