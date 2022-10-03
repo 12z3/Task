@@ -1,5 +1,8 @@
 package hackerRank;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class LongestSubstringSolution {
     public static void main(String[] args) {
         /**
@@ -10,38 +13,64 @@ public class LongestSubstringSolution {
          * В противен случай разпечатай stb и го изтрий.
          * Добави i-та буква към стринга stb и повтори всичко отново.
          *
-         * @longestSubstringSolution1:
+         * @longestSubstringSolution1: Взима "а" сравнява я с "b". Ако "b" не се съдържа в "а" добава "b" към "а"
+         * В противен случай ги трие. И това се повтаря за всяка една буква.
          */
 
-        String str1 = "abcvxztabcfghliopb";
-        String str = "aabccbaabcd";
+        String str = "abcvxztabfghliopp";
+        String str1 = "aabccbaabcd";
 
         //longestSubstringSolution(str);
         longestSubstringSolution1(str);
     }
 
     private static void longestSubstringSolution1(String str) {
-        for (int i = 0; i < str.length(); i++) {
-            StringBuilder stb = new StringBuilder();
-            stb.append(str.charAt(i));
+        List<Integer> counts = new ArrayList<>();
+        List<String> strings = new ArrayList<>();
+        int max = Integer.MIN_VALUE;
 
-            for (int j = i + 1; j < str.length(); j++) {
+        for (int index = 0; index < str.length(); index++) {
+            int countSize = 0;
+            StringBuilder stb = new StringBuilder();
+            stb.append(str.charAt(index));
+            countSize++;
+
+            for (int currentIndex = index + 1; currentIndex < str.length(); currentIndex++) {
                 boolean isCriteriaFalse = false;
-                isCriteriaFalse = isThisContainedInSTB(str, i, stb, j);
-                if (isCriteriaFalse) {
+                isCriteriaFalse = isThisContainedInSTB(str, index, stb, currentIndex);
+                if (isCriteriaFalse && index < str.length() - 1) {
+                    addToSTB(str, stb, currentIndex);
+                    countSize++;
+                    counts.add(countSize);
+                    strings.add(String.valueOf(stb));
+
                     stb.delete(0, stb.length());
                     break;
-                } else addToSTB(str, stb, j);
+                } else {
+                    addToSTB(str, stb, currentIndex);
+                    countSize++;
+                }
             }
-            if (stb.length() != 0) System.out.print(stb + " ");
+            if (stb.length() != 0) {
+                //System.out.print(stb + " ");
+                counts.add(countSize);
+                strings.add(String.valueOf(stb));
+            }
         }
+
+        String maxString = "";
+        for (int i = 0; i < strings.size(); i++) {
+            if (counts.get(i) > max) {
+                max = counts.get(i);
+                maxString = strings.get(i);
+            }
+        }
+        System.out.printf("%s -> %d ", maxString, max);
     }
 
     private static void addToSTB(String str, StringBuilder stb, int currentIndex) {
-        int countI = 1;
         if (stb.length() >= 1) {
             stb.append(str.charAt(currentIndex));
-            countI++;
         }
     }
 
