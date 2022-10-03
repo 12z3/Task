@@ -32,27 +32,28 @@ public class LongestSubstringSolution {
         int max = Integer.MIN_VALUE;
 
         for (int index = 0; index < str.length(); index++) {
-            int countSize = 0;
+            int countAddedElements = 0;
             StringBuilder stb = new StringBuilder();
             stb.append(str.charAt(index));
-            countSize++;
+            countAddedElements++;
 
             for (int nextIndex = index + 1; nextIndex < str.length(); nextIndex++) {
                 boolean isCriteria = false;
                 isCriteria = isThisContainedInSTB(str, index, stb, nextIndex);
                 if (isCriteria) {
-                    if (nextIndex < str.length() - 1) {
-                        counts.add(countSize);
+                    int lastIndex = str.length() - 1;
+                    if (nextIndex < lastIndex) {
+                        counts.add(countAddedElements);
                         strings.add(String.valueOf(stb));
                         stb.delete(0, stb.length());
                     } else break;
                 } else {
                     addToSTB(str, stb, nextIndex);
-                    countSize++;
+                    countAddedElements++;
                 }
             }
             if (stb.length() != 0) {
-                counts.add(countSize);
+                counts.add(countAddedElements);
                 strings.add(String.valueOf(stb));
             }
         }
