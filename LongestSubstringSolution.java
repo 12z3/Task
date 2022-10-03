@@ -15,9 +15,10 @@ public class LongestSubstringSolution {
          *
          * @longestSubstringSolution1: Взима "а" сравнява я с "b". Ако "b" не се съдържа в "а" добава "b" към "а"
          * В противен случай ги трие. И това се повтаря за всяка една буква.
+         * Не отчита приноса на последната буква.
          */
 
-        String str = "abcvxztabfghliopp";
+        String str = "aabcvxztabfghliopp";
         String str1 = "aabccbaabcd";
 
         //longestSubstringSolution(str);
@@ -35,24 +36,20 @@ public class LongestSubstringSolution {
             stb.append(str.charAt(index));
             countSize++;
 
-            for (int currentIndex = index + 1; currentIndex < str.length(); currentIndex++) {
-                boolean isCriteriaFalse = false;
-                isCriteriaFalse = isThisContainedInSTB(str, index, stb, currentIndex);
-                if (isCriteriaFalse && index < str.length() - 1) {
-                    addToSTB(str, stb, currentIndex);
-                    countSize++;
-                    counts.add(countSize);
-                    strings.add(String.valueOf(stb));
-
-                    stb.delete(0, stb.length());
+            for (int nextIndex = index + 1; nextIndex < str.length(); nextIndex++) {
+                boolean isCriteria = false;
+                isCriteria = isThisContainedInSTB(str, index, stb, nextIndex);
+                if (isCriteria) {
+                    if (nextIndex < str.length() - 1) {
+                        stb.delete(0, stb.length());
+                    }
                     break;
                 } else {
-                    addToSTB(str, stb, currentIndex);
+                    addToSTB(str, stb, nextIndex);
                     countSize++;
                 }
             }
             if (stb.length() != 0) {
-                //System.out.print(stb + " ");
                 counts.add(countSize);
                 strings.add(String.valueOf(stb));
             }
@@ -68,18 +65,18 @@ public class LongestSubstringSolution {
         System.out.printf("%s -> %d ", maxString, max);
     }
 
-    private static void addToSTB(String str, StringBuilder stb, int currentIndex) {
+    private static void addToSTB(String str, StringBuilder stb, int nextIndex) {
         if (stb.length() >= 1) {
-            stb.append(str.charAt(currentIndex));
+            stb.append(str.charAt(nextIndex));
         }
     }
 
 
-    private static boolean isThisContainedInSTB(String str, int index, StringBuilder stb, int currentIndex) {
+    private static boolean isThisContainedInSTB(String str, int index, StringBuilder stb, int nextIndex) {
         boolean isContainsInSB = false;
-        if (str.charAt(index) != str.charAt(currentIndex)) {
+        if (str.charAt(index) != str.charAt(nextIndex)) {
             for (int k = 0; k < stb.length(); k++) {
-                if (str.charAt(currentIndex) == stb.charAt(k)) {
+                if (str.charAt(nextIndex) == stb.charAt(k)) {
                     isContainsInSB = true;
                     break;
                 }
