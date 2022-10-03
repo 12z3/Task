@@ -9,25 +9,28 @@ public class LongestSubstringSolution {
          * @Problem: https://www.youtube.com/watch?v=GS9TyovoU4c
          * Търси най-дългият низ от неповтарящи се символи.
          *
-         * @longestSubstringSolution: Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
+         * @longestSubstringSolution: Сравнява ги Последователно.
+         * Ако буквата с индекс i не се съдържа в стринга stb то добави я към него.
          * В противен случай разпечатай stb и го изтрий.
          * Добави i-та буква към стринга stb и повтори всичко отново.
          *
-         * @longestSubstringSolution1: Взима "а" сравнява я с "b". Ако "b" не се съдържа в "а" добава "b" към "а"
+         * @longestSubstringSolution1: Взима "а" сравнява я с всяка една от следващите "x".
+         * Ако "x" не се съдържа в "а" добава "x" към "а"
          * В противен случай ги трие. И това се повтаря за всяка една буква.
-         * Не отчита приноса на последната буква.
+         * Не отчита приноса на последната буква ако съвпада с предпоследната.
          */
 
         String str = "aabcvxztabfghlioop";
         String str1 = "aabcvxztabfghliopp";
         String str2 = "aabccbaabcd";
 
-        //longestSubstringSolution(str);
-        longestSubstringSolution1(str);
+        longestSubstringSolution(str);
+        //longestSubstringSolution1(str);
     }
 
     private static void longestSubstringSolution1(String str) {
         System.out.printf("In: %s -> %d%n", str, str.length());
+
         List<Integer> counts = new ArrayList<>();
         List<String> strings = new ArrayList<>();
         int max = Integer.MIN_VALUE;
