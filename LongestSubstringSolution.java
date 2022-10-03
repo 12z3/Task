@@ -18,8 +18,9 @@ public class LongestSubstringSolution {
          * Не отчита приноса на последната буква.
          */
 
-        String str = "aabcvxztabfghliopp";
-        String str1 = "aabccbaabcd";
+        String str = "aabcvxztabfghlioop";
+        String str1 = "aabcvxztabfghliopp";
+        String str2 = "aabccbaabcd";
 
         //longestSubstringSolution(str);
         longestSubstringSolution1(str);
@@ -41,6 +42,8 @@ public class LongestSubstringSolution {
                 isCriteria = isThisContainedInSTB(str, index, stb, nextIndex);
                 if (isCriteria) {
                     if (nextIndex < str.length() - 1) {
+                        counts.add(countSize);
+                        strings.add(String.valueOf(stb));
                         stb.delete(0, stb.length());
                     }
                     break;
