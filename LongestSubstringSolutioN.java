@@ -104,12 +104,9 @@ public class LongestSubstringSolutioN {
                 delList.add(element);
                 stb.delete(stb.length(), stb.length());
             }
-
         }
         System.out.println(stb);
         System.out.println(delList);
         System.out.println(list);
-
     }
-
 }
