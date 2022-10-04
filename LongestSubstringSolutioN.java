@@ -87,7 +87,7 @@ public class LongestSubstringSolutioN {
         return isContainedInSB;
     }
 
-    private static void removeRepetitiveElements(String str) {            // a, b, c, d, a, f, g, k
+    private static void removeRepetitiveElements(String str) {            // [a, b, c, d, a], f, g, k]
         System.out.println(str);
         StringBuilder stb = new StringBuilder();
         List<Integer> list = new ArrayList<>();
