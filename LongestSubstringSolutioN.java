@@ -15,12 +15,12 @@ public class LongestSubstringSolutioN {
          * Не отчита приноса на последната буква ако съвпада с предпоследната.
          */
 
-        String str = "aabcvxztabfghlioop";
+        String str = "aaabcvxztabfghlioop";
         String str1 = "aabcvxztabfghliopp";
         String str2 = "aabccbaabcd";
 
-        //longestSubstringSolution(str);
-        removeRepetitiveElements(str);
+        longestSubstringSolution(str2);
+        //removeRepetitiveElements(str);
     }
 
     private static void longestSubstringSolution(String str) {
@@ -42,7 +42,7 @@ public class LongestSubstringSolutioN {
                 isCriteria = isThisContainedInSTB(str, index, stb, nextIndex);
                 if (isCriteria) {
                     int lastIndex = str.length() - 1;
-                    if (nextIndex < lastIndex) {
+                    if (nextIndex == lastIndex) {                  // Обработва случая с еднакви последни букви.
                         counts.add(countAddedElements);
                         strings.add(String.valueOf(stb));
                         stb.delete(0, stb.length());
