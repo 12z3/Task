@@ -9,6 +9,7 @@ public class StreamArray {
      * <p>
      * Arrays.stream(arr11) -> Връща последователността arr11 във вид на поток от тип String.
      * mapToInt(Integer::parseInt) -> преобразува потока от String -> int
+     * <p>
      */
 
 
