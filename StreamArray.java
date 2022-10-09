@@ -32,7 +32,7 @@ public class StreamArray {
     }
 
     private static void arraysComparator(int[] arr1, int[] arr2) {
-        int count = 0;
+        int allCounts = 0;
         for (int i = 0; i < arr1.length; i++) {
             int localCount = 0, el1 = arr1[i];
             for (int j = 0; j < arr2.length; j++) {
@@ -47,9 +47,9 @@ public class StreamArray {
                     return;
                 }
             }
-            count += localCount;
+            allCounts += localCount;
         }
-        if (count == arr1.length) {
+        if (allCounts == arr1.length) {
             System.out.println("YES");
         } else System.out.print("NO");
     }
