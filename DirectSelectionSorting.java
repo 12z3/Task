@@ -24,6 +24,7 @@ public class DirectSelectionSorting {
         }
         return arr;
     }
+
     private static int[] directSelectionSorting1(int[] arr) {
         for (int currentIndex = 0; currentIndex < arr.length; currentIndex++) {
             int minIndex = findIndex(arr, currentIndex);
