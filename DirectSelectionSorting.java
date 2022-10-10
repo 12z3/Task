@@ -11,6 +11,7 @@ public class DirectSelectionSorting {
     public static void main(String[] args) {
 
         int[] arr = {7, 3, 8, 4, 5, 2};
+        System.out.println(Arrays.toString(directSelectionSorting(arr)));
         System.out.println(Arrays.toString(directSelectionSorting1(arr)));
     }
 
