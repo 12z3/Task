@@ -16,7 +16,6 @@ public class DirectSelectionSorting {
 
     private static int[] directSelectionSorting(int[] arr) {
         int remainingNumbersInArr = 0, currentIndex = 0;
-
         while (remainingNumbersInArr < arr.length) {
             int minIndex = findMinIndex(arr, currentIndex);
             if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
