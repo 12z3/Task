@@ -25,9 +25,11 @@ public class DirectSelectionSorting {
     }
 
     private static void swap(int[] arr, int minIndex, int currentIndex) {
-        int tmp = arr[minIndex];
-        arr[minIndex] = arr[currentIndex];
-        arr[currentIndex] = tmp;
+        if (minIndex != currentIndex) {
+            int tmp = arr[minIndex];
+            arr[minIndex] = arr[currentIndex];
+            arr[currentIndex] = tmp;
+        }
     }
 
     private static int findIndex(int[] arr, int currentIndex) {
