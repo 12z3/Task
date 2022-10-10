@@ -11,7 +11,7 @@ public class DirectSelectionSorting {
     public static void main(String[] args) {
 
         int[] arr = {7, 3, 8, 4, 5, 2};
-        System.out.println(Arrays.toString(directSelectionSorting(arr)));
+        System.out.println(Arrays.toString(directSelectionSorting1(arr)));
     }
 
     private static int[] directSelectionSorting(int[] arr) {
@@ -20,6 +20,13 @@ public class DirectSelectionSorting {
             int minIndex = findIndex(arr, currentIndex);
             if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
             currentIndex++;
+        }
+        return arr;
+    }
+    private static int[] directSelectionSorting1(int[] arr) {
+        for (int currentIndex = 0; currentIndex < arr.length; currentIndex++) {
+            int minIndex = findIndex(arr, currentIndex);
+            if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
         }
         return arr;
     }
