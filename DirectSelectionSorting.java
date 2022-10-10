@@ -11,10 +11,10 @@ public class DirectSelectionSorting {
     public static void main(String[] args) {
 
         int[] arr = {7, 3, 8, 4, 5, 2};
-        directSelectionSorting(arr);
+        System.out.println(Arrays.toString(directSelectionSorting(arr)));
     }
 
-    private static void directSelectionSorting(int[] arr) {
+    private static int[] directSelectionSorting(int[] arr) {
         int remainingNumbersInArr = 0, currentIndex = 0;
 
         while (remainingNumbersInArr < arr.length) {
@@ -23,7 +23,7 @@ public class DirectSelectionSorting {
             currentIndex++;
             remainingNumbersInArr++;
         }
-        System.out.println(Arrays.toString(arr));
+        return arr;
     }
 
     private static void swap(int[] arr, int minIndex, int currentIndex) {
