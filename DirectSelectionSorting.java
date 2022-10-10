@@ -16,22 +16,21 @@ public class DirectSelectionSorting {
     }
 
     private static void directSelectionSorting(int[] arr) {
-        int remainingNumbersInArr = 0, fromIndex = 0;
+        int remainingNumbersInArr = 0, currentIndex = 0;
 
         while (remainingNumbersInArr < arr.length) {
-            int minIndex = findMin(arr, fromIndex);
-            swap(arr, minIndex, fromIndex);
-            fromIndex++;
+            int minIndex = findMin(arr, currentIndex);
+            swap(arr, minIndex, currentIndex);
+            currentIndex++;
             remainingNumbersInArr++;
         }
         System.out.println(Arrays.toString(arr));
     }
 
-    private static void swap(int[] arr, int index1, int index2) {
-        int el1 = arr[index1], el2 = arr[index1], tmp = 0;
-        tmp = arr[index1];
-        arr[index1] = arr[index2];
-        arr[index2] = tmp;
+    private static void swap(int[] arr, int minIndex, int currentIndex) {
+        int tmp = arr[minIndex];
+        arr[minIndex] = arr[currentIndex];
+        arr[currentIndex] = tmp;
     }
 
     private static int findMin(int[] arr, int fromIndex) {
