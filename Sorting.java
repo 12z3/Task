@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class Sorting {
     /**
-     * Намира най - малкото число и го слага на 1-во място.
+     * @directSelectionSorting: Намира най - малкото число и го слага на 1-во място.
      * Търси следващото най-малко като се изключва намеренето
      */
 
@@ -14,7 +14,6 @@ public class Sorting {
         System.out.println(Arrays.toString(directSelectionSorting(arr)));
         System.out.println(Arrays.toString(directSelectionSorting1(arr)));
         System.out.println(Arrays.toString(bubbleSort(arr)));
-
     }
 
     private static int[] directSelectionSorting(int[] arr) {
