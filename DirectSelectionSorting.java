@@ -8,7 +8,6 @@ public class DirectSelectionSorting {
      * Търси следващото най-малко като се изключва намеренето
      */
 
-
     public static void main(String[] args) {
 
         int[] arr = {7, 3, 8, 4, 5, 2};
@@ -20,7 +19,7 @@ public class DirectSelectionSorting {
 
         while (remainingNumbersInArr < arr.length) {
             int minIndex = findMin(arr, currentIndex);
-            swap(arr, minIndex, currentIndex);
+            if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
             currentIndex++;
             remainingNumbersInArr++;
         }
