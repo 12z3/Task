@@ -15,12 +15,12 @@ public class DirectSelectionSorting {
     }
 
     private static int[] directSelectionSorting(int[] arr) {
-        int remainingNumbersInArr = 0, currentIndex = 0;
-        while (remainingNumbersInArr < arr.length) {
-            int minIndex = findMinIndex(arr, currentIndex);
+        int arrRemainingNumbers = 0, currentIndex = 0;
+        while (arrRemainingNumbers < arr.length) {
+            int minIndex = findIndex(arr, currentIndex);
             if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
             currentIndex++;
-            remainingNumbersInArr++;
+            arrRemainingNumbers++;
         }
         return arr;
     }
@@ -31,9 +31,9 @@ public class DirectSelectionSorting {
         arr[currentIndex] = tmp;
     }
 
-    private static int findMinIndex(int[] arr, int fromIndex) {
+    private static int findIndex(int[] arr, int currentIndex) {
         int min = Integer.MAX_VALUE, minIndex = 0;
-        for (int i = fromIndex; i < arr.length; i++) {
+        for (int i = currentIndex; i < arr.length; i++) {
             if (arr[i] < min) {
                 min = arr[i];
                 minIndex = i;
