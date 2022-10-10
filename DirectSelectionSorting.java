@@ -3,7 +3,6 @@ package hackerRank;
 import java.util.Arrays;
 
 public class DirectSelectionSorting {
-
     /**
      * Намира най - малкото число и го слага на 1-во място.
      * Търси следващото най-малко като се изключва намеренето
@@ -13,18 +12,17 @@ public class DirectSelectionSorting {
     public static void main(String[] args) {
 
         int[] arr = {7, 3, 8, 4, 5, 2};
-        sorting(arr);
+        directSelectionSorting(arr);
     }
 
-    private static void sorting(int[] arr) {
-        int numbersInArr = 0, fromIndex = 0;
+    private static void directSelectionSorting(int[] arr) {
+        int remainingNumbersInArr = 0, fromIndex = 0;
 
-        while (numbersInArr < arr.length) {
+        while (remainingNumbersInArr < arr.length) {
             int minIndex = findMin(arr, fromIndex);
             swap(arr, minIndex, fromIndex);
             fromIndex++;
-            numbersInArr++;
-
+            remainingNumbersInArr++;
         }
         System.out.println(Arrays.toString(arr));
     }
@@ -46,5 +44,4 @@ public class DirectSelectionSorting {
         }
         return minIndex;
     }
-
 }
