@@ -35,10 +35,10 @@ public class Sorting {
     }
 
     private static int[] bubbleSort(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr.length; j++) {
-                if (arr[i] < arr[j]) {
-                    swap(arr, i, j);
+        for (int index1 = 0; index1 < arr.length; index1++) {
+            for (int index2 = 0; index2 < arr.length; index2++) {
+                if (arr[index1] < arr[index2]) {
+                    swap(arr, index1, index2);
                 }
             }
         }
