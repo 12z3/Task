@@ -20,30 +20,13 @@ public class Toto {
         List<Integer> count = new ArrayList<>();
         int i = 0;
         while (i < 100) {
-            count.add(generateNum(6, 39));
+            count.add(allMatches(6, 39));
             i++;
         }
         System.out.println(count);
     }
 
-    private static void generateTotoNum(int variants, int thisNumber) {
-        Random rnd = new Random();
-        List<Integer> list = new ArrayList<>();
-        List<List<Integer>> allNumbers = new ArrayList<>();
-
-        int counter = 0;
-        while (counter < variants) {
-            list = new ArrayList<>();
-            for (int k = 0; k < 6; k++) {
-                list.add(rnd.nextInt(50));
-            }
-            allNumbers.add(list);
-            counter++;
-        }
-        printResult(thisNumber, allNumbers);
-    }
-
-    private static int generateNum(int variants, int thisNumber) {
+    private static int allMatches(int variants, int thisNumber) {
         Random rnd = new Random();
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> allNumbers = new ArrayList<>();
@@ -58,6 +41,23 @@ public class Toto {
             counter++;
         }
         return allContains(allNumbers, thisNumber);
+    }
+
+    private static void generateTotoNum(int variants, int thisNumber) {
+        Random rnd = new Random();
+        List<Integer> list = new ArrayList<>();
+        List<List<Integer>> allNumbers = new ArrayList<>();
+
+        int counter = 0;
+        while (counter < variants) {
+            list = new ArrayList<>();
+            for (int k = 0; k <= 6; k++) {
+                list.add(rnd.nextInt(50));
+            }
+            allNumbers.add(list);
+            counter++;
+        }
+        printResult(thisNumber, allNumbers);
     }
 
     private static void printResult(int thisNumber, List<List<Integer>> allNumbers) {
