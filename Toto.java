@@ -13,7 +13,7 @@ public class Toto {
     public static void main(String[] args) {
 
         //allMatchesForThisNumber();
-        generateTotoNum(16, 45);
+        generateTotoNum(5, 4);
     }
 
     private static void allMatchesForThisNumber() {
@@ -46,18 +46,33 @@ public class Toto {
     private static void generateTotoNum(int variants, int thisNumber) {
         Random rnd = new Random();
         List<Integer> list = new ArrayList<>();
+        List<Integer> last = new ArrayList<>(List.of(47, 21, 45, 18, 18, 30));
         List<List<Integer>> allNumbers = new ArrayList<>();
 
         int counter = 0;
         while (counter < variants) {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
-                list.add(rnd.nextInt(50));
+                int el = rnd.nextInt(50);
+                if (!check(last, el)) {
+                    list.add(el);
+                } else k--;
             }
             allNumbers.add(list);
             counter++;
         }
         printResult(thisNumber, allNumbers);
+    }
+
+    private  static boolean check(List<Integer> l1, int l2){
+        boolean check = false;
+        for (int i = 0; i < l1.size(); i++) {
+                if (l1.get(i) == l2) {
+                    check = true;
+                    break;
+                }
+        }
+        return check;
     }
 
     private static void printResult(int thisNumber, List<List<Integer>> allNumbers) {
