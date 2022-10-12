@@ -34,8 +34,8 @@ public class Toto {
             "Numbers " + thisNumber + " contains " + allConsist(allNumbers, thisNumber) + " times.");
     }
 
-    private static boolean isConsist(List<Integer> list, int number) {
-        if (list.contains(number)) {
+    private static boolean isConsist(List<Integer> list, int thisNumber) {
+        if (list.contains(thisNumber)) {
             List<Integer> newList = new ArrayList<>(list);
             System.out.println(newList);
             return true;
@@ -43,10 +43,10 @@ public class Toto {
         return false;
     }
 
-    private static int allConsist(List<List<Integer>> allNumbers, int number) {
+    private static int allConsist(List<List<Integer>> allNumbers, int thisNumber) {
         int countConsist = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
-            if (isConsist(allNumbers.get(i), number)) countConsist++;
+            if (isConsist(allNumbers.get(i), thisNumber)) countConsist++;
         }
         return countConsist;
     }
