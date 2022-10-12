@@ -11,8 +11,6 @@ public class Toto {
      */
 
     public static void main(String[] args) {
-
-        //allMatchesForThisNumber();
         generateTotoNum(5, 4);
     }
 
@@ -87,15 +85,19 @@ public class Toto {
                 "Numbers " + thisNumber + " contains " + allContains(allNumbers, thisNumber) + " times.");
     }
 
-    private static boolean isContains(List<Integer> list, int thisNumber) {
-        if (list.contains(thisNumber)) return true;
-        return false;
+    private static int isContains(List<Integer> list, int thisNumber) {
+        int count = 0;
+        if (list.contains(thisNumber)) {
+            count++;
+            return count;
+        }
+        return -1;
     }
 
     private static int allContains(List<List<Integer>> allNumbers, int thisNumber) {
         int countConsist = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
-            if (isContains(allNumbers.get(i), thisNumber)) {
+            if (isContains(allNumbers.get(i), thisNumber) != -1) {
                 countConsist++;
                 System.out.println(allNumbers.get(i));
             }
