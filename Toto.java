@@ -11,7 +11,7 @@ public class Toto {
      */
 
     public static void main(String[] args) {
-        generateTotoNum(50, 4);
+        generateTotoNum(20, 4);
     }
 
     private static void allMatchesForThisNumber() {
@@ -87,9 +87,11 @@ public class Toto {
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
         int count = 0;
-        if (list.contains(thisNumber)) {
-            count++;
-            return count;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i) == thisNumber) {
+                    count++;
+                    return count;
+            }
         }
         return -1;
     }
@@ -98,12 +100,12 @@ public class Toto {
         int countConsist = 0, allCounts = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
             if (isThisContains(allNumbers.get(i), thisNumber) != -1) {
-                countConsist++;
-                //allCounts = countConsist + (isThisContains(allNumbers.get(i), thisNumber));
+                //countConsist++;
+                allCounts += (isThisContains(allNumbers.get(i), thisNumber));
                 System.out.println(allNumbers.get(i));
             }
         }
-        return countConsist;
+        return allCounts;
     }
 }
 
