@@ -82,8 +82,7 @@ public class Toto {
     }
 
     private static void printResult(List<List<Integer>> allNumbers, int thisNumber) {
-        System.out.println(allNumbers);
-        System.out.println();
+        System.out.println(allNumbers + "\n");
         System.out.println(
                 "Numbers " + thisNumber + " contains " + allContains(allNumbers, thisNumber) + " times.");
     }
