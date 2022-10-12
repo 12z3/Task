@@ -88,18 +88,19 @@ public class Toto {
     private static int isThisContains(List<Integer> list, int thisNumber) {
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
-            if (list.get(i) == thisNumber) {
+            if (list.get(i).equals(thisNumber)) {
                     count++;
-                    return count;
             }
         }
-        return -1;
+        if (count != 0) {
+            return count;
+        } else return -1;
     }
 
     private static int allThisContains(List<List<Integer>> allNumbers, int thisNumber) {
         int countConsist = 0, allCounts = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
-            if (isThisContains(allNumbers.get(i), thisNumber) != -1) {
+            if ((isThisContains(allNumbers.get(i), thisNumber)) != -1) {
                 //countConsist++;
                 allCounts += (isThisContains(allNumbers.get(i), thisNumber));
                 System.out.println(allNumbers.get(i));
