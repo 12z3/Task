@@ -18,7 +18,6 @@ public class Toto {
 
     private static void generateTotoNum(int variants, int number) {
         Random rnd = new Random();
-        int number = 44;
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> allNumbers = new ArrayList<>();
 
