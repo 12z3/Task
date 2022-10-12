@@ -11,10 +11,23 @@ public class Toto {
      */
 
     public static void main(String[] args) {
-        generateTotoNum(6, 44);
+
+        //allMatchesForThisNumber();
+        generateTotoNum(5,45);
+
     }
 
-    private static void generateTotoNum(int variants, int thisNumber) {
+    private static void allMatchesForThisNumber() {
+        List<Integer> count = new ArrayList<>();
+        int i = 0;
+        while (i < 100){
+            count.add(generateTotoNum(6,39));
+            i++;
+        }
+        System.out.println(count);
+    }
+
+    private static int generateTotoNum(int variants, int thisNumber) {
         Random rnd = new Random();
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> allNumbers = new ArrayList<>();
@@ -28,25 +41,29 @@ public class Toto {
             allNumbers.add(list);
             counter++;
         }
+        printResult(thisNumber, allNumbers);
+        return allContains(allNumbers,thisNumber);
+    }
+
+    private static void printResult(int thisNumber, List<List<Integer>> allNumbers) {
         System.out.println(allNumbers);
         System.out.println();
         System.out.println(
-            "Numbers " + thisNumber + " contains " + allConsist(allNumbers, thisNumber) + " times.");
+            "Numbers " + thisNumber + " contains " + allContains(allNumbers, thisNumber) + " times.");
     }
 
-    private static boolean isConsist(List<Integer> list, int thisNumber) {
-        if (list.contains(thisNumber)) {
-            List<Integer> newList = new ArrayList<>(list);
-            System.out.println(newList);
-            return true;
-        }
+    private static boolean isContains(List<Integer> list, int thisNumber) {
+        if (list.contains(thisNumber)) return true;
         return false;
     }
 
-    private static int allConsist(List<List<Integer>> allNumbers, int thisNumber) {
+    private static int allContains(List<List<Integer>> allNumbers, int thisNumber) {
         int countConsist = 0;
-        for (int i = 0; i < allNumbers.size(); i++) {
-            if (isConsist(allNumbers.get(i), thisNumber)) countConsist++;
+        for (List<Integer> allNumber : allNumbers) {
+            if (isContains(allNumber, thisNumber)) {
+                countConsist++;
+                System.out.println(allNumber);
+            }
         }
         return countConsist;
     }
