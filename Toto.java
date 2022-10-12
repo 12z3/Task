@@ -89,7 +89,7 @@ public class Toto {
         int count = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(thisNumber)) {
-                    count++;
+                count++;
             }
         }
         if (count != 0) {
@@ -98,10 +98,9 @@ public class Toto {
     }
 
     private static int allThisContains(List<List<Integer>> allNumbers, int thisNumber) {
-        int countConsist = 0, allCounts = 0;
+        int allCounts = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
             if ((isThisContains(allNumbers.get(i), thisNumber)) != -1) {
-                //countConsist++;
                 allCounts += (isThisContains(allNumbers.get(i), thisNumber));
                 System.out.println(allNumbers.get(i));
             }
