@@ -14,7 +14,7 @@ public class Toto {
         generateTotoNum(6, 44);
     }
 
-    private static void generateTotoNum(int variants, int number) {
+    private static void generateTotoNum(int variants, int thisNumber) {
         Random rnd = new Random();
         List<Integer> list = new ArrayList<>();
         List<List<Integer>> allNumbers = new ArrayList<>();
@@ -30,7 +30,8 @@ public class Toto {
         }
         System.out.println(allNumbers);
         System.out.println();
-        System.out.println("Numbers " + number + " contains " + allConsist(allNumbers, number) + " times.");
+        System.out.println(
+            "Numbers " + thisNumber + " contains " + allConsist(allNumbers, thisNumber) + " times.");
     }
 
     private static boolean isConsist(List<Integer> list, int number) {
