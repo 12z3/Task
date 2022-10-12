@@ -8,8 +8,6 @@ public class Toto {
     /**
      * Генерира числата от 1 до 49 variants пъти. и Записва резултатите в List<List<Integer>> allNumbers.
      * Търси колко пъти се намира числото number в резултата.
-     *
-     * @param args
      */
 
     public static void main(String[] args) {
