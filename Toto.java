@@ -38,7 +38,7 @@ public class Toto {
             allNumbers.add(list);
             counter++;
         }
-        return allContains(allNumbers, thisNumber);
+        return allThisContains(allNumbers, thisNumber);
     }
 
     private static void generateTotoNum(int variants, int thisNumber) {
@@ -82,10 +82,10 @@ public class Toto {
     private static void printResult(List<List<Integer>> allNumbers, int thisNumber) {
         System.out.println(allNumbers + "\n");
         System.out.println(
-                "Numbers " + thisNumber + " contains " + allContains(allNumbers, thisNumber) + " times.");
+                "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
     }
 
-    private static int isContains(List<Integer> list, int thisNumber) {
+    private static int isThisContains(List<Integer> list, int thisNumber) {
         int count = 0;
         if (list.contains(thisNumber)) {
             count++;
@@ -94,12 +94,12 @@ public class Toto {
         return -1;
     }
 
-    private static int allContains(List<List<Integer>> allNumbers, int thisNumber) {
+    private static int allThisContains(List<List<Integer>> allNumbers, int thisNumber) {
         int countConsist = 0, allCounts = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
-            if (isContains(allNumbers.get(i), thisNumber) != -1) {
+            if (isThisContains(allNumbers.get(i), thisNumber) != -1) {
                 countConsist++;
-                allCounts = countConsist + (isContains(allNumbers.get(i), thisNumber));
+                allCounts = countConsist + (isThisContains(allNumbers.get(i), thisNumber));
                 System.out.println(allNumbers.get(i));
             }
         }
