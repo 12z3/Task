@@ -67,7 +67,7 @@ public class Toto {
         }
         System.out.println("Last number is: " + last);
         System.out.println("New number: ");
-        printResult(thisNumber, allNumbers);
+        printResult(allNumbers, thisNumber);
     }
 
     private static boolean check(List<Integer> l1, int l2) {
@@ -81,7 +81,7 @@ public class Toto {
         return check;
     }
 
-    private static void printResult(int thisNumber, List<List<Integer>> allNumbers) {
+    private static void printResult(List<List<Integer>> allNumbers, int thisNumber) {
         System.out.println(allNumbers);
         System.out.println();
         System.out.println(
