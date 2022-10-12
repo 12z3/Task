@@ -14,7 +14,6 @@ public class Toto {
 
         //allMatchesForThisNumber();
         generateTotoNum(5, 45);
-
     }
 
     private static void allMatchesForThisNumber() {
