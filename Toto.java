@@ -13,7 +13,7 @@ public class Toto {
     public static void main(String[] args) {
 
         //allMatchesForThisNumber();
-        generateTotoNum(5, 4);
+        generateTotoNum(50, 0);
     }
 
     private static void allMatchesForThisNumber() {
@@ -56,21 +56,27 @@ public class Toto {
                 int el = rnd.nextInt(50);
                 if (!check(last, el)) {
                     list.add(el);
-                } else k--;
+                } else {
+                    if (k != 0 && k > -1) {
+                        k--;
+                    }
+                }
             }
             allNumbers.add(list);
             counter++;
         }
+        System.out.println("Last number is: " + last);
+        System.out.println("New number: ");
         printResult(thisNumber, allNumbers);
     }
 
-    private  static boolean check(List<Integer> l1, int l2){
+    private static boolean check(List<Integer> l1, int l2) {
         boolean check = false;
         for (int i = 0; i < l1.size(); i++) {
-                if (l1.get(i) == l2) {
-                    check = true;
-                    break;
-                }
+            if (l1.get(i) == l2 || l1.get(i) == 0) {
+                check = true;
+                break;
+            }
         }
         return check;
     }
@@ -98,3 +104,4 @@ public class Toto {
         return countConsist;
     }
 }
+
