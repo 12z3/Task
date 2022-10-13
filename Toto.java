@@ -1,17 +1,21 @@
 package task;
 
+import training.Methods;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Toto {
+public class Toto extends Methods {
     /**
      * Генерира числата от 1 до 49 "variants" пъти и записва резултатите в "List<List<Integer>> allNumbers".
      * Търси колко пъти се намира числото "thisNumber" в резултата.
      */
 
     public static void main(String[] args) {
-        generateTotoNum(20, 4);
+        timeAndData();
+        generateTotoNum(100, 4);
+        //allMatchesForThisNumber();
     }
 
     private static void allMatchesForThisNumber() {
@@ -52,7 +56,7 @@ public class Toto {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
                 int el = rnd.nextInt(50);
-                if (!check(last, el) && el != 0) {
+                if (!check(list, el) && el != 0 && !check(last,el)) {
                     list.add(el);
                 } else {
                     if (k != 0 && k > -1) {
@@ -66,6 +70,9 @@ public class Toto {
         System.out.println("Last number is: " + last);
         System.out.println("New number: ");
         printResult(allNumbers, thisNumber);
+
+        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
+        for (List<Integer> el: allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
     }
 
     private static boolean check(List<Integer> l1, int l2) {
