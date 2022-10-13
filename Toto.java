@@ -14,7 +14,7 @@ public class Toto extends Methods {
 
     public static void main(String[] args) {
         timeAndData();
-        generateTotoNum(100, 4);
+        generateTotoNum(5, 4);
         //allMatchesForThisNumber();
     }
 
@@ -69,10 +69,7 @@ public class Toto extends Methods {
         }
         System.out.println("Last number is: " + last);
         System.out.println("New number: ");
-        printResult(allNumbers, thisNumber);
-
-        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
-        for (List<Integer> el: allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
+        printResult(allNumbers, thisNumber, last);
     }
 
     private static boolean check(List<Integer> l1, int l2) {
@@ -86,10 +83,12 @@ public class Toto extends Methods {
         return check;
     }
 
-    private static void printResult(List<List<Integer>> allNumbers, int thisNumber) {
+    private static void printResult(List<List<Integer>> allNumbers, int thisNumber, List<Integer> last) {
         System.out.println(allNumbers + "\n");
         System.out.println(
                 "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
+        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
+        for (List<Integer> el: allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
     }
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
