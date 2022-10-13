@@ -56,8 +56,8 @@ public class Toto extends Methods {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
                 int el = rnd.nextInt(50);
-                if (!check(list, el) && el != 0 && !check(last,el)) {
-                    list.add(el);
+                if (!check(list, el) && !check(last,el) && el != 0) {        // Да не се съдържа в "last" или "List"
+                    list.add(el);                                            // ... и да е != 0.
                 } else {
                     if (k != 0 && k > -1) {
                         k--;
