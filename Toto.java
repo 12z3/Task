@@ -5,6 +5,7 @@ import training.Methods;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Toto extends Methods {
     /**
@@ -46,21 +47,41 @@ public class Toto extends Methods {
     }
 
     private static void generateTotoNum(int variants, int thisNumber) {
+        Scanner scanner = new Scanner(System.in);
+        boolean answers = false;
         Random rnd = new Random();
         List<Integer> list = new ArrayList<>();
         List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         List<List<Integer>> allNumbers = new ArrayList<>();
+
+        System.out.print("да се добавя ли предишният тираж? : ");
+        char answer = scanner.nextLine().charAt(0);
+        if (answer == 'Y') answers = true;
+
 
         int counter = 0;
         while (counter < variants) {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
                 int el = rnd.nextInt(50);
-                if (!check(list, el) && !check(last,el) && el != 0) {        // Да не се съдържа в "last" или "List"
-                    list.add(el);                                            // ... и да е != 0.
-                } else {
-                    if (k != 0 && k > -1) {
-                        k--;
+                switch (answer) {
+                    case 'y' -> {
+                        if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
+                            list.add(el);                                         // ... и да е != 0.
+                        } else {
+                            if (k != 0 && k > -1) {
+                                k--;
+                            }
+                        }
+                    }
+                    case 'n' -> {
+                        if (!check(list, el) && !check(last, el) && el != 0) {
+                            list.add(el);
+                        } else {
+                            if (k != 0 && k > -1) {
+                                k--;
+                            }
+                        }
                     }
                 }
             }
@@ -88,7 +109,7 @@ public class Toto extends Methods {
         System.out.println(
                 "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
         System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
-        for (List<Integer> el: allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
+        for (List<Integer> el : allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
     }
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
