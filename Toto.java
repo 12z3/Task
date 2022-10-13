@@ -11,6 +11,8 @@ public class Toto extends Methods {
     /**
      * Генерира числата от 1 до 49 "variants" пъти и записва резултатите в "List<List<Integer>> allNumbers".
      * Търси колко пъти се намира числото "thisNumber" в резултата.
+     * Избира дали да се включат числата от предишният тираж в новото теглене.
+     * Проверява за еднаквост на числата от всяко ново теглене (allNumbers) и старият тираж (last).
      */
 
     public static void main(String[] args) {
@@ -48,16 +50,14 @@ public class Toto extends Methods {
 
     private static void generateTotoNum(int variants, int thisNumber) {
         Scanner scanner = new Scanner(System.in);
-        boolean answers = false;
         Random rnd = new Random();
+
         List<Integer> list = new ArrayList<>();
         List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         List<List<Integer>> allNumbers = new ArrayList<>();
 
-        System.out.print("да се добавя ли предишният тираж? : ");
+        System.out.print("Да се отчита ли предишният тираж? : ");
         char answer = scanner.nextLine().charAt(0);
-        if (answer == 'Y') answers = true;
-
 
         int counter = 0;
         while (counter < variants) {
