@@ -16,8 +16,9 @@ public class Toto extends Methods {
      */
 
     public static void main(String[] args) {
+        List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         timeAndData();
-        generateTotoNum(5, 4);
+        generateTotoNum(last,5, 4);
         //allMatchesForThisNumber();
     }
 
@@ -48,12 +49,11 @@ public class Toto extends Methods {
         return allThisContains(allNumbers, thisNumber);
     }
 
-    private static void generateTotoNum(int variants, int thisNumber) {
+    private static void generateTotoNum(List<Integer> last, int variants, int thisNumber) {
         Scanner scanner = new Scanner(System.in);
         Random rnd = new Random();
 
         List<Integer> list = new ArrayList<>();
-        List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         List<List<Integer>> allNumbers = new ArrayList<>();
 
         System.out.print("Да се отчита ли предишният тираж? : ");
@@ -65,7 +65,7 @@ public class Toto extends Methods {
             for (int k = 0; k < 6; k++) {
                 int el = rnd.nextInt(50);
                 switch (answer) {
-                    case 'y' -> {
+                    case 'n' -> {
                         if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
                             list.add(el);                                         // ... и да е != 0.
                         } else {
@@ -74,7 +74,7 @@ public class Toto extends Methods {
                             }
                         }
                     }
-                    case 'n' -> {
+                    case 'y' -> {
                         if (!check(list, el) && !check(last, el) && el != 0) {
                             list.add(el);
                         } else {
@@ -113,26 +113,26 @@ public class Toto extends Methods {
     }
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
-        int count = 0;
+        int contains = 0;
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(thisNumber)) {
-                count++;
+                contains++;
             }
         }
-        if (count != 0) {
-            return count;
+        if (contains != 0) {
+            return contains;
         } else return -1;
     }
 
     private static int allThisContains(List<List<Integer>> allNumbers, int thisNumber) {
-        int allCounts = 0;
+        int allContains = 0;
         for (int i = 0; i < allNumbers.size(); i++) {
             if ((isThisContains(allNumbers.get(i), thisNumber)) != -1) {
-                allCounts += (isThisContains(allNumbers.get(i), thisNumber));
+                allContains += (isThisContains(allNumbers.get(i), thisNumber));
                 System.out.println(allNumbers.get(i));
             }
         }
-        return allCounts;
+        return allContains;
     }
 }
 
