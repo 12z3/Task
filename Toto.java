@@ -18,7 +18,7 @@ public class Toto extends Methods {
     public static void main(String[] args) {
         List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         timeAndData();
-        generateTotoNum(last,5, 4);
+        generateTotoNum(last,5, 5);
         //allMatchesForThisNumber();
     }
 
@@ -94,22 +94,22 @@ public class Toto extends Methods {
     }
 
     private static boolean check(List<Integer> l1, int l2) {
-        boolean check = false;
+        boolean isMatch = false;
         for (int i = 0; i < l1.size(); i++) {
             if (l1.get(i) == l2) {
-                check = true;
+                isMatch = true;
                 break;
             }
         }
-        return check;
+        return isMatch;
     }
 
     private static void printResult(List<List<Integer>> allNumbers, int thisNumber, List<Integer> last) {
         System.out.println(allNumbers + "\n");
-        System.out.println(
-                "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
-        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
-        for (List<Integer> el : allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
+       // System.out.println(
+               // "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
+       // System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
+       // for (List<Integer> el : allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
     }
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
