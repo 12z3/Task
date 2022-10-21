@@ -23,7 +23,7 @@ public class MyFile {
         return false;
     }
 
-    private static void printPathFile(File file){
+    private static void printFilePath(File file){
         System.out.println("Path is: " + file.getAbsoluteFile());
     }
 
@@ -33,7 +33,11 @@ public class MyFile {
         // File file = null;
         // file = new File(file,"totoResult");
         File file = new File("totoResult");
-        printPathFile(file);
+        printFilePath(file);
+        writerInFile(input, file);
+    }
+
+    private static void writerInFile(String[] input, File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
