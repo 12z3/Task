@@ -18,15 +18,6 @@ public class MyFile {
     // Презаписвва файла защото всеки път го създава. Създай го веднъж и го преизползвай...
     // ... Същото се отнася и за List<List<Integers>> data;
 
-    private static boolean isFileExist(File thisFile) {
-        if (!thisFile.exists()) return true;
-        return false;
-    }
-
-    private static void printFilePath(File file){
-        System.out.println("Path is: " + file.getAbsoluteFile());
-    }
-
     private static void write() {
         Scanner scanner = new Scanner(System.in);
         String[] input = scanner.nextLine().split(" ");
@@ -50,6 +41,16 @@ public class MyFile {
         }
     }
 
+    private static boolean isFileExist(File thisFile) {
+        if (!thisFile.exists()) return true;
+        return false;
+    }
+
+    private static void printFilePath(File file){
+        System.out.println("Path is: " + file.getAbsoluteFile());
+    }
+
+    
     private static void read() {
         try {
             File file = new File("totoResult");
