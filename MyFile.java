@@ -14,14 +14,15 @@ public class MyFile {
 
     private static void write() {
         Scanner scanner = new Scanner(System.in);
-        String[] input = scanner.nextLine().split(",");
+        String[] input = scanner.nextLine().split(" ");
         File file = new File("totoResult");
         try {
-            BufferedWriter writher = new BufferedWriter(new FileWriter(file));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-            writher.write("\n" + Arrays.toString(input));
+           // writer.newLine(); -> "\n" +
+            writer.write("\n" + Arrays.toString(input));
 
-            writher.close();
+            writer.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
