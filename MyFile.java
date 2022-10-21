@@ -17,23 +17,23 @@ public class MyFile {
 
     // Презаписвва файла защото всеки път го създава. Създай го веднъж и го преизползвай...
     // ... Същото се отнася и за List<List<Integers>> data;
+    // Всеки път презаписва файла, а не продължава от там докъдето е стигнал....
+
 
     private static void write() {
         Scanner scanner = new Scanner(System.in);
-        String[] input = scanner.nextLine().split(" ");
-        // File file = null;
-        // file = new File(file,"totoResult");
         File file = new File("totoResult");
-        printFilePath(file);
-        writerInFile(input, file);
-    }
-
-    private static void writerInFile(String[] input, File file) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-            // writer.newLine(); -> "\n" +
-            writer.write("\n" + Arrays.toString(input));
+            int count = 1;
+            while (count <= 3) {
+                String[] input = scanner.nextLine().split("");
+                writer.write("\n" + Arrays.toString(input));
+                count++;
+            }
+
+            printFilePath(file);
 
             writer.close();
         } catch (IOException e) {
@@ -46,11 +46,11 @@ public class MyFile {
         return false;
     }
 
-    private static void printFilePath(File file){
-        System.out.println("Path is: " + file.getAbsoluteFile());
+    private static void printFilePath(File file) {
+        System.out.print("Path is: " + file.getAbsoluteFile());
     }
 
-    
+
     private static void read() {
         try {
             File file = new File("totoResult");
