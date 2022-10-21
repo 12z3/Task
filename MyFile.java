@@ -12,14 +12,23 @@ public class MyFile {
         read();
     }
 
+    // Презаписвва файла защото всеки път го създава. Създай го веднъж и го преизползвай...
+    // ... Същото се отнася и за List<List<Integers>> data;
+
+    private static boolean isFileExist(File file) {
+
+        return true;
+    }
+
     private static void write() {
         Scanner scanner = new Scanner(System.in);
         String[] input = scanner.nextLine().split(" ");
         File file = new File("totoResult");
+        System.out.println("Path is: " + file.getAbsoluteFile());
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-           // writer.newLine(); -> "\n" +
+            // writer.newLine(); -> "\n" +
             writer.write("\n" + Arrays.toString(input));
 
             writer.close();
