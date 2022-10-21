@@ -6,6 +6,9 @@ import java.util.Scanner;
 
 public class MyFile {
 
+    /**
+     * @Source: <a href="https://www.geeksforgeeks.org/file-class-in-java/">...</a>
+     */
 
     public static void main(String[] args) {
         write();
@@ -15,16 +18,22 @@ public class MyFile {
     // Презаписвва файла защото всеки път го създава. Създай го веднъж и го преизползвай...
     // ... Същото се отнася и за List<List<Integers>> data;
 
-    private static boolean isFileExist(File file) {
+    private static boolean isFileExist(File thisFile) {
+        if (!thisFile.exists()) return true;
+        return false;
+    }
 
-        return true;
+    private static void printPathFile(File file){
+        System.out.println("Path is: " + file.getAbsoluteFile());
     }
 
     private static void write() {
         Scanner scanner = new Scanner(System.in);
         String[] input = scanner.nextLine().split(" ");
+        // File file = null;
+        // file = new File(file,"totoResult");
         File file = new File("totoResult");
-        System.out.println("Path is: " + file.getAbsoluteFile());
+        printPathFile(file);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
