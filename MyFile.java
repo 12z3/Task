@@ -1,4 +1,4 @@
-package task.task;
+package task;
 
 import java.io.*;
 import java.util.Arrays;
@@ -25,6 +25,9 @@ public class MyFile {
         File file = new File("totoResult");
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+            String totoResult = "totoResult";
+            RandomAccessFile raf = new RandomAccessFile(totoResult, "rw");
+
 
             int count = 1;
             while (count <= 3) {
@@ -34,6 +37,8 @@ public class MyFile {
             }
 
             printFilePath(file);
+            writer.newLine();
+            raf.seek(file.length());
 
             writer.close();
         } catch (IOException e) {
