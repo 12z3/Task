@@ -1,4 +1,4 @@
-package task.task;
+package task;
 
 import training.Methods;
 
@@ -18,7 +18,7 @@ public class Toto extends Methods {
     public static void main(String[] args) {
         List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         timeAndData();
-        generateTotoNum(last,5, 5);
+        generateTotoNum(last,70, 5);
         //allMatchesForThisNumber();
     }
 
@@ -66,7 +66,7 @@ public class Toto extends Methods {
                 int el = rnd.nextInt(50);
                 switch (answer) {
                     case 'n' -> {
-                        if (!theseMatch(list, el) && el != 0) {                   // Да не се съдържа в "last" и "List"
+                        if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
                             list.add(el);                                         // ... и да е != 0.
                         } else {
                             if (k != 0 && k > -1) {
@@ -75,7 +75,7 @@ public class Toto extends Methods {
                         }
                     }
                     case 'y' -> {
-                        if (!theseMatch(list, el) && !theseMatch(last, el) && el != 0) {
+                        if (!check(list, el) && !check(last, el) && el != 0) {
                             list.add(el);
                         } else {
                             if (k != 0 && k > -1) {
@@ -89,11 +89,18 @@ public class Toto extends Methods {
             counter++;
         }
         System.out.println("Last number is: " + last);
-        System.out.println("New number: ");
+        System.out.print("New number: ");
         printResult(allNumbers, thisNumber, last);
     }
 
-    private static boolean theseMatch(List<Integer> l1, int l2) {
+    private static void printResult(List<List<Integer>> allNumbers, int thisNumber, List<Integer> last) {
+        System.out.println(allNumbers + "\n");
+        System.out.println(
+                "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
+        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
+        for (List<Integer> el : allNumbers) System.out.print(isASameElementsOfLists(last, el) + " / ");
+    }
+    private static boolean check(List<Integer> l1, int l2) {
         boolean isMatch = false;
         for (int i = 0; i < l1.size(); i++) {
             if (l1.get(i) == l2) {
@@ -102,14 +109,6 @@ public class Toto extends Methods {
             }
         }
         return isMatch;
-    }
-
-    private static void printResult(List<List<Integer>> allNumbers, int thisNumber, List<Integer> last) {
-        System.out.println(allNumbers + "\n");
-//        System.out.println(
-//                "Numbers " + thisNumber + " contains " + allThisContains(allNumbers, thisNumber) + " times.");
-//        System.out.print("is 'allNumbers' - elements match with 'last' - element? : ");
-//        for (List<Integer> el : allNumbers) System.out.print(compareTwoIntLists(last, el) + " ");
     }
 
     private static int isThisContains(List<Integer> list, int thisNumber) {
