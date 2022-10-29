@@ -9,6 +9,7 @@ public class BubbleSortingVariants {
 
         bubbleForCycle(arr);
         System.out.println(Arrays.toString(arr));
+        System.out.println();
 
         int[] brr = {122, 13, 444, 56, 7, 8};
         System.out.println(Arrays.toString(brr));
@@ -22,12 +23,13 @@ public class BubbleSortingVariants {
         while (!isSorted) {                 // Условито за сортировка е : Да не сме преминали през редове от 25 до 29.
             isSorted = true;                //... или да не е преминато през условието: "if (brr[i] < brr[i + 1])"
             for (int i = 0; i < brr.length - 1; i++) {
-                if (brr[i] < brr[i + 1]) {
+                if (brr[i] > brr[i + 1]) {
                     int tmp = brr[i];
                     brr[i] = brr[i + 1];
                     brr[i + 1] = tmp;
                     isSorted = false;
                 }
+                //System.out.println(Arrays.toString(brr));
             }
         }
     }
