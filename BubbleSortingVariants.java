@@ -63,10 +63,10 @@ public class BubbleSortingVariants {
                of their current position */                                 // key = 3; j = 0;
 
             while (j >= 0 && arr[j] > key) {                                // {12, 3, 4, 56, 7, 8};
-                arr[j + 1] = arr[j];                                        // {12, 12, 4, 56, 7, 8};
+                arr[j + 1] = arr[j];                                        // ... -> {12, 12, 4, 56, 7, 8};
                 j = j - 1;                                                  // j = -1;
             }                                                               // {12, 12, 4, 56, 7, 8};
-            arr[j + 1] = key;                                               // arr[0] = 3 -> {3, 12, 4, 56, 7, 8};
+            arr[j + 1] = key;                                               // arr[0] = 3 ... -> {3, 12, 4, 56, 7, 8};
         }
     }
 
