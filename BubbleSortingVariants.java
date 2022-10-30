@@ -60,21 +60,23 @@ public class BubbleSortingVariants {
 
             /* Move elements of arr[0..i-1], that are
                greater than key, to one position ahead
-               of their current position */
-            while (j >= 0 && arr[j] > key) {
-                arr[j + 1] = arr[j];
-                j = j - 1;
-            }
-            arr[j + 1] = key;
+               of their current position */                                 // key = 3; j = 0;
+
+            while (j >= 0 && arr[j] > key) {                                // {12, 3, 4, 56, 7, 8};
+                arr[j + 1] = arr[j];                                        // {12, 12, 4, 56, 7, 8};
+                j = j - 1;                                                  // j = -1;
+            }                                                               // {12, 12, 4, 56, 7, 8};
+            arr[j + 1] = key;                                               // arr[0] = 3 -> {3, 12, 4, 56, 7, 8};
         }
     }
 
     /* A utility function to print array of size n*/
     static void printArray(int arr[]) {
         int n = arr.length;
-        for (int i = 0; i < n; ++i)
-            System.out.print(arr[i] + " ");
-
+        for (int i = 0; i < n; ++i) {
+            if (i > 0) System.out.print(", ");
+            System.out.print(arr[i]);/**/
+        }
         System.out.println();
     }
 }
