@@ -32,7 +32,7 @@ public class Randomizing {
     private static <T> void randomizing(List<T> list) {
         Random random = new Random();
         List<T> elements = new ArrayList<>();
-        int min = 0, stopCriteria = 0, max = list.size() - 1;
+        int min = 0, stopCriterion = 0, max = list.size() - 1;
 
         while (true) {
             int randomIndex1 = (int) (Math.random() * ((max - min) + 1)) + min;
@@ -42,8 +42,8 @@ public class Randomizing {
             if (!isContained(elements, currentElement)) {
                 System.out.print(currentElement + " ");
                 elements.add(currentElement);
-                stopCriteria++;
-                if (stopCriteria == list.size()) break;
+                stopCriterion++;
+                if (stopCriterion == list.size()) break;
             }
         }
     }
