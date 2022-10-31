@@ -18,8 +18,10 @@ public class BubbleSortingVariants {
 //        System.out.println(Arrays.toString(brr));
 
         BubbleSortingVariants ob = new BubbleSortingVariants();
-        ob.insertionSort(arr);
+        // ob.insertionSort(arr);
+        ob.mainInsertionSort(arr);
 
+        //printArray(arr);
         printArray(arr);
     }
 
@@ -75,8 +77,21 @@ public class BubbleSortingVariants {
         int n = arr.length;
         for (int i = 0; i < n; ++i) {
             if (i > 0) System.out.print(", ");
-            System.out.print(arr[i]);/**/
+            System.out.print(arr[i]);
         }
         System.out.println();
+    }
+
+    void mainInsertionSort(int[] arr) {
+        for (int i = 0; i < arr.length - 1; i++) {
+            int current = arr[i];
+            int next = arr[i + 1];
+
+            if (current > next) {                                          // {12, 3, 4, 56, 7, 1};
+                int tmp = arr[i];                                          // ... {3, 4, 12, 56, 7, 8};
+                arr[i] = arr[i + 1];
+                arr[i + 1] = tmp;
+            }
+        }
     }
 }
