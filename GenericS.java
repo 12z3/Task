@@ -1,4 +1,8 @@
-package task;
+package task.task;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class GenericS<T> {
 
@@ -8,7 +12,7 @@ public class GenericS<T> {
         }
         System.out.println();
     }
-    
+
     public static void main(String[] args) {
 
         Integer[] inT = {1, 2, 0, 4, 5};
@@ -25,6 +29,11 @@ public class GenericS<T> {
         printD.print(douB);
         printS.print(stR);
         printB.print(booL);
+
+        List<String> stRL = new ArrayList<>(List.of("a", "b", "c"));
+        Iterator<String> itr = stRL.iterator();
+
+        System.out.println(stRL + " ");
 
     }
 }
