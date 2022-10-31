@@ -18,7 +18,7 @@ public class Toto extends Methods {
     public static void main(String[] args) {
         List<Integer> last = new ArrayList<>(List.of(3, 5, 8, 12, 16, 36));
         timeAndData();
-        generateTotoNum(last,70, 5);
+        generateTotoNum(last,3, 5);
         //allMatchesForThisNumber();
     }
 
@@ -116,6 +116,7 @@ public class Toto extends Methods {
         for (int i = 0; i < list.size(); i++) {
             if (list.get(i).equals(thisNumber)) {
                 contains++;
+                // boolean a = list.remove(Integer.valueOf(i));
             }
         }
         if (contains != 0) {
