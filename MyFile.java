@@ -23,22 +23,22 @@ public class MyFile {
     private static void write() {
         Scanner scanner = new Scanner(System.in);
         File file = new File("totoResult");
+
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             String totoResult = "totoResult";
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file));
             RandomAccessFile raf = new RandomAccessFile(totoResult, "rw");
 
-
+            raf.seek(file.length());
             int count = 1;
             while (count <= 3) {
                 String[] input = scanner.nextLine().split("");
                 writer.write("\n" + Arrays.toString(input));
                 count++;
             }
-
-            printFilePath(file);
+            //raf.seek(file.length());
             writer.newLine();
-            raf.seek(file.length());
+            printFilePath(file);
 
             writer.close();
         } catch (IOException e) {
@@ -65,7 +65,10 @@ public class MyFile {
             while (line != null) {
                 line = reader.readLine();
                 System.out.println(line);
+                File[] listOfFiles = file.listFiles();
+                System.out.println(Arrays.toString(listOfFiles));
             }
+
             reader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
