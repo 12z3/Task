@@ -5,17 +5,20 @@ import java.util.Map;
 
 public class Chickens {
     public static void main(String[] args) {
-//        System.out.println(chickens(1));
-//        System.out.println(chickens(2));
-//        System.out.println(chickens(3));
-//        System.out.println(chickens(4));
+        System.out.println(chickens(1));
+        System.out.println(chickens(2));
+        System.out.println(chickens(3));
+        System.out.println(chickens(4));
         System.out.println(chickens(7));
+        System.out.println(chickens(8));
+        System.out.println(chickens(9));
+        System.out.println(chickens(10));
     }
 
 
     private static long chickens(int day) {
         long oldChickens = 1, newChicks = 0, allChicks = 0, deathChicks = 0;
-        long oldTime = 1, newTime = 0;
+        long oldTime = 1, newTime = 0, rec = 0;
         Map<Integer, Long> chicks = new HashMap<>();
         int days = 1;
 
@@ -30,12 +33,13 @@ public class Chickens {
             chicks.put(i,allChicks);
 
             int key = i - 6;
-            if (key > 0){
-                chicks.remove(key);
+            if (key >= 0){
+                rec = chicks.get(key + 1);
+                chicks.remove(key + 1);
             }
-            if (i == day) System.out.println(chicks.get(i));
+            // if (i == day) System.out.println(chicks.get(i));
         }
-        return allChicks;
+        return allChicks - rec;
     }
 
 //    public long oldChicks(int N) {
