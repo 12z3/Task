@@ -42,8 +42,7 @@ public class Chickens {
 
         chicks.put(1, oldChickens);
         if (day == 1) allChicks = oldChickens;
-
-
+        
         for (int i = 2; i <= day; i++) {
             oldChickens -= death;                        // След 6-я ден общата бройка намалява за всеки един ден с...
             newChicks = oldChickens * 2;                 //... "chicks.get(key);"
