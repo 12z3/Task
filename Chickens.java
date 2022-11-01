@@ -6,6 +6,7 @@ import java.util.Map;
 public class Chickens {
 
     /**
+     * Chicks in a Zoo:
      * @Source: <a href="https://practice.geeksforgeeks.org/problems/chicks-in-a-zoo1159/1">...</a>
      * @Problem: Initially, the zoo have a single chick.
      * A chick gives birth to 2 chicks every day and the life expectancy of a chick is 6 days.
@@ -23,12 +24,11 @@ public class Chickens {
      * 9: 6498
      * 10: 19440
      */
+
     public static void main(String[] args) {
         for (int i = 1; i <= 10; i++) {
             System.out.println(i + ": " + chickens(i));
         }
-
-        //System.out.println(chickens(10));
     }
 
 
@@ -41,7 +41,7 @@ public class Chickens {
         if (day == 1) allChicks = oldChickens;
 
         for (int i = 2; i <= day; i++) {
-            oldChickens -= death;
+            oldChickens -= death;                        // След 6-я ден общата бройка намалява с n = chicks.get(key);
             newChicks = oldChickens * 2;
             allChicks = (newChicks + oldChickens);
             oldChickens += newChicks;
