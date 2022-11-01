@@ -11,10 +11,21 @@ public class Chickens {
      * A chick gives birth to 2 chicks every day and the life expectancy of a chick is 6 days.
      * Zoo officials want to buy food for chicks so they want to know the number of chicks on an Nth day.
      * Help the officials with this task.
+     * K: V
+     * 1: 1
+     * 2: 3
+     * 3: 9
+     * 4: 27
+     * 5: 81
+     * 6: 243
+     * 7: 726
+     * 8: 2172
+     * 9: 6498
+     * 10: 19440
      */
     public static void main(String[] args) {
         for (int i = 1; i <= 10; i++) {
-            System.out.println(chickens(i));
+            System.out.println(i + ": " + chickens(i));
         }
 
         //System.out.println(chickens(10));
@@ -35,10 +46,10 @@ public class Chickens {
             allChicks = (newChicks + oldChickens);
             oldChickens += newChicks;
 
-            chicks.put(i, newChicks);
+            chicks.put(i, newChicks);                                      // Key: деня, Value: броя нови.
 
-            int key = i - 5;
-            if (key >= 1) death = chicks.get(key);
+            int key = i - 5;                                               // На 6-я ден key = 0;
+            if (key >= 1) death = chicks.get(key);                         // death = броя преди 6 дни.
 
             // if (i == day) System.out.println(chicks.get(i));
         }
