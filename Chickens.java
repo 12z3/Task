@@ -5,14 +5,11 @@ import java.util.Map;
 
 public class Chickens {
     public static void main(String[] args) {
-        System.out.println(chickens(1));
-        System.out.println(chickens(2));
-        System.out.println(chickens(3));
-        System.out.println(chickens(4));
-        System.out.println(chickens(7));
-        System.out.println(chickens(8));
-        System.out.println(chickens(9));
-        System.out.println(chickens(10));
+        for (int i = 1; i <= 10; i++) {
+            System.out.println(chickens(i));
+        }
+
+        //System.out.println(chickens(10));
     }
 
 
@@ -26,21 +23,22 @@ public class Chickens {
         if (day == 1) allChicks = oldChickens;
 
         for (int i = 2; i <= day; i++) {
+            oldChickens -= rec;
             newChicks = oldChickens * 2;
             allChicks = (newChicks + oldChickens);
             oldChickens += newChicks;
 
             oldTime++;
-            chicks.put(i,allChicks);
+            chicks.put(i,newChicks);
 
-            int key = i - 6;
-            if (key >= 0){
-                rec = chicks.get(key + 1);
-                chicks.remove(key + 1);
+            int key = i - 5;
+            if (key >= 1){
+                rec = chicks.get(key);
+                //chicks.remove(key + 1);
             }
             // if (i == day) System.out.println(chicks.get(i));
         }
-        return allChicks - rec;
+        return allChicks;
     }
 
 //    public long oldChicks(int N) {
