@@ -7,6 +7,7 @@ public class Chickens {
 
     /**
      * Chicks in a Zoo:
+     *
      * @Source: <a href="https://practice.geeksforgeeks.org/problems/chicks-in-a-zoo1159/1">...</a>
      * @Problem: Initially, the zoo have a single chick.
      * A chick gives birth to 2 chicks every day and the life expectancy of a chick is 6 days.
@@ -35,14 +36,14 @@ public class Chickens {
     private static long chickens(int day) {
         long oldChickens = 1, newChicks = 0, allChicks = 0, death = 0;
         Map<Integer, Long> chicks = new HashMap<>();
-        int days = 1;
 
-        chicks.put(days, oldChickens);
+        chicks.put(1, oldChickens);
         if (day == 1) allChicks = oldChickens;
 
+
         for (int i = 2; i <= day; i++) {
-            oldChickens -= death;                        // След 6-я ден общата бройка намалява с n = chicks.get(key);
-            newChicks = oldChickens * 2;
+            oldChickens -= death;                        // След 6-я ден общата бройка намалява за всеки един ден с...
+            newChicks = oldChickens * 2;                 //... "chicks.get(key);"
             allChicks = (newChicks + oldChickens);
             oldChickens += newChicks;
 
