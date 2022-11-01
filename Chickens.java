@@ -13,17 +13,20 @@ public class Chickens {
      * A chick gives birth to 2 chicks every day and the life expectancy of a chick is 6 days.
      * Zoo officials want to buy food for chicks so they want to know the number of chicks on an Nth day.
      * Help the officials with this task.
-     * K: V
-     * 1: 1
-     * 2: 3
-     * 3: 9
-     * 4: 27
-     * 5: 81
-     * 6: 243
-     * 7: 726
-     * 8: 2172
-     * 9: 6498
-     * 10: 19440
+     * Първоначалният брой е 1.
+     * За всеки следващ ден, всяко едно старо ражда по две нови. Всяко едно живее по 6 дни.
+     * K:   V
+     * дни: бройка
+     * 1:   1
+     * 2:   3
+     * 3:   9
+     * 4:   27
+     * 5:   81
+     * 6:   243
+     * 7:   726
+     * 8:   2172
+     * 9:   6498
+     * 10:  19440
      */
 
     public static void main(String[] args) {
