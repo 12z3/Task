@@ -29,6 +29,7 @@ public class Chickens {
             newChicks = oldChickens * 2;
             allChicks = (newChicks + oldChickens);
             oldChickens += newChicks;
+
             oldTime++;
             chicks.put(i,allChicks);
 
