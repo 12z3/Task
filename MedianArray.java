@@ -46,18 +46,18 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static void filldArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] lsArr) {
+    private static void filldArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
         if (matrixSize <= 3) {
             int j = R - 1;
             for (int i = 0; i < C; i++) {
                 index++;
-                lsArr[index] = matrix[i][j];
+                array[index] = matrix[i][j];
             }
         } else {
             for (int i = 0; i < matrix.length; i++) {
                 for (int j = 0; j < matrix[i].length; j++) {
                     index++;
-                    lsArr[index] = matrix[i][j];
+                    array[index] = matrix[i][j];
                 }
             }
         }
@@ -72,40 +72,41 @@ public class MedianArray extends Sorting {
         return matrixSize;
     }
 
-//    private static int median(int[][] matrix, int R, int C) {
-//        int index = -1, matrixSize = 0, median = 0;
-//
-//        for (int row1 = 0; row1 < matrix.length; row1++) {
-//            for (int col1 = 0; col1 < matrix[row1].length; col1++) {
-//                matrixSize++;
-//            }
-//        }
-//
-//        int[] lsArr = new int[matrixSize];
-//        if (matrixSize <= 3) {
-//            int j = R - 1;
-//            for (int i = 0; i < C; i++) {
-//                index++;
-//                lsArr[index] = matrix[i][j];
-//            }
-//        } else {
-//            for (int i = 0; i < matrix.length; i++) {
-//                for (int j = 0; j < matrix[i].length; j++) {
-//                    index++;
-//                    lsArr[index] = matrix[i][j];
-//                }
-//            }
-//        }
-//
-//        Arrays.sort(lsArr);
-//
-//        if (lsArr.length % 2 != 0) {
-//            index = (lsArr.length / 2);
-//            median = lsArr[index];
-//        } else {
-//            index = (lsArr.length / 2) - 1;
-//            median = (lsArr[index] + lsArr[index + 1]) / 2;
-//        }
-//        return median;
-//    }
+
+    private static int medianOld(int[][] matrix, int R, int C) {
+        int index = -1, matrixSize = 0, median = 0;
+
+        for (int row1 = 0; row1 < matrix.length; row1++) {
+            for (int col1 = 0; col1 < matrix[row1].length; col1++) {
+                matrixSize++;
+            }
+        }
+
+        int[] lsArr = new int[matrixSize];
+        if (matrixSize <= 3) {
+            int j = R - 1;
+            for (int i = 0; i < C; i++) {
+                index++;
+                lsArr[index] = matrix[i][j];
+            }
+        } else {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    index++;
+                    lsArr[index] = matrix[i][j];
+                }
+            }
+        }
+
+        Arrays.sort(lsArr);
+
+        if (lsArr.length % 2 != 0) {
+            index = (lsArr.length / 2);
+            median = lsArr[index];
+        } else {
+            index = (lsArr.length / 2) - 1;
+            median = (lsArr[index] + lsArr[index + 1]) / 2;
+        }
+        return median;
+    }
 }
