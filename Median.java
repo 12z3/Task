@@ -11,10 +11,10 @@ public class Median extends Sorting {
 
     public static void main(String[] args) {
 
-        int[][] input = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
-        int[][] input1 = {{1}, {2}, {3}};                         //  row = 3, col = 1;
-        int row = 3, col = 3;
-       // int row = 1, col = 3;
+        int[][] input1 = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
+        int[][] input = {{1}, {2}, {13}};                        // {{1}, {2}, {3}}          //  row = 3, col = 1;
+       // int row = 3, col = 3;
+        int row = 1, col = 3;
 
         System.out.println(median(input, row, col));
     }
@@ -30,8 +30,8 @@ public class Median extends Sorting {
 
         int[] lsArr = new int[matrixSize];
         if (matrixSize <= 3) {
-            int j = C - 1;
-            for (int i = 0; i < R; i++) {
+            int j = R - 1;
+            for (int i = 0; i < C; i++) {
                 index++;
                 lsArr[index] = matrix[i][j];
 
