@@ -25,7 +25,7 @@ public class MedianArray extends Sorting {
         matrixSize = getMatrixSize(matrix, matrixSize);
 
         int[] array = new int[matrixSize];
-        filldArray(matrix, R, C, index, matrixSize, array);
+        filledArray(matrix, R, C, index, matrixSize, array);
 
         Arrays.sort(array);
 
@@ -46,7 +46,7 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static void filldArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
+    private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
         if (matrixSize <= 3) {
             int j = R - 1;
             for (int i = 0; i < C; i++) {
