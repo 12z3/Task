@@ -1,67 +1,52 @@
 package task;
 
-import training.Methods;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 public class Median extends Sorting {
     public static void main(String[] args) {
 
-        int[][] input1 = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
-        int[][] input = {{1}, {2}, {3}};
+        int[][] input = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
+        int[][] input1 = {{1}, {2}, {3}};
+        int row = 3, col = 3;
 
-        int index = -1, elements = 0;
-        int row = 3, col = 1, medium = 0;
+        System.out.println(median(input, row, col));
+    }
 
-        // List<Integer> ls = new ArrayList<>();
+    private static int median(int[][] matrix, int R, int C) {
+        int index = -1, elements = 0, median = 0;
 
-        for (row = 0; row < input.length; row++) {
-            for (col = 0; col < input[row].length; col++) {
+        for (int row1 = 0; row1 < matrix.length; row1++) {
+            for (int col1 = 0; col1 < matrix[row1].length; col1++) {
                 elements++;
             }
         }
 
         int[] lsArr = new int[elements];
-        for (col = 0; col < input.length; col++) {
-            for (row = 0; row < input[col].length; row++) {
+        if (elements <= 3) {
+            int j = C - 1;
+            for (int i = 0; i < R; i++) {
                 index++;
-                lsArr[index] = input[row][col];
+                lsArr[index] = matrix[i][j];
+
+            }
+        } else {
+            for (int i = 0; i < matrix.length; i++) {
+                for (int j = 0; j < matrix[i].length; j++) {
+                    index++;
+                    lsArr[index] = matrix[i][j];
+                }
             }
         }
-        System.out.println(Arrays.toString(lsArr));
-        //ls = new ArrayList<>(Arrays.asList(input));
-        // 1, 2, 3, 3,  5,  6, 6, 9, 9 - 9
-        // Collections.sort(ls);                               // 1, 2, 3,  3, 5,  6, 6, 9 - 8
-        //  ls.remove(ls.size() - 1);
-//        if (ls.size() % 2 != 0) {
-//            int index = (ls.size() / 2);
-//            medium = ls.get(index);
-//        } else {
-//            int index = (ls.size() / 2) - 1 ;
-//            medium = (ls.get(index) + ls.get(index + 1)) / 2;
-//        }
-//
-//        System.out.println(ls);
-//        System.out.println(ls.size());
-//        System.out.println(medium);
 
-        directSelectionSorting(lsArr);
+        Arrays.sort(lsArr);
 
         if (lsArr.length % 2 != 0) {
             index = (lsArr.length / 2);
-            medium = lsArr[index];
+            median = lsArr[index];
         } else {
             index = (lsArr.length / 2) - 1;
-            medium = (lsArr[index] + lsArr[index + 1]) / 2;
+            median = (lsArr[index] + lsArr[index + 1]) / 2;
         }
-
-        System.out.println(Arrays.toString(lsArr));
-        System.out.println(lsArr.length);
-        System.out.println(medium);
-
-
+        return median;
     }
 }
