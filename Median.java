@@ -12,23 +12,21 @@ public class Median extends Sorting {
 
         int[][] input1 = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
         int[][] input = {{1}, {2}, {3}};
-        System.out.println(input.length);
+
         int index = -1, elements = 0;
-        int row = 3, col = 1;
+        int row = 3, col = 1, medium = 0;
 
         // List<Integer> ls = new ArrayList<>();
-        int medium = 0;
 
-        for ( row = 0; row < input.length; row++) {
-            for ( col = 0; col < input[row].length; col++) {
+        for (row = 0; row < input.length; row++) {
+            for (col = 0; col < input[row].length; col++) {
                 elements++;
-                int el = input[row][col];
             }
         }
-        int[] lsArr = new int[elements];
 
-        for ( col = 0; col < input.length; col++) {
-            for ( row = 0; row < input[col].length; row++) {
+        int[] lsArr = new int[elements];
+        for (col = 0; col < input.length; col++) {
+            for (row = 0; row < input[col].length; row++) {
                 index++;
                 lsArr[index] = input[row][col];
             }
