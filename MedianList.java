@@ -30,30 +30,41 @@ public class MedianList {
             }
         }
 
+        List<int[]> ls1;
         List<Integer> ls = new ArrayList<>();
-        if (matrixSize <= 3) {
-            int j = R - 1;
-            for (int i = 0; i < C; i++) {
-                ls.add(matrix[i][j]);
-            }
-        } else {
-            for (int i = 0; i < matrix.length; i++) {
-                for (int j = 0; j < matrix[i].length; j++) {
-                    index++;
-                    ls.add(matrix[i][j]);
-                }
-            }
+        ls1 = Arrays.asList(matrix);
+
+        for (int i = 0; i < ls1.size(); i++) {
+            System.out.print(Arrays.toString(ls1.get(i)) + " ");
+            ls.add(Integer.parseInt(Arrays.toString(ls1.get(i))));
         }
 
-        Collections.sort(ls);
+        System.out.println(ls);
 
-        if (ls.size() % 2 != 0) {
-            index = (ls.size() / 2);
-            median = ls.get(index);
-        } else {
-            index = (ls.size() / 2) - 1;
-            median = (ls.get(index) + ls.get(index + 1)) / 2;
-        }
+
+//        if (matrixSize <= 3) {
+//            int j = R - 1;
+//            for (int i = 0; i < C; i++) {
+//                ls.add(matrix[i][j]);
+//            }
+//        } else {
+//            for (int i = 0; i < matrix.length; i++) {
+//                for (int j = 0; j < matrix[i].length; j++) {
+//                    index++;
+//                    ls.add(matrix[i][j]);
+//                }
+//            }
+//        }
+//
+//        Collections.sort(ls);
+//
+//        if (ls.size() % 2 != 0) {
+//            index = (ls.size() / 2);
+//            median = ls.get(index);
+//        } else {
+//            index = (ls.size() / 2) - 1;
+//            median = (ls.get(index) + ls.get(index + 1)) / 2;
+//        }
         return median;
     }
 
