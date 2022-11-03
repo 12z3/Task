@@ -13,7 +13,7 @@ public class Median extends Sorting {
 
         int[][] input1 = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
         int[][] input = {{1}, {2}, {13}};                        // {{1}, {2}, {3}}          //  row = 3, col = 1;
-       // int row = 3, col = 3;
+        // int row = 3, col = 3;
         int row = 1, col = 3;
 
         System.out.println(median(input, row, col));
@@ -34,7 +34,6 @@ public class Median extends Sorting {
             for (int i = 0; i < C; i++) {
                 index++;
                 lsArr[index] = matrix[i][j];
-
             }
         } else {
             for (int i = 0; i < matrix.length; i++) {
