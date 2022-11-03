@@ -47,9 +47,9 @@ public class MedianArray extends Sorting {
 
     private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
         if (matrixSize <= 3) {
-            int j = R - 1;                     // ... покрил си единственно случаят -> 1 ред и n-колони
+            int j = R - 1;                     // ... покрил си единственно случаят -> 1 ред и n-колони.
             for (int i = 0; i < C; i++) {      // n-реда и 1 колона липсва.
-                index++;                       // т.е. трябва проверка на условието ? R < C
+                index++;                       // т.е. необходима е и проверка на условието: "? R < C".
                 array[index] = matrix[i][j];
             }
         } else {
