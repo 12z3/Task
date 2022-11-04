@@ -33,14 +33,14 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static int getMedian(int[] lsArr) {
+    private static int getMedian(int[] array) {
         int median, index;
-        if (lsArr.length % 2 != 0) {
-            index = (lsArr.length / 2);
-            median = lsArr[index];
+        if (array.length % 2 != 0) {
+            index = (array.length / 2);
+            median = array[index];
         } else {
-            index = (lsArr.length / 2) - 1;
-            median = (lsArr[index] + lsArr[index + 1]) / 2;
+            index = (array.length / 2) - 1;
+            median = (array[index] + array[index + 1]) / 2;
         }
         return median;
     }
