@@ -75,6 +75,7 @@ public class MedianArray extends Sorting {
         return matrixSize;
     }
 
+    // -----------------------------------------------------------------------------------------------------------------
 
     private static int medianOld(int[][] matrix, int R, int C) {
         int index = -1, matrixSize = 0, median = 0;
