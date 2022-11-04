@@ -86,7 +86,9 @@ public class MedianArray extends Sorting {
         }
         System.out.println(matrixSize);
 
-        int[] array = new int[matrixSize];
+        // int[] array = new int[matrixSize];
+        int[] array = new int[R * C];
+
         if (matrixSize <= 3) {
             int j = R - 1;
             for (int i = 0; i < C; i++) {
