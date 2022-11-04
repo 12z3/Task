@@ -33,12 +33,12 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static int getMedian(int[] array) {                          // [1, 2, 3, 3,  5,  6, 6, 9, 9] = 9 length
-        int median, index;                                               // [1, 2, 3,  3, 5,  6, 6, 9, ] = 8 length
-        if (array.length % 2 != 0) {
+    private static int getMedian(int[] array) {
+        int median, index;
+        if (array.length % 2 != 0) {                                    // [1, 2, 3, 3,  5,  6, 6, 9, 9] = 9 length
             index = (array.length / 2);
             median = array[index];
-        } else {
+        } else {                                                         // [1, 2, 3,  3, 5,  6, 6, 9, ] = 8 length
             index = (array.length / 2) - 1;
             median = (array[index] + array[index + 1]) / 2;
         }
@@ -48,7 +48,7 @@ public class MedianArray extends Sorting {
     private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
         if (R == 1) {                                                   // 0-колона и n-редове.
             for (int i = 0; i < C; i++) {
-                index++;                        
+                index++;
                 array[index] = matrix[i][R - 1];
             }
         } else if (C == 1) {                                             // 0-ред и n-колони.
