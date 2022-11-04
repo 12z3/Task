@@ -16,7 +16,7 @@ public class MedianArray extends Sorting {
         int row = 1, col = 3;
         // int row = 1, col = 3;
 
-        System.out.println("median: " + medianOld(input, row, col));
+        System.out.println("median: " + median(input, row, col));
     }
 
     private static int median(int[][] matrix, int R, int C) {
@@ -46,11 +46,17 @@ public class MedianArray extends Sorting {
     }
 
     private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
-        if (matrixSize <= 3) {
-            int j = R - 1;                     // ... покрил си единственно случаят -> 1 ред и n-колони.
-            for (int i = 0; i < C; i++) {      // n-реда и 1 колона липсва.
-                index++;                       // т.е. необходима е и проверка на условието: "? R < C".
-                array[index] = matrix[i][j];
+        if (R == 1) {                           // 0-колона и n-редове.
+                                                // ... покрил си единственно случаят -> 1 ред и n-колони.
+            for (int i = 0; i < C; i++) {       // n-реда и 1 колона липсва.
+                index++;                        // т.е. необходима е и проверка на условието: "? R < C".
+                array[index] = matrix[i][R - 1];
+            }
+        } else if (C == 1) {                    // 0-ред и n-колони.
+                                                // ... покрил си единственно случаят -> 1 ред и n-колони.
+            for (int i = 0; i < R; i++) {       // n-реда и 1 колона липсва.
+                index++;                        // т.е. необходима е и проверка на условието: "? R < C".
+                array[index] = matrix[C - 1][i];
             }
         } else {
             for (int i = 0; i < matrix.length; i++) {
