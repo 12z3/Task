@@ -13,7 +13,7 @@ public class MedianArray extends Sorting {
 
         int[][] input = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
         int[][] input1 = {{1}, {133}, {2}};                 // {{1}, {2}, {3}}          //  row = 1, col = 3;
-        int[][] input2 = {{1, 31, 3}};                     // {{1}, {2}, {3}}          //  row = 3, col = 1;
+        int[][] input2 = {{1, 31, 3}};                      // {{1}, {2}, {3}}          //  row = 3, col = 1;
         int row = 3, col = 3;
 
         System.out.println("median: " + median4(input, row, col));
