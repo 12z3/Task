@@ -11,10 +11,10 @@ public class MedianArray extends Sorting {
 
     public static void main(String[] args) {
 
-        int[][] input1 = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
-        int[][] input = {{1}, {133}, {2}};                 // {{1}, {2}, {3}}          //  row = 1, col = 3;
+        int[][] input = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
+        int[][] input1 = {{1}, {133}, {2}};                 // {{1}, {2}, {3}}          //  row = 1, col = 3;
         int[][] input2 = {{1, 31, 3}};                     // {{1}, {2}, {3}}          //  row = 3, col = 1;
-        int row = 1, col = 3;
+        int row = 3, col = 3;
 
         System.out.println("median: " + median(input, row, col));
     }
@@ -33,8 +33,8 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static int getMedian(int[] array) {                          // [1, 2, 3, 3,  5,  6, 6, 9, 9]
-        int median, index;                                               // [1, 2, 3,  3, 5,  6, 6, 9, ]
+    private static int getMedian(int[] array) {                          // [1, 2, 3, 3,  5,  6, 6, 9, 9] = 9 length
+        int median, index;                                               // [1, 2, 3,  3, 5,  6, 6, 9, ] = 8 length
         if (array.length % 2 != 0) {
             index = (array.length / 2);
             median = array[index];
@@ -46,16 +46,14 @@ public class MedianArray extends Sorting {
     }
 
     private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
-        if (R == 1) {                           // 0-колона и n-редове.
-                                                // ... покрил си единственно случаят -> 1 ред и n-колони.
-            for (int i = 0; i < C; i++) {       // n-реда и 1 колона липсва.
-                index++;                        // т.е. необходима е и проверка на условието: "? R < C".
+        if (R == 1) {                                                   // 0-колона и n-редове.
+            for (int i = 0; i < C; i++) {
+                index++;                        
                 array[index] = matrix[i][R - 1];
             }
-        } else if (C == 1) {                    // 0-ред и n-колони.
-                                                // ... покрил си единственно случаят -> 1 ред и n-колони.
-            for (int i = 0; i < R; i++) {       // n-реда и 1 колона липсва.
-                index++;                        // т.е. необходима е и проверка на условието: "? R < C".
+        } else if (C == 1) {                                             // 0-ред и n-колони.
+            for (int i = 0; i < R; i++) {
+                index++;
                 array[index] = matrix[C - 1][i];
             }
         } else {
