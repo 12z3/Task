@@ -16,7 +16,7 @@ public class MedianArray extends Sorting {
         int[][] input2 = {{1, 31, 3}};                     // {{1}, {2}, {3}}          //  row = 3, col = 1;
         int row = 3, col = 3;
 
-        System.out.println("median: " + median(input, row, col));
+        System.out.println("median: " + median4(input, row, col));
     }
 
     private static int median(int[][] matrix, int R, int C) {
@@ -38,7 +38,7 @@ public class MedianArray extends Sorting {
         if (array.length % 2 != 0) {                                    // [1, 2, 3, 3,  5,  6, 6, 9, 9] = 9 length
             index = (array.length / 2);
             median = array[index];
-        } else {                                                         // [1, 2, 3,  3, 5,  6, 6, 9, ] = 8 length
+        } else {                                                        // [1, 2, 3,  3, 5,  6, 6, 9, ] = 8 length
             index = (array.length / 2) - 1;
             median = (array[index] + array[index + 1]) / 2;
         }
@@ -51,7 +51,7 @@ public class MedianArray extends Sorting {
                 index++;
                 array[index] = matrix[i][R - 1];
             }
-        } else if (C == 1) {                                             // 0-ред и n-колони.
+        } else if (C == 1) {                                            // 0-ред и n-колони.
             for (int i = 0; i < R; i++) {
                 index++;
                 array[index] = matrix[C - 1][i];
@@ -117,7 +117,7 @@ public class MedianArray extends Sorting {
 
     // -----------------------------------------------------------------------------------------------------------------
 
-    int median4(int matrix[][], int R, int C) {
+    static int median4(int matrix[][], int R, int C) {
         // code here
         int index = -1, matrixSize = 0, median = 0;
 
@@ -126,7 +126,7 @@ public class MedianArray extends Sorting {
                 matrixSize++;
             }
         }
-        System.out.println(matrixSize);
+        //System.out.println("length: "  + matrixSize);
 
         int[] array = new int[matrixSize];
         if (R == 1) {
