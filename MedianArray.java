@@ -22,9 +22,9 @@ public class MedianArray extends Sorting {
     private static int median(int[][] matrix, int R, int C) {
         int index = -1, matrixSize = 0, median = 0;
 
-        matrixSize = getMatrixSize(matrix, matrixSize);
-
+        matrixSize = getMatrixSize(R, C, matrixSize);
         int[] array = new int[matrixSize];
+        
         filledArray(matrix, R, C, index, matrixSize, array);
 
         Arrays.sort(array);
@@ -66,7 +66,11 @@ public class MedianArray extends Sorting {
         }
     }
 
-    private static int getMatrixSize(int[][] matrix, int matrixSize) {
+    private static int getMatrixSize(int R, int C, int matrixSize) {
+        return matrixSize = R * C;
+    }
+
+    private static int getMatrixSizeA(int[][] matrix, int matrixSize) {
         for (int row1 = 0; row1 < matrix.length; row1++) {
             for (int col1 = 0; col1 < matrix[row1].length; col1++) {
                 matrixSize++;
