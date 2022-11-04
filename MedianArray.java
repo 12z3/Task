@@ -57,7 +57,7 @@ public class MedianArray extends Sorting {
                 array[index] = matrix[C - 1][i];
             }
         } else {
-            for (int col = 0; col < C; col++) {                        // ... обхожда я по колони не по редове
+            for (int col = 0; col < C; col++) {                        // ... обхожда matrix по колони не по редове
                 for (int row = 0; row < R; row++) {
                     index++;
                     array[index] = matrix[row][col];
