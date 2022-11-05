@@ -17,6 +17,17 @@ public class MergeTwoMassive extends Methods {
      * @param a "Масив а"
      * @param b "Масив b"
      */
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        timeAndData();
+
+        int[] a = {1, 2, 3, 4, 5, 56, 47};
+        int[] b = {11, 2, 33, 4, 5, 12, 34};
+
+        System.out.println("a = " + Arrays.toString(a));
+        System.out.println("b = " + Arrays.toString(b));
+        mergeTwoMassive(a, b);
+    }
 
     public static void mergeTwoMassive(int[] a, int[] b) {
         int count = 0;
@@ -66,7 +77,6 @@ public class MergeTwoMassive extends Methods {
     // ВАЖНО:
     // Печата ", " ако е изпълнено условието -> (index > countZeroElement).
     // И едва След това печата елемента ако е различен от нула независимо от условието за запетаята.
-
     public static void printNoZeroIntDArray(int[] arr) {
         boolean isMatch = false;
         int count = 0, countZeroElement = 0;
@@ -85,17 +95,5 @@ public class MergeTwoMassive extends Methods {
 
         System.out.print("]");
         System.out.println();
-    }
-
-    public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
-        timeAndData();
-
-        int[] a = {1, 2, 3, 4, 5, 56, 47};
-        int[] b = {11, 2, 33, 4, 5, 12, 34};
-
-        System.out.println("a = " + Arrays.toString(a));
-        System.out.println("b = " + Arrays.toString(b));
-        mergeTwoMassive(a, b);
     }
 }
