@@ -20,7 +20,7 @@ public class MedianArray extends Sorting {
     }
 
     private static int median(int[][] matrix, int R, int C) {
-        int matrixSize = 0, median = 0;
+        int matrixSize, median;
 
         matrixSize = getMatrixSize(R, C);
         int[] array = new int[matrixSize];
