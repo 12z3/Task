@@ -68,8 +68,7 @@ public class MedianArray extends Sorting {
     }
 
     private static int getMatrixSize(int R, int C) {
-        int matrixSize;
-        return matrixSize = R * C;
+        return R * C;
     }
 
     private static int getMatrixSizeA(int[][] matrix, int matrixSize) {
