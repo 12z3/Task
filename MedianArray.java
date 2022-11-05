@@ -12,20 +12,20 @@ public class MedianArray extends Sorting {
     public static void main(String[] args) {
 
         int[][] input = {{1, 3, 5}, {2, 6, 9}, {3, 6, 9}};
-        int[][] input1 = {{1}, {133}, {2}};                 // {{1}, {2}, {3}}          //  row = 1, col = 3;
-        int[][] input2 = {{1, 31, 3}};                      // {{1}, {2}, {3}}          //  row = 3, col = 1;
+        int[][] input2 = {{1}, {133}, {2}};                 // {{1}, {2}, {3}}          //  row = 1, col = 3;
+        int[][] input1 = {{1, 31, 3}};                      // {{1}, {2}, {3}}          //  row = 3, col = 1;
         int row = 3, col = 3;
 
-        System.out.println("median: " + median4(input, row, col));
+        System.out.println("median: " + median(input, row, col));
     }
 
     private static int median(int[][] matrix, int R, int C) {
-        int index = -1, matrixSize = 0, median = 0;
+        int matrixSize = 0, median = 0;
 
-        matrixSize = getMatrixSize(R, C, matrixSize);
+        matrixSize = getMatrixSize(R, C);
         int[] array = new int[matrixSize];
-        
-        filledArray(matrix, R, C, index, matrixSize, array);
+
+        filledArray(matrix, R, C, array);
 
         Arrays.sort(array);
 
@@ -45,7 +45,8 @@ public class MedianArray extends Sorting {
         return median;
     }
 
-    private static void filledArray(int[][] matrix, int R, int C, int index, int matrixSize, int[] array) {
+    private static void filledArray(int[][] matrix, int R, int C, int[] array) {
+        int index = -1;
         if (R == 1) {                                                   // 0-колона и n-редове.
             for (int i = 0; i < C; i++) {
                 index++;
@@ -66,7 +67,8 @@ public class MedianArray extends Sorting {
         }
     }
 
-    private static int getMatrixSize(int R, int C, int matrixSize) {
+    private static int getMatrixSize(int R, int C) {
+        int matrixSize;
         return matrixSize = R * C;
     }
 
