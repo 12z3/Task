@@ -12,8 +12,8 @@ public class BinarySearch {
 
         int[] a1 = {1, 2, 7, 9, 55, 4, 77, 13, 24, 54, 67, 18};   // 11; 5 - 77
         int[] a = {1, 2, 3, 4, 5};   // 11; 5 - 77
-        System.out.println(
-                "index: " + binarySearch(a, 67) + " -> element: " + a[binarySearch(a, 67)]);
+        System.out.println("index: " + binarySearch(a, 4) +
+                " -> element: " + a[binarySearch(a, 4)]);
 
         System.out.println(binarySearch(a, 4));
 
@@ -27,9 +27,9 @@ public class BinarySearch {
             // middleIndex = (endIndex + startIndex) / 2;
             middleIndex = startIndex + (endIndex - startIndex) / 2;
 
-            if (elementToSearch == array[middleIndex]) return middleIndex;
-
-            if (elementToSearch > array[middleIndex]) {
+            if (elementToSearch == array[middleIndex]) {
+                return middleIndex;
+            }else if (elementToSearch > array[middleIndex]) {
                 startIndex = middleIndex + 1;
             } else if (elementToSearch < array[middleIndex]) {
                 endIndex = middleIndex - 1;
