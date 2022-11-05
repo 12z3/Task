@@ -16,7 +16,6 @@ public class BinarySearch {
                 " -> element: " + a[binarySearch(a, 4)]);
 
         System.out.println(binarySearch(a, 4));
-
     }
 
     public static int binarySearch(int[] array, int elementToSearch) {
