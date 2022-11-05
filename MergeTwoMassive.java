@@ -13,9 +13,6 @@ public class MergeTwoMassive extends Methods {
      *       Виж и "removeZeroElementsOfArray"
      * Слива два масива като изключва повтарящите се елементи.
      * Ако съвпадат -> "Нищо не прави". Ако ли не запиши елемента в нов масив и го разпечатай.
-     *
-     * @param a "Масив а"
-     * @param b "Масив b"
      */
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
