@@ -51,9 +51,9 @@ public class MergeArray {
         for (int indexA = 0, indexB = (-a.length), j = sizeA; indexA < newArr.length; indexA++, indexB++) {
             if (indexA < a.length) {
                 T tmp = null;
-                newArr[indexA] = a[indexA];
+             //   newArr[indexA] = a[indexA];                     // Required type: "int" -> Provided: "T" ???
             } else {
-                newArr[sizeA++] = b[indexB];
+             //   newArr[sizeA++] = b[indexB];                    // Required type: "int" -> Provided: "T" ???
             }
         }
 
