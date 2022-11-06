@@ -8,6 +8,7 @@ public class MergeArray {
 
         int[] a = {6, 7, 8, 1, 2, 3, 4};
         int[] b = {1, 2, 5, 7, 8};
+        
         mergeArray(a, b);
         mergeArray1(a, b);
     }
