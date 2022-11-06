@@ -35,7 +35,7 @@ public class GenericSort {
     private static <T> T[] bubbleSort(T[] arr) {
         for (int index1 = 0; index1 < arr.length; index1++) {
             for (int index2 = 0; index2 < arr.length; index2++) {
-                if ((int)arr[index1] < (int)arr[index2]) {
+                if ((int)arr[index1] < (int)arr[index2]) {         // ... Ъ. В случая когато arr[index] 1= int ... ???
                     swap(arr, index1, index2);
                 }
             }
