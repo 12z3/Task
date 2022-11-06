@@ -2,7 +2,6 @@ package task;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class MedianList {
@@ -21,25 +20,22 @@ public class MedianList {
         System.out.println("median: " + median(input, row, col));
     }
 
-    private static int median(int[][] matrix, int R, int C) {
+    private static int median(int[][] matrix, int R, int C) {                     // ДОВЪРШИ ГО.....
         int index = -1, matrixSize = 0, median = 0;
+
+        List<int[]> ls = new ArrayList<>();
 
         for (int row1 = 0; row1 < matrix.length; row1++) {
             for (int col1 = 0; col1 < matrix[row1].length; col1++) {
                 matrixSize++;
+                index++;
+                ls.add(matrix[index]);
             }
         }
 
-        List<int[]> ls1;
-        List<Integer> ls = new ArrayList<>();
-        ls1 = Arrays.asList(matrix);
-
-        for (int i = 0; i < ls1.size(); i++) {
-            System.out.print(Arrays.toString(ls1.get(i)) + " ");
-            ls.add(Integer.parseInt(Arrays.toString(ls1.get(i))));
+        for (int i = 0; i < ls.size(); i++) {
+            System.out.print(Arrays.toString(ls.get(i)) + " ");
         }
-
-        System.out.println(ls);
 
 
 //        if (matrixSize <= 3) {
