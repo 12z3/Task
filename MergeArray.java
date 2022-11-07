@@ -8,7 +8,7 @@ public class MergeArray {
 
         int[] a = {6, 7, 8, 1, 2, 3, 4};
         int[] b = {1, 2, 5, 7, 8};
-        
+
         mergeArray(a, b);
         mergeArray1(a, b);
     }
@@ -17,8 +17,8 @@ public class MergeArray {
         int[] newArr = new int[a.length + b.length];
         int sizeA = a.length;
 
-        for (int idxA = 0, idxB = (-a.length); idxA < newArr.length; idxA++, idxB++) {
-            if (idxA < a.length) {
+        for (int idxA = 0, idxB = (-sizeA); idxA < newArr.length; idxA++, idxB++) {
+            if (idxA < sizeA) {
                 newArr[idxA] = a[idxA];
             } else {
                 newArr[sizeA++] = b[idxB];
