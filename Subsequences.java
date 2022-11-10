@@ -28,9 +28,9 @@ public class Subsequences {
             boolean add = false;
 
             ls = new ArrayList<>();
-            int el1 = a[i], el2 = a[i + 1], index = i + 1;
+            int el1 = a[i], el2 = a[i + 1], index = i + 1, endEl = a.length - 1;
 
-            while (compare(el1, el2) && index < a.length - 1) {
+            while (compare(el1, el2) && index < endEl) {
                 if (add) {
                     ls.add(el2);
                     count++;
@@ -46,9 +46,9 @@ public class Subsequences {
                 i = index;          // <-
                 index++;
             }
-            if ((index == a.length - 1) && (a[a.length - 1] == a[a.length - 2] + 1)) {
-                if (!add) ls.add(a[a.length - 2]);
-                ls.add(a[a.length - 1]);
+            if ((index == endEl) && (a[endEl] == a[endEl - 1] + 1)) {
+                if (!add) ls.add(a[endEl - 1]);
+                ls.add(a[endEl]);
                 count++;
             }
             System.out.println(ls);
