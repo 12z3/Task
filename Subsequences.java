@@ -33,10 +33,10 @@ public class Subsequences {
 
             ls = new ArrayList<>();
             int el1 = a[i], el2 = a[i + 1],
-                    index = i + 1, endEl = a.length - 1;
+                    index = i + 1, endElIdx = a.length - 1;
             count++;
 
-            while (compare(el1, el2) && index < endEl) {
+            while (compare(el1, el2) && index < endElIdx) {
                 if (!PreviouslyAdded) ls.add(el1);
                 ls.add(el2);
                 PreviouslyAdded = true;
@@ -45,9 +45,9 @@ public class Subsequences {
                 i = index;               // <-
                 index++;
             }
-            if ((index == endEl) && (a[endEl] == a[endEl - 1] + 1)) {
-                if (!PreviouslyAdded) ls.add(a[endEl - 1]);
-                ls.add(a[endEl]);
+            if ((index == endElIdx) && (a[endElIdx] == a[endElIdx - 1] + 1)) {
+                if (!PreviouslyAdded) ls.add(a[endElIdx - 1]);
+                ls.add(a[endElIdx]);
             }
             System.out.println(ls);
         }
