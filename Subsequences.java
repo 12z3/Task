@@ -39,8 +39,6 @@ public class Subsequences {
             while (compare(el1, el2) && index < endEl) {
                 if (!PreviouslyAdded) ls.add(el1);
                 ls.add(el2);
-                // count++;
-
                 PreviouslyAdded = true;
                 el1 = a[index];
                 el2 = a[index + 1];
