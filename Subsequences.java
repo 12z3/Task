@@ -15,14 +15,18 @@ public class Subsequences {
      */
 
     public static void main(String[] args) {
-        List<Integer> ls;
 
         int[] a2 = {1, 2, 3, 6, 7, 8};
         int[] a1 = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
         int[] a = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
         int[] a3 = {1, 2, 1, 2, 1, 2};
-        int count = 0;
 
+        consecutiveSubsequences(a);
+    }
+
+    private  static void consecutiveSubsequences(int[] a){
+        List<Integer> ls;
+        int  count = 0;
 
         for (int i = 0; i < a.length - 1; i++) {
             boolean add = false;
@@ -44,7 +48,7 @@ public class Subsequences {
                 add = true;
                 el1 = a[index];
                 el2 = a[index + 1];
-                i = index;          // <-
+                i = index;               // <-
                 index++;
             }
             if ((index == endEl) && (a[endEl] == a[endEl - 1] + 1)) {
@@ -57,7 +61,6 @@ public class Subsequences {
 
         System.out.println(count);
     }
-
     private static boolean compare(int el1, int el2) {
         return el1 + 1 == el2;
     }
