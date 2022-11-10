@@ -18,8 +18,8 @@ public class Subsequences {
 
         int[] a2 = {1, 2, 3, 6, 7, 8};
         int[] a1 = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
-        int[] a3 = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
-        int[] a = {1, 2, 1, 2, 1, 2};
+        int[] a = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
+        int[] a3 = {1, 2, 1, 2, 1, 2};
 
         consecutiveSubsequences(a);
     }
@@ -46,8 +46,8 @@ public class Subsequences {
                 index++;
             }
             if ((index == endElIdx) && (a[endElIdx] == a[endElIdx - 1] + 1)) {
-                if (!PreviouslyAdded) ls.add(a[endElIdx - 1]);
-                ls.add(a[endElIdx]);
+                if (!PreviouslyAdded) ls.add(el1);
+                ls.add(el2);
             }
             System.out.println(ls);
         }
