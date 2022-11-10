@@ -29,14 +29,14 @@ public class Subsequences {
         int  count = 0;
 
         for (int i = 0; i < a.length - 1; i++) {
-            boolean add = false;
+            boolean PreviouslyAdded = false;
 
             ls = new ArrayList<>();
             int el1 = a[i], el2 = a[i + 1],
                     index = i + 1, endEl = a.length - 1;
 
             while (compare(el1, el2) && index < endEl) {
-                if (add) {
+                if (PreviouslyAdded) {
                     ls.add(el2);
                     count++;
                 } else {
@@ -45,14 +45,14 @@ public class Subsequences {
                     count++;
                 }
 
-                add = true;
+                PreviouslyAdded = true;
                 el1 = a[index];
                 el2 = a[index + 1];
                 i = index;               // <-
                 index++;
             }
             if ((index == endEl) && (a[endEl] == a[endEl - 1] + 1)) {
-                if (!add) ls.add(a[endEl - 1]);
+                if (!PreviouslyAdded) ls.add(a[endEl - 1]);
                 ls.add(a[endEl]);
                 count++;
             }
