@@ -42,7 +42,7 @@ public class Subsequences {
                 PreviouslyAdded = true;
                 el1 = a[index];
                 el2 = a[index + 1];
-                i = index;               // <-
+                i = index;                     // <-
                 index++;
             }
             if ((index == endElIdx) && (a[endElIdx] == a[endElIdx - 1] + 1)) {
