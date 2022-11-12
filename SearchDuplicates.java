@@ -15,7 +15,7 @@ public class SearchDuplicates {
 
     public static void main(String[] args) {
         int[] a = {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
-        // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
+             // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
         searchDuplicates(a);
     }
 
