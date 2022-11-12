@@ -44,7 +44,7 @@ public class SearchDuplicates {
         for (int el : matches) System.out.print(el + " ");
     }
 
-    private static int findDuplicated(int[] arr,int el1, int index) {
+    private static int findDuplicated(int[] arr, int el1, int index) {
         int elCount = 1;
         while (index < arr.length) {
             int el2 = arr[index];
