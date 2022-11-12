@@ -15,7 +15,7 @@ public class SearchDuplicates {
 
     public static void main(String[] args) {
         int[] a = {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
-             // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
+        // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
         searchDuplicates(a);
     }
 
@@ -23,17 +23,17 @@ public class SearchDuplicates {
         int[] matches = new int[a.length];
 
         for (int i = 0; i < a.length; i++) {
-            int elCount = 1, el1 = a[i], index = i + 1;
+            int matchesCounter = 1, el1 = a[i], index = i + 1;
 
             if (i == 0) {
-                elCount = findDuplicated(a, elCount, el1, index);
+                matchesCounter = findDuplicated(a, matchesCounter, el1, index);
             } else {
                 if (!isChecked(a, a[i], i)) {
-                    elCount = findDuplicated(a, elCount, el1, index);
+                    matchesCounter = findDuplicated(a, matchesCounter, el1, index);
                 } else continue;
             }
-            matches[i] = elCount;
-            System.out.printf("Element %d = finds %d times %n", el1, elCount);
+            matches[i] = matchesCounter;
+            System.out.printf("Element %d = finds %d times %n", el1, matchesCounter);
         }
 
         for (int el : matches) System.out.print(el + " ");
