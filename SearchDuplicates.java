@@ -24,17 +24,17 @@ public class SearchDuplicates {
         searchDuplicates(a);
     }
 
-    private static void searchDuplicates(int[] a) {
-        int[] matches = new int[a.length];
+    private static void searchDuplicates(int[] arr) {
+        int[] matches = new int[arr.length];
 
-        for (int i = 0; i < a.length; i++) {
-            int matchesCounter = 1, el1 = a[i], index = i + 1;
+        for (int i = 0; i < arr.length; i++) {
+            int matchesCounter = 1, el1 = arr[i], index = i + 1;
 
             if (i == 0) {
-                matchesCounter = findDuplicated(a, matchesCounter, el1, index);
+                matchesCounter = findDuplicated(arr, el1, index);
             } else {
-                if (!isChecked(a, a[i], i)) {
-                    matchesCounter = findDuplicated(a, matchesCounter, el1, index);
+                if (!isChecked(arr, arr[i], i)) {
+                    matchesCounter = findDuplicated(arr, el1, index);
                 } else continue;
             }
             matches[i] = matchesCounter;
@@ -44,9 +44,10 @@ public class SearchDuplicates {
         for (int el : matches) System.out.print(el + " ");
     }
 
-    private static int findDuplicated(int[] a, int elCount, int el1, int index) {
-        while (index < a.length) {
-            int el2 = a[index];
+    private static int findDuplicated(int[] arr,int el1, int index) {
+        int elCount = 1;
+        while (index < arr.length) {
+            int el2 = arr[index];
             if (el1 == el2) {
                 elCount++;
             }
@@ -55,9 +56,9 @@ public class SearchDuplicates {
         return elCount;
     }
 
-    private static boolean isChecked(int[] a, int el, int elIndex) {
-        for (int j = elIndex - 1; j >= 0; j--) {
-            if (el == a[j]) return true;
+    private static boolean isChecked(int[] arr, int el, int index) {
+        for (int j = index - 1; j >= 0; j--) {
+            if (el == arr[j]) return true;
         }
         return false;
     }
