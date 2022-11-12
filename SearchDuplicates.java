@@ -5,17 +5,17 @@ public class SearchDuplicates {
     /**
      * Виж: GitHiB -> inTime -> RemoveDuplicateElements
      * {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
+     * {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0}; - > counter of matches
      * Element 1 = finds 4 times
      * Element 3 = finds 3 times
      * Element 4 = finds 2 times
      * Element 5 = finds 1 times
      * Element 2 = finds 1 times
-     * 4 0 3 0 2 1 1 0 0 0 0
      */
 
     public static void main(String[] args) {
         int[] a = {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
-
+             // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
         searchDuplicates(a);
     }
 
