@@ -6,6 +6,11 @@ public class SearchDuplicates {
      * Виж: GitHiB -> inTime -> RemoveDuplicateElements
      * {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
      * {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0}; - > counter of matches
+     * <p></p>
+     * Взима първият "1" и брои колко пъти се среща в следващите.
+     * Взима втория. Проверява дали е проверяван. Ако Е прескача на следващия.
+     * В противен случай извършва проверката и за него.
+     * <p></p>
      * Element 1 = finds 4 times
      * Element 3 = finds 3 times
      * Element 4 = finds 2 times
