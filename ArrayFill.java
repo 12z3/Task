@@ -63,7 +63,6 @@ public class ArrayFill {
                 System.out.println("startRowIdx = " + startRowIdx + " startColIdx = " + startColIdx);
                 i++;
                 j++;
-
             }
             if (startRowIdx > 0) {
                 startRowIdx--;
