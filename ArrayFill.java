@@ -49,7 +49,8 @@ public class ArrayFill {
         int rows = sc.nextInt();
         int cols = sc.nextInt();
         int[][] arr = new int[rows][cols];
-        int startRowIdx = arr.length - 1;            // 3
+
+        int startRowIdx = arr.length - 1;             // 3
         int startColIdx = 0;
         int valueToFill = 1;
         // while (startCol <= arr[0].length - 1) {
@@ -57,20 +58,20 @@ public class ArrayFill {
             int i = startRowIdx;                      // 3
             int j = startColIdx;                      // 0
             while (i < rows && j < cols) {
-                arr[i][j] = valueToFill;             // 30->20->31
+                arr[i][j] = valueToFill;              // 30->20->31
                 valueToFill++;
                 System.out.println( "i = " + i + "; j = " + j + " -> " + arr[i][j]);
                 System.out.println("startRowIdx = " + startRowIdx + " startColIdx = " + startColIdx);
                 i++;
                 j++;
             }
-            if (startRowIdx > 0) {
+            if (startRowIdx > 0) {                    // ..не съм опрял в горният край на мсива
                 startRowIdx--;
             } else {
                 startColIdx++;
             }
         }
-        for (int k = 0; k < arr.length; k++) {
+        for (int k = 0; k < arr.length; k++) {           // Не случайно печата масива тук....
             for (int p = 0; p < arr[0].length; p++) {
                 System.out.print(arr[k][p] + " ");
             }
