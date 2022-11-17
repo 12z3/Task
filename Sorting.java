@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class Sorting {
     /**
      * @directSelectionSorting: Намира най - малкото число и го слага на 1-во място.
-     * Търси следващото най-малко като се изключва намеренето
+     * Търси следващото най-малко такова като се изключва предишното от търсенето.
      */
 
     public static void main(String[] args) {
@@ -33,7 +33,25 @@ public class Sorting {
 
 
         int[] a = {1, 15, 12, 3, 5, 7, 4, 9};
+        bubbleOptimized(a);
 
+        int[] arr = {7, 3, 8, 4, 5, 2};
+        System.out.println(Arrays.toString(directSelectionSorting(arr)));
+        System.out.println(Arrays.toString(directSelectionSorting1(arr)));
+        System.out.println(Arrays.toString(bubbleSort(arr)));
+    }
+
+    private static int[] bubbleSort(int[] arr) {
+        for (int index1 = 0; index1 < arr.length; index1++) {
+            for (int index2 = 0; index2 < arr.length; index2++) {
+                if (arr[index1] < arr[index2]) {
+                    swap(arr, index1, index2);
+                }
+            }
+        }
+        return arr;
+    }
+    public static void bubbleOptimized(int[] a) {
         for (int i = 0; i < a.length; i++) {
             for (int j = 0; j < a.length - i - 1; j++) {
                 if (a[j] > a[j + 1]) {
@@ -41,15 +59,10 @@ public class Sorting {
                     a[j] = a[j + 1];
                     a[j + 1] = tmp;
                     System.out.println("i = " + i +
-                            ", j = " + j + ":  " + Arrays.toString(a)); 
+                            ", j = " + j + ":  " + Arrays.toString(a));
                 }
             }
         }
-
-        int[] arr = {7, 3, 8, 4, 5, 2};
-        System.out.println(Arrays.toString(directSelectionSorting(arr)));
-        System.out.println(Arrays.toString(directSelectionSorting1(arr)));
-        System.out.println(Arrays.toString(bubbleSort(arr)));
     }
 
     public static int[] directSelectionSorting(int[] arr) {
@@ -62,21 +75,10 @@ public class Sorting {
         return arr;
     }
 
-    private static int[] directSelectionSorting1(int[] arr) {
+    public static int[] directSelectionSorting1(int[] arr) {
         for (int currentIndex = 0; currentIndex < arr.length; currentIndex++) {
             int minIndex = findIndex(arr, currentIndex);
             if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
-        }
-        return arr;
-    }
-
-    private static int[] bubbleSort(int[] arr) {
-        for (int index1 = 0; index1 < arr.length; index1++) {
-            for (int index2 = 0; index2 < arr.length; index2++) {
-                if (arr[index1] < arr[index2]) {
-                    swap(arr, index1, index2);
-                }
-            }
         }
         return arr;
     }
@@ -91,8 +93,8 @@ public class Sorting {
 
     private static int findIndex(int[] arr, int currentIndex) {
         int min = Integer.MAX_VALUE, minIndex = 0;
-        for (int i = currentIndex; i < arr.length; i++) {
-            if (arr[i] < min) {
+        for (int i = currentIndex; i < arr.length; i++) {      // Валидно е и: i = currentIndex + 1
+            if (arr[i] < min) {                      // ... идеята е да не проверява текущият сам със себе си всеки път
                 min = arr[i];
                 minIndex = i;
             }
