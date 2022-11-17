@@ -69,7 +69,8 @@ public class Sorting {
         int currentIndex = 0;
         while (currentIndex < arr.length) {
             int minIndex = findIndex(arr, currentIndex);
-            if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
+            swap(arr, minIndex, currentIndex);
+           // if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
             currentIndex++;
         }
         return arr;
@@ -78,8 +79,9 @@ public class Sorting {
     public static int[] directSelectionSorting1(int[] arr) {
         for (int currentIndex = 0; currentIndex < arr.length; currentIndex++) {
             int minIndex = findIndex(arr, currentIndex);
-            if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex);
-        }
+            swap(arr, minIndex, currentIndex);
+            //if (arr[minIndex] < arr[currentIndex]) swap(arr, minIndex, currentIndex); // ... няма смисъл от него
+        }                      // arr[minIndex] < arr[currentIndex] е проверено в метода findIndex
         return arr;
     }
 
