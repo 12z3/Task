@@ -25,8 +25,8 @@ public class TOTOCheckResults extends Toto {
         List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ще залагаме ли? (y / n) : ");
-        String answer = scanner.nextLine();
 
+        String answer = scanner.nextLine();                         // while търси true
         while (!answer.equalsIgnoreCase("y")            // true && true = true; true && false = false;
                 && !answer.equalsIgnoreCase("n")){
             System.out.println(".... 'y' или 'n'?");
@@ -47,7 +47,9 @@ public class TOTOCheckResults extends Toto {
     }
 
     private static int[] result(Scanner scanner) {
-        String[] input = scanner.nextLine().split(", ");
+        String[] input = scanner.nextLine().
+                trim().
+                split(", ");
         int[] result = new int[input.length];
 
         for (int i = 0; i < result.length; i++) {
