@@ -12,12 +12,12 @@ public class TOTOCheckResults extends Toto {
 
         // 92-и тираж:  9, 24, 26, 28, 37, 46
 
-        System.out.println("----------------------------------------");
+        System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ", scanner);
         int[] b = yourSuppose("Твоят залог: ", scanner);
-        System.out.println("----------------------------------------");
+        System.out.println("-----------------------------------------------");
         printResult(a, b);
-        System.out.println("----------------------------------------");
+        System.out.println("-----------------------------------------------");
         question();
     }
 
@@ -61,7 +61,7 @@ public class TOTOCheckResults extends Toto {
 
     private static void printResult(int[] a, int[] b) {
 
-        System.out.print("Имаш " + getCounts(a, b) + " попадения: ");
+        System.out.print("Имаш " + getCounts(a, b)+ " от " + a.length + " попадения: ");
 
         for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
             if (Objects.requireNonNull(compareResults(a, b))[i] != 0 &&
