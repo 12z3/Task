@@ -1,6 +1,7 @@
 package task;
 
 import training.Methods;
+
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -9,7 +10,7 @@ public class TOTOCheckResults extends Methods {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        // 92-и тираж:  9, 24, 26, 28, 37, 46 
+        // 92-и тираж:  9, 24, 26, 28, 37, 46
 
         int[] a = OfficialResult("Резултат от тиража: ", scanner);
         int[] b = yourInput("Твоя залог: ", scanner);
@@ -33,7 +34,7 @@ public class TOTOCheckResults extends Methods {
 
         for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
             if (Objects.requireNonNull(compareResults(a, b))[i] != 0) {
-                if (i < Objects.requireNonNull(compareResults(a, b)).length - 1){
+                if (i < Objects.requireNonNull(compareResults(a, b)).length - 1) {
                     System.out.print(a[i] + ", ");
                 } else System.out.print(a[i]);
             }
