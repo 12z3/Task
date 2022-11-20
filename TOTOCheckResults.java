@@ -1,19 +1,19 @@
 package task;
 
 import training.Methods;
-
 import java.util.Objects;
 import java.util.Scanner;
 
 public class TOTOCheckResults extends Methods {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        timeAndData();
 
-        // 92-и тираж:  9, 24, 26, 28, 37, 46 //
+        // 92-и тираж:  9, 24, 26, 28, 37, 46 
 
         int[] a = OfficialResult("Резултат от тиража: ", scanner);
         int[] b = yourInput("Твоя залог: ", scanner);
-        System.out.println("------------------------------------");
+        System.out.println("---------------------------------");
         printResult(a, b);
     }
 
@@ -29,12 +29,13 @@ public class TOTOCheckResults extends Methods {
 
     private static void printResult(int[] a, int[] b) {
 
-        System.out.println("Имаш " + getCounts(a, b) + " попадения: ");
+        System.out.print("Имаш " + getCounts(a, b) + " попадения: ");
 
         for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
             if (Objects.requireNonNull(compareResults(a, b))[i] != 0) {
-                System.out.println("Елемента " + a[i] + " се среща " +
-                        Objects.requireNonNull(compareResults(a, b))[i] + " пъти.");
+                if (i < Objects.requireNonNull(compareResults(a, b)).length - 1){
+                    System.out.print(a[i] + ", ");
+                } else System.out.print(a[i]);
             }
         }
     }
