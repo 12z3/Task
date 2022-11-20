@@ -11,8 +11,7 @@ public class TOTOCheckResults extends Toto  {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
-
-
+        
         // 92-и тираж:  9, 24, 26, 28, 37, 46
         List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
 
