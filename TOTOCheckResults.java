@@ -31,6 +31,10 @@ public class TOTOCheckResults extends Toto {
                 generateTotoNum(last, 3, 5);
             }
             case "n" -> {
+                return;
+            }
+            default -> {
+                break;
             }
         }
     }
