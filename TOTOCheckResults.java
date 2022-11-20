@@ -2,43 +2,37 @@ package task;
 
 import training.Methods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class TOTOCheckResults extends Methods {
+public class TOTOCheckResults extends Toto  {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
+
         // 92-и тираж:  9, 24, 26, 28, 37, 46
+        List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
 
-        int[] a = OfficialResult("Резултат от тиража: ", scanner);
-        int[] b = yourInput("Твоя залог: ", scanner);
-        System.out.println("---------------------------------");
+        int[] a = officialResult("Резултат от тиража: ", scanner);
+        int[] b = yourSuppose("Твоя залог: ", scanner);
+        System.out.println("----------------------------------------");
         printResult(a, b);
+        System.out.println("----------------------------------------");
+
+        generateTotoNum(last,3, 5);
     }
 
-    private static int[] yourInput(String s, Scanner scanner) {
+    private static int[] yourSuppose(String s, Scanner scanner) {
         System.out.print(s);
         return result(scanner);
     }
 
-    private static int[] OfficialResult(String s, Scanner scanner) {
+    private static int[] officialResult(String s, Scanner scanner) {
         System.out.print(s);
         return result(scanner);
-    }
-
-    private static void printResult(int[] a, int[] b) {
-
-        System.out.print("Имаш " + getCounts(a, b) + " попадения: ");
-
-        for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
-            if (Objects.requireNonNull(compareResults(a, b))[i] != 0) {
-                if (i < Objects.requireNonNull(compareResults(a, b)).length - 1) {
-                    System.out.print(a[i] + ", ");
-                } else System.out.print(a[i]);
-            }
-        }
     }
 
     private static int[] result(Scanner scanner) {
@@ -49,6 +43,19 @@ public class TOTOCheckResults extends Methods {
             result[i] = Integer.parseInt(input[i]);
         }
         return result;
+    }
+
+    private static void printResult(int[] a, int[] b) {
+
+        System.out.print("Имаш " + getCounts(a, b) + " попадения: ");
+
+        for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
+            if (Objects.requireNonNull(compareResults(a, b))[i] != 0 &&
+                    i < Objects.requireNonNull(compareResults(a, b)).length - 1) {
+                System.out.print(a[i] + ", ");
+            } else System.out.print(a[i]);
+        }
+        System.out.println();
     }
 
     private static int[] compareResults(int[] a, int[] b) {
@@ -62,7 +69,7 @@ public class TOTOCheckResults extends Methods {
     private static int[] getResult(int[] a, int[] b) {
         int[] tmp = new int[a.length];
         for (int i = 0; i < a.length; i++) {
-            int count = 0, el = 0;
+            int count = 0;
             for (int j = 0; j < b.length; j++) {
                 if (a[i] == b[j]) {
                     count++;
