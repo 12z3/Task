@@ -10,7 +10,7 @@ public class TOTOCheckResults extends Toto {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        // 92-и тираж:  9, 24, 26, 28, 37, 46
+        //TODO: 92-и тираж:  9, 24, 26, 28, 37, 46
 
         System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ", scanner);
@@ -24,19 +24,16 @@ public class TOTOCheckResults extends Toto {
     private static void question() {
         List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Ще залагаме ли? : ");
+        System.out.print("Ще залагаме ли? (y / n) : ");
         String answer = scanner.nextLine();
-        switch (answer) {
-            case "y" -> {
-                generateTotoNum(last, 3, 5);
-            }
-            case "n" -> {
-                return;
-            }
-            default -> {
-                break;
-            }
+
+        while (!answer.equalsIgnoreCase("y")            // true && true = true; true && false = false;
+                && !answer.equalsIgnoreCase("n")){
+            System.out.println(".... 'y' или 'n'?");
+            answer = scanner.nextLine();
         }
+
+        if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
     }
 
     private static int[] yourSuppose(String s, Scanner scanner) {
