@@ -27,23 +27,23 @@ public class SearchDuplicates {
     }
 
     private static void searchDuplicates(int[] arr) {
-        int[] matches = new int[arr.length];
+        int[] matchesArr = new int[arr.length];
 
-        for (int i = 0; i < arr.length; i++) {
-            int matchesCounter = 1, el1 = arr[i], index = i + 1;
+       LOOP: for (int i = 0; i < arr.length; i++) {
+            int matches, el1 = arr[i], index = i + 1;
 
             if (i == 0) {
-                matchesCounter = findDuplicated(arr, el1, index);
+                matches = findDuplicated(arr, el1, index);
             } else {
                 if (!isChecked(arr, arr[i], i)) {
-                    matchesCounter = findDuplicated(arr, el1, index);
-                } else continue;
+                    matches = findDuplicated(arr, el1, index);
+                } else continue LOOP;
             }
-            matches[i] = matchesCounter;
-            System.out.printf("Element %d = finds %d times %n", el1, matchesCounter);
+            matchesArr[i] = matches;
+            System.out.printf("Element %d = finds %d times %n", el1, matches);
         }
 
-        for (int el : matches) System.out.print(el + " ");
+        for (int el : matchesArr) System.out.print(el + " ");
     }
 
     private static int findDuplicated(int[] arr, int el1, int index) {
