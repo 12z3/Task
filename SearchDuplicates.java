@@ -21,15 +21,17 @@ public class SearchDuplicates {
      */
 
     public static void main(String[] args) {
-        int[] a = {1, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1};
-             // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
+        int[] a = {19, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1, 3, 5};
+        // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
+
         searchDuplicates(a);
     }
 
     private static void searchDuplicates(int[] arr) {
         int[] matchesArr = new int[arr.length];
 
-       LOOP: for (int i = 0; i < arr.length; i++) {
+        LOOP:
+        for (int i = 0; i < arr.length; i++) {
             int matches, el1 = arr[i], index = i + 1;
 
             if (i == 0) {
@@ -48,8 +50,8 @@ public class SearchDuplicates {
 
     private static int findDuplicated(int[] arr, int el1, int index) {
         int matches = 1;
-        while (index < arr.length) {
-            int el2 = arr[index];
+        for (int i = index; i < arr.length; i++) {
+            int el2 = arr[i];
             if (el1 == el2) {
                 matches++;
             }
