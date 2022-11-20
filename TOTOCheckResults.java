@@ -5,21 +5,34 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class TOTOCheckResults extends Toto  {
+public class TOTOCheckResults extends Toto {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
         // 92-и тираж:  9, 24, 26, 28, 37, 46
-        List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
 
+        System.out.println("----------------------------------------");
         int[] a = officialResult("Резултат от тиража: ", scanner);
-        int[] b = yourSuppose("Твоя залог: ", scanner);
+        int[] b = yourSuppose("Твоят залог: ", scanner);
         System.out.println("----------------------------------------");
         printResult(a, b);
         System.out.println("----------------------------------------");
+        question();
+    }
 
-        generateTotoNum(last,3, 5);
+    private static void question() {
+        List<Integer> last = new ArrayList<>(List.of(17, 21, 39, 41, 42, 44));
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Ще залагаме ли? : ");
+        String answer = scanner.nextLine();
+        switch (answer) {
+            case "y" -> {
+                generateTotoNum(last, 3, 5);
+            }
+            case "n" -> {
+            }
+        }
     }
 
     private static int[] yourSuppose(String s, Scanner scanner) {
