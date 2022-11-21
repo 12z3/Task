@@ -10,7 +10,7 @@ public class TOTOCheckResultsNew extends Toto {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        //TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  // 9, 24, 26, 28, 37, 46 - Thies's official;
+        //TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  // 9, 24, 26, 28, 37, 46 - It's official;
 
         System.out.print("Проверяваме или играем (c / p): ");
         String answerOne = scanner.nextLine().trim();
@@ -21,11 +21,11 @@ public class TOTOCheckResultsNew extends Toto {
         } else if (answerOne.equalsIgnoreCase("c")) {
             play();
         }
-        //System.out.println("Ще залагаш ли? (y / n): ");
-        String answerTwo = scanner.nextLine().trim();
-        if (answerTwo.equalsIgnoreCase("y")){
-            play();
-        } else if (answerTwo.equalsIgnoreCase("n")) return;
+//        System.out.println("Ще залагаш ли? (y / n): ");
+//        String answerTwo = scanner.nextLine().trim();
+//        if (answerTwo.equalsIgnoreCase("y")){
+//            play();
+//        } else if (answerTwo.equalsIgnoreCase("n")) return;
     }
 
     private static void play() {
