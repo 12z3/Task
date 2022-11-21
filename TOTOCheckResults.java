@@ -10,7 +10,7 @@ public class TOTOCheckResults extends Toto {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        //TODO: 92-и тираж:  39, 24, 26, 28, 37, 46
+        //TODO: 92-и тираж:  39, 14, 26, 28, 37, 46
 
         System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ", scanner);
@@ -64,9 +64,9 @@ public class TOTOCheckResults extends Toto {
 
         for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
             if (Objects.requireNonNull(compareResults(a, b))[i] != 0 &&
-                    i < Objects.requireNonNull(compareResults(a, b)).length - 1) {
+                    i < Objects.requireNonNull(compareResults(a, b)).length) {
                 System.out.print(Objects.requireNonNull(compareResults(a, b))[i] + ", ");
-            } else System.out.print(Objects.requireNonNull(compareResults(a, b))[i]);
+            } else System.out.print(Objects.requireNonNull(compareResults(a, b))[Objects.requireNonNull(compareResults(a, b)).length - 1]);
         }
         System.out.println();
     }
