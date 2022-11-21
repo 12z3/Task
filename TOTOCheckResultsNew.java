@@ -7,18 +7,16 @@ import java.util.Scanner;
 
 public class TOTOCheckResultsNew extends Toto {
 
-    /*
-        TODO: Пренапиши го грамотно използвайки ООП
-     */
+       // TODO: Пренапиши го грамотно използвайки ООП
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        //TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  // 9, 24, 26, 28, 37, 46 - It's official;
+        // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
 
         System.out.print("Проверяваме или играем (c / p): ");
         String answerOne = scanner.nextLine().trim();
-
 
         if (answerOne.equalsIgnoreCase("p")) {
             question();
