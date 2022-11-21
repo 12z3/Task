@@ -66,7 +66,9 @@ public class TOTOCheckResults extends Toto {
             if (Objects.requireNonNull(compareResults(a, b))[i] != 0 &&
                     i < Objects.requireNonNull(compareResults(a, b)).length) {
                 System.out.print(Objects.requireNonNull(compareResults(a, b))[i] + ", ");
-            } else System.out.print(Objects.requireNonNull(compareResults(a, b))[Objects.requireNonNull(compareResults(a, b)).length - 1]);
+            } else System.out.print(
+                    Objects.requireNonNull(compareResults(a, b))
+                            [Objects.requireNonNull(compareResults(a, b)).length - 1]);
         }
         System.out.println();
     }
