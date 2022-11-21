@@ -10,15 +10,24 @@ public class TOTOCheckResults extends Toto {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
 
-        //TODO: 92-и тираж:  39, 14, 26, 28, 37, 46
+        //TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  // 9, 24, 26, 28, 37, 46
 
-        System.out.println("-----------------------------------------------");
-        int[] a = officialResult("Резултат от тиража: ", scanner);
-        int[] b = yourSuppose("Твоят залог: ", scanner);
-        System.out.println("-----------------------------------------------");
-        printResult(a, b);
-        System.out.println("-----------------------------------------------");
-        question();
+        System.out.print("Проверяваме или играем (c / p): ");
+        String answerOne = scanner.nextLine().trim();
+
+
+        if (answerOne.equalsIgnoreCase("p")){
+            question();
+        } else if (answerOne.equalsIgnoreCase("c")){
+
+            System.out.println("-----------------------------------------------");
+            int[] a = officialResult("Резултат от тиража: ", scanner);
+            int[] b = yourSuppose("Твоят залог: ", scanner);
+            System.out.println("-----------------------------------------------");
+            printResult(a, b);
+            System.out.println("-----------------------------------------------");
+        }
+        //question();
     }
 
     private static void question() {
@@ -26,8 +35,9 @@ public class TOTOCheckResults extends Toto {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ще залагаме ли? (y / n) : ");
 
-        String answer = scanner.nextLine();                         // while търси true
-        while (!answer.equalsIgnoreCase("y") &&         // true && true = true; true && false = false;
+        // while търси true;  // true && true = true; true && false = false;
+        String answer = scanner.nextLine();
+        while (!answer.equalsIgnoreCase("y") &&
                 !answer.equalsIgnoreCase("n")) {
             System.out.println("Айде сега.... 'y' или 'n'?");
             answer = scanner.nextLine();
@@ -62,13 +72,17 @@ public class TOTOCheckResults extends Toto {
 
         System.out.print("Имаш " + getCounts(a, b) + " от " + a.length + " попадения: ");
 
-        for (int i = 0; i < Objects.requireNonNull(compareResults(a, b)).length; i++) {
-            if (Objects.requireNonNull(compareResults(a, b))[i] != 0 &&
-                    i < Objects.requireNonNull(compareResults(a, b)).length) {
-                System.out.print(Objects.requireNonNull(compareResults(a, b))[i] + ", ");
-            } else System.out.print(
-                    Objects.requireNonNull(compareResults(a, b))
-                            [Objects.requireNonNull(compareResults(a, b)).length - 1]);
+        int[] tmp = Objects.requireNonNull(compareResults(a, b));   // 12, 14, 17, 21, 39, 48
+        int counter = getCounts(a,b);
+        for (int i = 0; i < tmp.length; i++) {
+            if (tmp[i] != 0 && counter > 1) {
+                System.out.print(tmp[i] + ", ");
+                counter--;
+            } else if(tmp[i] != 0)  {
+                System.out.print(tmp[i]);
+                counter--;
+            }
+            if (counter == 0) break;
         }
         System.out.println();
     }
