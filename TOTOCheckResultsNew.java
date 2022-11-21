@@ -6,6 +6,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class TOTOCheckResultsNew extends Toto {
+
+    /*
+        TODO: Пренапиши го грамотно използвайки ООП
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         timeAndData();
