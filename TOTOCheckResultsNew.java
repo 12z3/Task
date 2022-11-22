@@ -15,20 +15,23 @@ public class TOTOCheckResultsNew extends Toto {
 
         // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
 
-        System.out.print("Проверяваме или играем? (c / p): ");
-        String answerOne = scanner.nextLine().trim();
-       // getAnswer1(answerOne);
-
-        if ("p".equalsIgnoreCase(getAnswer1(answerOne))) {
-            question();
-        } else if ("c".equalsIgnoreCase(getAnswer1(answerOne))) {
-            play();
-        }
+        letsGo(scanner);
 //        System.out.println("Ще залагаш ли? (y / n): ");
 //        String answerTwo = scanner.nextLine().trim();
 //        if (answerTwo.equalsIgnoreCase("y")){
 //            play();
 //        } else if (answerTwo.equalsIgnoreCase("n")) return;
+    }
+
+    private static void letsGo(Scanner scanner) {
+        System.out.print("Проверяваме или играем? (c / p): ");
+        String answerOne = scanner.nextLine().trim();
+
+        if ("p".equalsIgnoreCase(checkAnswer(answerOne))) {
+            question();
+        } else if ("c".equalsIgnoreCase(checkAnswer(answerOne))) {
+            play();
+        }
     }
 
     private static void play() {
@@ -46,11 +49,11 @@ public class TOTOCheckResultsNew extends Toto {
         System.out.print("Ще залагаме ли? (y / n) : ");
 
 
-        String answer = getAnswer();
+        String answer = checkAnswerAgain();
         if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
     }
 
-    private static String getAnswer() {
+    private static String checkAnswerAgain() {
         Scanner scanner = new Scanner(System.in);
 
         String answer = scanner.nextLine();
@@ -61,7 +64,7 @@ public class TOTOCheckResultsNew extends Toto {
         }
         return answer;
     }
-    private static String getAnswer1(String answer) {
+    private static String checkAnswer(String answer) {
        Scanner scanner = new Scanner(System.in);
         while (!answer.equalsIgnoreCase("c") &&              // while търси true;
                 !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
