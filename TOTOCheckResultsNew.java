@@ -16,11 +16,6 @@ public class TOTOCheckResultsNew extends Toto {
         // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
 
         letsGo(scanner);
-//        System.out.println("Ще залагаш ли? (y / n): ");
-//        String answerTwo = scanner.nextLine().trim();
-//        if (answerTwo.equalsIgnoreCase("y")){
-//            play();
-//        } else if (answerTwo.equalsIgnoreCase("n")) return;
     }
 
     private static void letsGo(Scanner scanner) {
@@ -53,6 +48,15 @@ public class TOTOCheckResultsNew extends Toto {
         if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
     }
 
+    private static String checkAnswer(String answer) {
+        Scanner scanner = new Scanner(System.in);
+        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
+                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
+            System.out.println("Айде сега.... 'c' или 'p'?");
+            answer = scanner.nextLine();
+        }
+        return answer;
+    }
     private static String checkAnswerAgain() {
         Scanner scanner = new Scanner(System.in);
 
@@ -60,15 +64,6 @@ public class TOTOCheckResultsNew extends Toto {
         while (!answer.equalsIgnoreCase("y") &&              // while търси true;
                 !answer.equalsIgnoreCase("n")) {             // true && true = true; true && false = false;
             System.out.println("Айде сега.... 'y' или 'n'?");
-            answer = scanner.nextLine();
-        }
-        return answer;
-    }
-    private static String checkAnswer(String answer) {
-       Scanner scanner = new Scanner(System.in);
-        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
-                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
-            System.out.println("Айде сега.... 'c' или 'p'?");
             answer = scanner.nextLine();
         }
         return answer;
