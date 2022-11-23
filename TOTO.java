@@ -1,5 +1,7 @@
 package task;
 
+import training.Methods;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,6 @@ public class TOTO extends TotoA {
     // TODO: Пренапиши го грамотно използвайки ООП
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         timeAndData();
 
         // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
