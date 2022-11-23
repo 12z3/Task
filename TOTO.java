@@ -31,32 +31,12 @@ public class TOTO extends TotoA {
         }
     }
 
-    private static void checkResults() {
-        System.out.println("-----------------------------------------------");
-        int[] a = officialResult("Резултат от тиража: ");
-        int[] b = yourSuppose("Твоят залог: ");
-        System.out.println("-----------------------------------------------");
-        printResult(a, b);
-        System.out.println("-----------------------------------------------");
-    }
-
     private static void play() {
         List<Integer> last = new ArrayList<>(List.of(12, 14, 17, 21, 39, 48));
         System.out.print("Ще залагаме ли? (y / n) : ");
-
-
+        
         String answer = checkAnswerAgain();
         if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
-    }
-
-    private static String checkAnswer(String answer) {
-        Scanner scanner = new Scanner(System.in);
-        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
-                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
-            System.out.println("Айде сега.... 'c' или 'p'?");
-            answer = scanner.nextLine();
-        }
-        return answer;
     }
 
     private static String checkAnswerAgain() {
@@ -66,6 +46,25 @@ public class TOTO extends TotoA {
         while (!answer.equalsIgnoreCase("y") &&              // while търси true;
                 !answer.equalsIgnoreCase("n")) {             // true && true = true; true && false = false;
             System.out.println("Айде сега.... 'y' или 'n'?");
+            answer = scanner.nextLine();
+        }
+        return answer;
+    }
+
+    private static void checkResults() {
+        System.out.println("-----------------------------------------------");
+        int[] a = officialResult("Резултат от тиража: ");
+        int[] b = yourSuppose("Твоят залог: ");
+        System.out.println("-----------------------------------------------");
+        printResult(a, b);
+        System.out.println("-----------------------------------------------");
+    }
+
+    private static String checkAnswer(String answer) {
+        Scanner scanner = new Scanner(System.in);
+        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
+                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
+            System.out.println("Айде сега.... 'c' или 'p'?");
             answer = scanner.nextLine();
         }
         return answer;
