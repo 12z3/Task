@@ -76,7 +76,7 @@ public class TOTO extends TotoA {
         printResult(a, b);
         System.out.println("-----------------------------------------------");
 
-        System.out.print("Приключваш ли?... (y / n) : ");
+        System.out.print("Край?... (y / n) : ");
         String answerNew = scanner.nextLine().trim();
         if (answerNew.equalsIgnoreCase("n")){
             play();
