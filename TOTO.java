@@ -41,12 +41,18 @@ public class TOTO extends TotoA {
         return answer;
     }
     private static void play() {
+        Scanner scanner = new Scanner(System.in);
         List<Integer> last = new ArrayList<>(List.of(12, 14, 17, 21, 39, 48));
         System.out.print("Ще залагаме ли? (y / n) : ");
 
         String answer = checkAnswerAgain();
         if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
 
+        System.out.print("Приключваш ли?... (y / n) : ");
+        String answerNew = scanner.nextLine().trim();
+        if (answerNew.equalsIgnoreCase("n")){
+            checkResults();
+        }
     }
 
     private static String checkAnswerAgain() {
@@ -62,12 +68,19 @@ public class TOTO extends TotoA {
     }
 
     private static void checkResults() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ");
         int[] b = yourSuppose("Твоят залог: ");
         System.out.println("-----------------------------------------------");
         printResult(a, b);
         System.out.println("-----------------------------------------------");
+
+        System.out.print("Приключваш ли?... (y / n) : ");
+        String answerNew = scanner.nextLine().trim();
+        if (answerNew.equalsIgnoreCase("n")){
+            play();
+        }
     }
 
     private static int[] yourSuppose(String s) {
