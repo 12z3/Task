@@ -31,12 +31,22 @@ public class TOTO extends TotoA {
         }
     }
 
+    private static String checkAnswer(String answer) {
+        Scanner scanner = new Scanner(System.in);
+        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
+                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
+            System.out.println("Айде сега.... 'c' или 'p'?");
+            answer = scanner.nextLine();
+        }
+        return answer;
+    }
     private static void play() {
         List<Integer> last = new ArrayList<>(List.of(12, 14, 17, 21, 39, 48));
         System.out.print("Ще залагаме ли? (y / n) : ");
-        
+
         String answer = checkAnswerAgain();
         if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
+
     }
 
     private static String checkAnswerAgain() {
@@ -58,16 +68,6 @@ public class TOTO extends TotoA {
         System.out.println("-----------------------------------------------");
         printResult(a, b);
         System.out.println("-----------------------------------------------");
-    }
-
-    private static String checkAnswer(String answer) {
-        Scanner scanner = new Scanner(System.in);
-        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
-                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
-            System.out.println("Айде сега.... 'c' или 'p'?");
-            answer = scanner.nextLine();
-        }
-        return answer;
     }
 
     private static int[] yourSuppose(String s) {
@@ -148,7 +148,7 @@ public class TOTO extends TotoA {
     }
 }
 
-/**
+/*
  * public static void main(String[] args) {
  * Scanner scanner = new Scanner(System.in);
  * timeAndData();
