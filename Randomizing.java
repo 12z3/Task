@@ -12,7 +12,7 @@ public class Randomizing {
      * - с число на което индекса му е произволно генериран.
      * @randomizing: Избира елемент чийто индекс е произволен, записва го в масив.
      * Генерира втори елемент и проверява дали е наличен в масива. Ако не е наличен го печата записва го в масива.
-     *
+     * <p>
      * (Math.random() * ((max - min) + 1)) + min = min + 1; (Math.random() == 0) -> минималното число.
      * (Math.random() * ((max - min) + 1)) + min = max - 1 + 1 + min; (Math.random() == max - 1) -> максималното число.
      */
@@ -36,7 +36,7 @@ public class Randomizing {
 
         while (true) {
             int randomIndex1 = (int) (Math.random() * ((max - min) + 1)) + min;
-            int randomIndex = random.nextInt(list.size());
+            int randomIndex = random.nextInt(list.size());                               // [0, list.size())
             T currentElement = list.get(randomIndex);
 
             if (!isContained(elements, currentElement)) {
@@ -62,7 +62,6 @@ public class Randomizing {
             int randomIndex = (int) (Math.random() * ((max - min) + 1)) + min;
             swap(list, i, randomIndex);
         }
-
         for (T el : list) System.out.print(el + " ");
     }
 
