@@ -42,7 +42,7 @@ public class TOTO extends TotoA {
     }
     private static void play() {
         Scanner scanner = new Scanner(System.in);
-        List<Integer> last = new ArrayList<>(List.of(12, 14, 17, 21, 39, 48));
+        List<Integer> last = new ArrayList<>(List.of(17,26,35,45,48,49));
         System.out.print("Ще залагаме ли? (y / n) : ");
 
         String answer = checkAnswerAgain();
@@ -51,6 +51,7 @@ public class TOTO extends TotoA {
         System.out.print("Приключваш ли?... (y / n) : ");
         String answerNew = scanner.nextLine().trim();
         if (answerNew.equalsIgnoreCase("n")){
+            System.out.println("... добре");
             checkResults();
         }
     }
@@ -77,7 +78,7 @@ public class TOTO extends TotoA {
         System.out.println("-----------------------------------------------");
 
         System.out.print("Край?... (y / n) : ");
-        String answerNew = scanner.nextLine().trim();
+        String answerNew = scanner.nextLine();
         if (answerNew.equalsIgnoreCase("n")){
             play();
         }
