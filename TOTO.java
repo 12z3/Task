@@ -91,7 +91,7 @@ public class TOTO extends TotoA {
 
         String answer = scanner.nextLine();
         while (!answer.equalsIgnoreCase("y") &&              // while търси true;
-                !answer.equalsIgnoreCase("n")) {                                    // true && true = true; true && false = false;
+                !answer.equalsIgnoreCase("n")) {             // true && true = true; true && false = false;
             System.out.println("Айде сега.... 'y' или 'n'?");
             answer = scanner.nextLine();
         }
