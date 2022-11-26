@@ -1,6 +1,7 @@
 package task;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -57,11 +58,17 @@ public class TOTO extends TotoA {
 
             System.out.print("Избери между 1, 2, 3 вариант: ");
             String yourChoice = scanner.nextLine();
+            while (!yourChoice.equalsIgnoreCase("1") && !yourChoice.equalsIgnoreCase("2")
+            && !yourChoice.equalsIgnoreCase("3")){
+                System.out.print("Избери между 1, 2, 3 вариант: ");
+                yourChoice = scanner.nextLine();
+            }
             switch (yourChoice) {
                 case "1" -> result = listResult.get(0);
                 case "2" -> result = listResult.get(1);
                 case "3" -> result = listResult.get(2);
             }
+            System.out.println("Избрал си: " + result.toString());
         }
 
         System.out.print("Приключваш ли?... (y / n) : ");
@@ -70,8 +77,9 @@ public class TOTO extends TotoA {
             System.out.println("... добре");
             checkResults();
         } else if (answerNew.equalsIgnoreCase("y")) System.out.println("... Всичко добро Брат.");
-        int resultCounter = 1;                       // 12-2
+        int resultCounter = 1;
         writeResult(listResult, resultCounter, result);
+        System.out.println("Резултата е записан в: ....");
     }
 
     private static String checkAnswerAgain() {
@@ -205,10 +213,10 @@ public class TOTO extends TotoA {
             writer.newLine();
             writer.newLine();
             writer.close();
-
         } catch (IOException exp) {
             exp.printStackTrace();
         }
+
     }
 
     public static String totoTimeAndData() {
