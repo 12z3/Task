@@ -40,8 +40,8 @@ public class TOTO extends TotoA {
 
     private static String checkAnswer(String answer) {
         Scanner scanner = new Scanner(System.in);
-        while (!answer.equalsIgnoreCase("c") &&              // while търси true;
-                !answer.equalsIgnoreCase("p")) {             // true && true = true; true && false = false;
+        while (!answer.equalsIgnoreCase("c") &&
+                !answer.equalsIgnoreCase("p")) {
             System.out.println("Айде сега.... 'c' или 'p'?");
             answer = scanner.nextLine();
         }
@@ -60,10 +60,10 @@ public class TOTO extends TotoA {
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
-            while (!yourChoice.equalsIgnoreCase("1") &&
-                    !yourChoice.equalsIgnoreCase("2") &&
-                    !yourChoice.equalsIgnoreCase("3")) {
-                System.out.print("Избери между 1, 2 и 3 вариант: ");
+            while (!yourChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
+                    !yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
+                    !yourChoice.equalsIgnoreCase("3")) {     // while търси true;
+                System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
                 yourChoice = scanner.nextLine();
             }
             switch (yourChoice) {
@@ -90,8 +90,8 @@ public class TOTO extends TotoA {
         Scanner scanner = new Scanner(System.in);
 
         String answer = scanner.nextLine();
-        while (!answer.equalsIgnoreCase("y") &&              // while търси true;
-                !answer.equalsIgnoreCase("n")) {             // true && true = true; true && false = false;
+        while (!answer.equalsIgnoreCase("y") &&
+                !answer.equalsIgnoreCase("n")) {
             System.out.println("Айде сега.... 'y' или 'n'?");
             answer = scanner.nextLine();
         }
@@ -142,7 +142,7 @@ public class TOTO extends TotoA {
 
         System.out.print("Имаш " + getCounts(a, b) + " от " + a.length + " попадения: ");
 
-        int[] tmp = Objects.requireNonNull(compareResults(a, b));                // 12, 14, 17, 21, 39, 48
+        int[] tmp = Objects.requireNonNull(compareResults(a, b));                
         int counter = getCounts(a, b);
         for (int i = 0; i < tmp.length; i++) {
             if (tmp[i] != 0 && counter > 1) {
@@ -208,7 +208,7 @@ public class TOTO extends TotoA {
             File file = new File("totoNew.txt");
             if (file.exists()) path = file.getAbsolutePath();
 
-            writer.write(String.valueOf(totoTimeAndData()));
+            writer.write(String.valueOf(timeAndData()));
             writer.newLine();
             for (List<Integer> el : input) {
                 writer.write(el.toString() + "\n");
