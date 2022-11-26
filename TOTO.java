@@ -1,8 +1,10 @@
 package task;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -56,11 +58,12 @@ public class TOTO extends TotoA {
         if (answer.equalsIgnoreCase("y")) {
             listResult = generateNum(last, 3);
 
-            System.out.print("Избери между 1, 2, 3 вариант: ");
+            System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
-            while (!yourChoice.equalsIgnoreCase("1") && !yourChoice.equalsIgnoreCase("2")
-            && !yourChoice.equalsIgnoreCase("3")){
-                System.out.print("Избери между 1, 2, 3 вариант: ");
+            while (!yourChoice.equalsIgnoreCase("1") &&
+                    !yourChoice.equalsIgnoreCase("2") &&
+                    !yourChoice.equalsIgnoreCase("3")) {
+                System.out.print("Избери между 1, 2 и 3 вариант: ");
                 yourChoice = scanner.nextLine();
             }
             switch (yourChoice) {
@@ -71,15 +74,16 @@ public class TOTO extends TotoA {
             System.out.println("Избрал си: " + result.toString());
         }
 
-        System.out.print("Приключваш ли?... (y / n) : ");
+        System.out.print("Приключваш ли?... (y / n): ");
         String answerNew = scanner.nextLine().trim();
         if (answerNew.equalsIgnoreCase("n")) {
             System.out.println("... добре");
             checkResults();
-        } else if (answerNew.equalsIgnoreCase("y")) System.out.println("... Всичко добро Брат.");
+        } else if (answerNew.equalsIgnoreCase("y"))
+            System.out.println("... Всичко добро Брат.");
+
         int resultCounter = 1;
-        writeResult(listResult, resultCounter, result);
-        System.out.println("Резултата е записан в: ....");
+        writeResult(listResult, result);
     }
 
     private static String checkAnswerAgain() {
@@ -187,20 +191,23 @@ public class TOTO extends TotoA {
         return count;
     }
 
-    private static void writeResult(List<List<Integer>> input, int resultCounter, List<Integer> result) {
+    private static void writeResult(List<List<Integer>> input, List<Integer> result) {
+        String path = "";
         try {
             boolean choice = false;
             System.out.print("Да се запазят ли предишните резултати? (y / n): ");
 
             String answer = checkAnswerAgain();
-            if (answer.equalsIgnoreCase("y")) {
-                choice = true;
-                resultCounter++;
-            }
+            if (answer.equalsIgnoreCase("y")) choice = true;
+
 
             BufferedWriter writer =
                     new BufferedWriter(new java.io.FileWriter("totoNew.txt", choice));
-            writer.write(String.valueOf(resultCounter + ": " + totoTimeAndData()));
+
+            File file = new File("totoNew.txt");
+            if (file.exists()) path = file.getAbsolutePath();
+
+            writer.write(String.valueOf(totoTimeAndData()));
             writer.newLine();
             for (List<Integer> el : input) {
                 writer.write(el.toString() + "\n");
@@ -216,7 +223,7 @@ public class TOTO extends TotoA {
         } catch (IOException exp) {
             exp.printStackTrace();
         }
-
+        System.out.println("Резултатът е записан в: " + path);
     }
 
     public static String totoTimeAndData() {
