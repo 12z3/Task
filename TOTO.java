@@ -2,9 +2,7 @@ package task;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -55,8 +53,9 @@ public class TOTO extends TotoA {
 
         System.out.print("Ще залагаме ли? (y / n) : ");
         String answer = checkAnswerAgain();
+
         if (answer.equalsIgnoreCase("y")) {
-            listResult = generateNum(last, 3);
+            listResult = generateTotoNum(last, 3);
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
@@ -142,7 +141,7 @@ public class TOTO extends TotoA {
 
         System.out.print("Имаш " + getCounts(a, b) + " от " + a.length + " попадения: ");
 
-        int[] tmp = Objects.requireNonNull(compareResults(a, b));                
+        int[] tmp = Objects.requireNonNull(compareResults(a, b));
         int counter = getCounts(a, b);
         for (int i = 0; i < tmp.length; i++) {
             if (tmp[i] != 0 && counter > 1) {
