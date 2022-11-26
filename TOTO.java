@@ -19,21 +19,22 @@ public class TOTO extends TotoA {
     public static void main(String[] args) {
         timeAndData();
 
-        List<Integer> last = new ArrayList<>(List.of(17, 26, 35, 45, 48, 49));
-        // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
+        // TODO: Резултат от тиража:
+        List<Integer> last = new ArrayList<>(List.of(7, 26, 35, 45, 48, 49));
+        // TODO: 94-и тираж:  8, 23, 28, 38, 40, 42 <- твоя залог
 
-        letsGo();
+        letsGo(last);
     }
 
-    private static void letsGo() {
+    private static void letsGo(List<Integer> last) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Проверяваме или играем? (c / p): ");
         String answerOne = scanner.nextLine().trim();
 
         if ("p".equalsIgnoreCase(checkAnswer(answerOne))) {
-            play();
+            play(last);
         } else if ("c".equalsIgnoreCase(checkAnswer(answerOne))) {
-            checkResults();
+            checkResults(last);
         }
     }
 
@@ -47,11 +48,10 @@ public class TOTO extends TotoA {
         return answer;
     }
 
-    private static void play() {
+    private static void play(List<Integer> last) {
         Scanner scanner = new Scanner(System.in);
         List<List<Integer>> listResult = new ArrayList<>();
         List<Integer> result = new ArrayList<>();
-        List<Integer> last = new ArrayList<>(List.of(17, 26, 35, 45, 48, 49));
 
         System.out.print("Ще залагаме ли? (y / n) : ");
         String answer = checkAnswerAgain();
@@ -78,7 +78,7 @@ public class TOTO extends TotoA {
         String answerNew = scanner.nextLine().trim();
         if (answerNew.equalsIgnoreCase("n")) {
             System.out.println("... добре");
-            checkResults();
+            checkResults(last);
         } else if (answerNew.equalsIgnoreCase("y"))
             System.out.println("... Всичко добро Брат.");
 
@@ -91,14 +91,14 @@ public class TOTO extends TotoA {
 
         String answer = scanner.nextLine();
         while (!answer.equalsIgnoreCase("y") &&              // while търси true;
-                !answer.equalsIgnoreCase("n")) {             // true && true = true; true && false = false;
+                !answer.equalsIgnoreCase("n")) {                                    // true && true = true; true && false = false;
             System.out.println("Айде сега.... 'y' или 'n'?");
             answer = scanner.nextLine();
         }
         return answer;
     }
 
-    private static void checkResults() {
+    private static void checkResults(List<Integer> last) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ");
@@ -110,7 +110,7 @@ public class TOTO extends TotoA {
         System.out.print("Край?... (y / n) : ");
         String answerNew = scanner.nextLine();
         if (answerNew.equalsIgnoreCase("n")) {
-            play();
+            play(last);
         }
     }
 
@@ -126,6 +126,7 @@ public class TOTO extends TotoA {
 
     private static int[] result() {
         Scanner scanner = new Scanner(System.in);
+
         String[] input = scanner.nextLine().
                 trim().
                 split(", ");
@@ -193,8 +194,8 @@ public class TOTO extends TotoA {
 
     private static void writeResult(List<List<Integer>> input, List<Integer> result) {
         String path = "";
+        boolean choice = false;
         try {
-            boolean choice = false;
             System.out.print("Да се запазят ли предишните резултати? (y / n): ");
 
             String answer = checkAnswerAgain();
@@ -223,7 +224,7 @@ public class TOTO extends TotoA {
         } catch (IOException exp) {
             exp.printStackTrace();
         }
-        System.out.println("Резултатът е записан в: " + path);
+        if (choice) System.out.println("Резултатът е записан в: " + path);
     }
 
     public static String totoTimeAndData() {
