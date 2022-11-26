@@ -2,6 +2,10 @@ package task;
 
 import training.Methods;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -14,6 +18,7 @@ public class TOTO extends TotoA {
     public static void main(String[] args) {
         timeAndData();
 
+        List<Integer> last = new ArrayList<>(List.of(17, 26, 35, 45, 48, 49));
         // TODO: 92-и тираж:  12, 24, 26, 28, 37, 48  //  9, 24, 26, 28, 37, 46 - It's official;
 
         letsGo();
@@ -40,20 +45,26 @@ public class TOTO extends TotoA {
         }
         return answer;
     }
+
     private static void play() {
         Scanner scanner = new Scanner(System.in);
-        List<Integer> last = new ArrayList<>(List.of(17,26,35,45,48,49));
-        System.out.print("Ще залагаме ли? (y / n) : ");
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> last = new ArrayList<>(List.of(17, 26, 35, 45, 48, 49));
 
+        System.out.print("Ще залагаме ли? (y / n) : ");
         String answer = checkAnswerAgain();
-        if (answer.equalsIgnoreCase("y")) generateTotoNum(last, 3, 5);
+        if (answer.equalsIgnoreCase("y")) {
+            result = generateNum(last, 3);
+        }
 
         System.out.print("Приключваш ли?... (y / n) : ");
         String answerNew = scanner.nextLine().trim();
-        if (answerNew.equalsIgnoreCase("n")){
+        if (answerNew.equalsIgnoreCase("n")) {
             System.out.println("... добре");
             checkResults();
-        }
+        } else if (answerNew.equalsIgnoreCase("y")) System.out.println("... Всичко добро Брат.");
+        int resultCounter = 1;                       // 12-2
+        writeResult(result, resultCounter);
     }
 
     private static String checkAnswerAgain() {
@@ -79,7 +90,7 @@ public class TOTO extends TotoA {
 
         System.out.print("Край?... (y / n) : ");
         String answerNew = scanner.nextLine();
-        if (answerNew.equalsIgnoreCase("n")){
+        if (answerNew.equalsIgnoreCase("n")) {
             play();
         }
     }
@@ -160,9 +171,52 @@ public class TOTO extends TotoA {
         }
         return count;
     }
+
+    private static String writeResult(List<List<Integer>> input, int resultCounter) {
+        int counter = 0;
+        int reper = -2;
+        try {
+            boolean choice = false;
+            System.out.print("Да се запазят ли предишните резултати? (y / n): ");
+
+            String answer = checkAnswerAgain();
+            if (answer.equalsIgnoreCase("y")) {
+                choice = true;
+                resultCounter++;
+                counter++;
+                reper = -1;
+            }
+
+            BufferedWriter writer =
+                    new BufferedWriter(new java.io.FileWriter("totoNew.txt", choice));
+            writer.write(String.valueOf(resultCounter + ": " + myTimeAndData()));
+            writer.newLine();
+            for (List<Integer> el : input) {
+                writer.write(el.toString() + "\n");
+            }
+            writer.append("-----------------------");
+            writer.newLine();
+            writer.close();
+
+        } catch (IOException exp) {
+            exp.printStackTrace();
+        }
+        StringBuilder tmp = new StringBuilder(counter + reper);
+        return tmp.toString();
+    }
+
+    public static String myTimeAndData() {
+        LocalDateTime localTime = LocalDateTime.now();
+        DateTimeFormatter formatDate =
+                DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
+        return localTime.format(formatDate);
+    }
 }
 
+/* ----------------------------------------------------------------------------------------------------------
+
 /*
+   First variant:
  * public static void main(String[] args) {
  * Scanner scanner = new Scanner(System.in);
  * timeAndData();
