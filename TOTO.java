@@ -18,20 +18,20 @@ public class TOTO extends TotoA {
         timeAndData();
 
         // TODO: Резултат от тиража:
-        List<Integer> last = new ArrayList<>(List.of(7, 26, 35, 45, 48, 49));
-        // TODO: 94-и тираж:  8, 23, 28, 38, 40, 42 <- твоя залог
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 26, 35, 45, 48, 49));
+        // TODO: 94-и тираж - Твоя залог:  8, 23, 28, 38, 40, 42
 
-        letsGo(last);
+        letsGo(lastLotteryResult);
     }
 
     private static void letsGo(List<Integer> last) {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Проверяваме или играем? (c / p): ");
-        String answerOne = scanner.nextLine().trim();
+        String thisAnswer = scanner.nextLine().trim();
 
-        if ("p".equalsIgnoreCase(checkAnswer(answerOne))) {
+        if ("p".equalsIgnoreCase(checkAnswer(thisAnswer))) {
             play(last);
-        } else if ("c".equalsIgnoreCase(checkAnswer(answerOne))) {
+        } else if ("c".equalsIgnoreCase(checkAnswer(thisAnswer))) {
             checkResults(last);
         }
     }
@@ -52,14 +52,14 @@ public class TOTO extends TotoA {
         List<Integer> result = new ArrayList<>();
 
         System.out.print("Ще залагаме ли? (y / n) : ");
-        String answer = checkAnswerAgain();
+        String thisAnswer = checkAnswerAgain();
 
-        if (answer.equalsIgnoreCase("y")) {
+        if (thisAnswer.equalsIgnoreCase("y")) {
             listResult = generateTotoNum(last, 3);
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
-            while (!yourChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
+            while ( !yourChoice.equalsIgnoreCase("1") &&     // -> false == на 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("3")) {     // while търси true;
                 System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
@@ -74,11 +74,11 @@ public class TOTO extends TotoA {
         }
 
         System.out.print("Приключваш ли?... (y / n): ");
-        String answerNew = scanner.nextLine().trim();
-        if (answerNew.equalsIgnoreCase("n")) {
+        String thisAnswer = scanner.nextLine().trim();
+        if (thisAnswer.equalsIgnoreCase("n")) {
             System.out.println("... добре");
             checkResults(last);
-        } else if (answerNew.equalsIgnoreCase("y"))
+        } else if (thisAnswer.equalsIgnoreCase("y"))
             System.out.println("... Всичко добро Брат.");
 
         int resultCounter = 1;
@@ -88,17 +88,16 @@ public class TOTO extends TotoA {
     private static String checkAnswerAgain() {
         Scanner scanner = new Scanner(System.in);
 
-        String answer = scanner.nextLine();
-        while (!answer.equalsIgnoreCase("y") &&
-                !answer.equalsIgnoreCase("n")) {
+        String thisAnswer = scanner.nextLine();
+        while (!thisAnswer.equalsIgnoreCase("y") &&
+                !thisAnswer.equalsIgnoreCase("n")) {
             System.out.println("Айде сега.... 'y' или 'n'?");
-            answer = scanner.nextLine();
+            thisAnswer = scanner.nextLine();
         }
-        return answer;
+        return thisAnswer;
     }
 
     private static void checkResults(List<Integer> last) {
-        Scanner scanner = new Scanner(System.in);
         System.out.println("-----------------------------------------------");
         int[] a = officialResult("Резултат от тиража: ");
         int[] b = yourSuppose("Твоят залог: ");
@@ -107,8 +106,8 @@ public class TOTO extends TotoA {
         System.out.println("-----------------------------------------------");
 
         System.out.print("Край?... (y / n) : ");
-        String answerNew = scanner.nextLine();
-        if (answerNew.equalsIgnoreCase("n")) {
+        String thisAnswer = checkAnswerAgain();
+        if (thisAnswer.equalsIgnoreCase("n")) {
             play(last);
         }
     }
@@ -144,13 +143,12 @@ public class TOTO extends TotoA {
         int[] tmp = Objects.requireNonNull(compareResults(a, b));
         int counter = getCounts(a, b);
         for (int i = 0; i < tmp.length; i++) {
-            if (tmp[i] != 0 && counter > 1) {
+            if (counter > 1) {
                 System.out.print(tmp[i] + ", ");
-                counter--;
-            } else if (tmp[i] != 0) {
+            } else {
                 System.out.print(tmp[i]);
-                counter--;
             }
+            counter--;
             if (counter == 0) break;
         }
         System.out.println();
@@ -197,9 +195,8 @@ public class TOTO extends TotoA {
         try {
             System.out.print("Да се запазят ли предишните резултати? (y / n): ");
 
-            String answer = checkAnswerAgain();
-            if (answer.equalsIgnoreCase("y")) choice = true;
-
+            String thisAnswer = checkAnswerAgain();
+            if (thisAnswer.equalsIgnoreCase("y")) choice = true;
 
             BufferedWriter writer =
                     new BufferedWriter(new java.io.FileWriter("totoNew.txt", choice));
