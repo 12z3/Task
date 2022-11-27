@@ -52,9 +52,9 @@ public class TOTO extends TotoA {
         List<Integer> result = new ArrayList<>();
 
         System.out.print("Ще залагаме ли? (y / n) : ");
-        String thisAnswer = checkAnswerAgain();
+        String answer = checkAnswerAgain();
 
-        if (thisAnswer.equalsIgnoreCase("y")) {
+        if (answer.equalsIgnoreCase("y")) {
             listResult = generateTotoNum(last, 3);
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
