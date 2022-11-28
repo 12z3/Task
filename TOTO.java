@@ -18,8 +18,8 @@ public class TOTO extends TotoA {
         timeAndData();
 
         // TODO: Резултат от тиража:
-        List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 26, 35, 45, 48, 49));
-        // TODO: 94-и тираж - Твоя залог:  8, 23, 28, 38, 40, 42
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 10, 25, 32, 36, 44));
+        // TODO: 94-и тираж - Твоя залог: 8, 23, 28, 38, 40, 42
 
         letsGo(lastLotteryResult);
     }
@@ -143,9 +143,9 @@ public class TOTO extends TotoA {
         int[] tmp = Objects.requireNonNull(compareResults(a, b));
         int counter = getCounts(a, b);
         for (int i = 0; i < tmp.length; i++) {
-            if (counter > 1) {
+            if (tmp[i] != 0 && counter > 1) {
                 System.out.print(tmp[i] + ", ");
-            } else {
+            } else if(tmp[i] != 0) {
                 System.out.print(tmp[i]);
             }
             counter--;
