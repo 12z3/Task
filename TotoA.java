@@ -147,14 +147,14 @@ public class TotoA extends Methods {
         List<List<Integer>> allNumbers = new ArrayList<>();
 
         System.out.print("Да се отчита ли предишният тираж? (y / n): ");
-        char answer = scanner.nextLine().charAt(0);
+        char thisAnswer = scanner.nextLine().charAt(0);
 
         int counter = 0;
         while (counter < variants) {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
                 int el = rnd.nextInt(50);                                   // ... до 50!
-                switch (answer) {
+                switch (thisAnswer) {
                     case 'n' -> {
                         if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
                             list.add(el);                                         // ... и да е != 0.
