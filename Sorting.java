@@ -53,7 +53,7 @@ public class Sorting {
     }
     public static void bubbleOptimized(int[] a) {
         for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < a.length - i - 1; j++) {
+            for (int j = 0; j < a.length - i - 1; j++) {       // от 1-я до последния. От 2-я до предпоследния и т.н.
                 if (a[j] > a[j + 1]) {
                     int tmp = a[j];
                     a[j] = a[j + 1];
