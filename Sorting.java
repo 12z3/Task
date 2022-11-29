@@ -41,6 +41,30 @@ public class Sorting {
         System.out.println(Arrays.toString(bubbleSort(arr)));
     }
 
+    public void bubbleSorting(int[] matr) {
+        System.out.print("Sorting one: ");
+        try {
+            boolean isSorted = false;                  // Необходимо Е за да се "влезе" в while - a.
+            while (!isSorted) {
+                isSorted = true;                      // Ще си промени стойноста ако if - > true - (matr[i] > matr[i + 1])
+                for (int i = 0; i < matr.length - 1; i++) {
+                    int temp;
+                    if (matr[i] > matr[i + 1]) {
+                        temp = matr[i + 1];
+                        matr[i + 1] = matr[i];
+                        matr[i] = temp;
+                        isSorted = false;                   // fixed = false; докато е изпълнено - (matr[i] > matr[i + 1])
+                    }
+                }
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            System.out.println("\n " + "ArrayIndex OutOf Bounds Exception");
+        } catch (NullPointerException e) {
+            System.out.println("Null Pointer Exception");
+        } catch (NegativeArraySizeException ng) {
+            System.out.println("Negative Array Size Exception");
+        }
+    }
     private static int[] bubbleSort(int[] arr) {
         for (int index1 = 0; index1 < arr.length; index1++) {
             for (int index2 = 0; index2 < arr.length; index2++) {
