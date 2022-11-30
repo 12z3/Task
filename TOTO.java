@@ -17,9 +17,9 @@ public class TOTO extends TotoA {
     public static void main(String[] args) {
         timeAndData();
 
-        // TODO: Резултат от тиража:
+        //TODO: Резултат от тиража:
         List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 10, 25, 32, 36, 44));
-        // TODO: 94-и тираж - Твоя залог: 8, 23, 28, 38, 40, 42
+        //TODO: 95-и тираж - Твоя залог: 8, 23, 28, 38, 40, 42
 
         letsGo(lastLotteryResult);
     }
@@ -219,8 +219,9 @@ public class TOTO extends TotoA {
             writer.close();
         } catch (IOException exp) {
             exp.printStackTrace();
+        } finally {
+            if (choice) System.out.println("Резултатът е записан в: " + path);
         }
-        if (choice) System.out.println("Резултатът е записан в: " + path);
     }
 
     public static String totoTimeAndData() {
