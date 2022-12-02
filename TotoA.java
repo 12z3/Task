@@ -139,7 +139,7 @@ public class TotoA extends Methods {
 
     // ----------------------------------------------------------------------------------------------------------
 
-    static List<List<Integer>> generateTotoNum(List<Integer> last, int variants) {
+    static List<List<Integer>> generateTotoNum(List<Integer> lastN, int variants) {
         Scanner scanner = new Scanner(System.in);
         Random rnd = new Random();
 
@@ -159,13 +159,14 @@ public class TotoA extends Methods {
                         if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
                             list.add(el);                                         // ... и да е != 0.
                         } else {
-                            if (k != 0 && k > - 1) {            // k e от -0.99 до - 0.001 и от 0.001 до...безкрайност)
+                            // if (k != 0 && k > - 1)            // k e от -0.99 до - 0.001 и от 0.001 до...безкрайност)
+//                            if (k > 0) {
                                 k--;
-                            }
+                            //}
                         }
                     }
                     case 'y' -> {
-                        if (!check(list, el) && !check(last, el) && el != 0) {
+                        if (!check(list, el) && !check(lastN, el) && el != 0) {
                             list.add(el);
                         } else {
                             if (k != 0 && k > -1) {
@@ -178,13 +179,13 @@ public class TotoA extends Methods {
             allNumbers.add(list);
             counter++;
         }
-        System.out.println("Предишно теглене - резултат: " + last);
+        System.out.println("Предишно теглене - резултат: " + lastN);
         System.out.print("Предложения за залог: ");
-        printTotoResult(allNumbers, last);
+        printTotoResult(allNumbers, lastN);
         return allNumbers;
     }
 
-    private static void printTotoResult(List<List<Integer>> allNumbers, List<Integer> last) {
+    private static void printTotoResult(List<List<Integer>> allNumbers, List<Integer> lastN) {
         System.out.println(allNumbers + "\n");
     }
 
