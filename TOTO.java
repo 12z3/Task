@@ -5,10 +5,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class TOTO extends TotoA {
 
@@ -18,8 +15,8 @@ public class TOTO extends TotoA {
         timeAndData();
 
         //TODO: Резултат от тиража:
-        List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 10, 25, 32, 36, 44));
-        //TODO: 95-и тираж - Твоя залог: 8, 23, 28, 38, 40, 42
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(6, 13, 20, 24, 35, 40));
+        //TODO: 96-и тираж - Твоя залог:  6, 9, 19, 34, 38, 49
 
         letsGo(lastLotteryResult);
     }
@@ -51,7 +48,7 @@ public class TOTO extends TotoA {
         List<List<Integer>> listResult = new ArrayList<>();
         List<Integer> result = new ArrayList<>();
 
-        System.out.print("Ще залагаме ли? (y / n) : ");
+        System.out.print("Ще залагаме ли? (y / n): ");
         String answer = checkAnswerAgain();
 
         if (answer.equalsIgnoreCase("y")) {
@@ -59,7 +56,7 @@ public class TOTO extends TotoA {
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
-            while ( !yourChoice.equalsIgnoreCase("1") &&     // -> false == на 1, 2 или 3
+            while (!yourChoice.equalsIgnoreCase("1") &&     // -> false == на 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("3")) {     // while търси true;
                 System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
@@ -82,7 +79,8 @@ public class TOTO extends TotoA {
             System.out.println("... Всичко добро Брат.");
 
         int resultCounter = 1;
-        writeResult(listResult, result);
+        Collections.sort(result);
+        writeResult(listResult, result, last);
     }
 
     private static String checkAnswerAgain() {
@@ -145,10 +143,11 @@ public class TOTO extends TotoA {
         for (int i = 0; i < tmp.length; i++) {
             if (tmp[i] != 0 && counter > 1) {
                 System.out.print(tmp[i] + ", ");
-            } else if(tmp[i] != 0) {
+                counter--;
+            } else if (tmp[i] != 0) {
                 System.out.print(tmp[i]);
+                counter--;
             }
-            counter--;
             if (counter == 0) break;
         }
         System.out.println();
@@ -170,6 +169,7 @@ public class TOTO extends TotoA {
             for (int j = 0; j < b.length; j++) {
                 if (a[i] == b[j]) {
                     isMatch = true;
+                    break;
                 }
             }
             if (isMatch) tmp[i] = a[i];
@@ -189,7 +189,7 @@ public class TOTO extends TotoA {
         return count;
     }
 
-    private static void writeResult(List<List<Integer>> input, List<Integer> result) {
+    private static void writeResult(List<List<Integer>> input, List<Integer> result, List<Integer> last) {
         String path = "";
         boolean choice = false;
         try {
@@ -209,19 +209,17 @@ public class TOTO extends TotoA {
             for (List<Integer> el : input) {
                 writer.write(el.toString() + "\n");
             }
-            writer.append("-----------------------");
-            writer.newLine();
-            writer.write(result.toString());
-            writer.newLine();
-            writer.append("-----------------------");
-            writer.newLine();
+            writer.append("------------------------------------" + "\n");
+            writer.write("Избрал си: " + result.toString() + "\n"
+                    + "Изтеглени: " + last.toString() + "\n");
+            writer.append("------------------------------------" + "\n");
             writer.newLine();
             writer.close();
         } catch (IOException exp) {
             exp.printStackTrace();
-        } finally {
-            if (choice) System.out.println("Резултатът е записан в: " + path);
         }
+        if (choice) System.out.println("Резултатът е записан в: " + path);
+
     }
 
     public static String totoTimeAndData() {
