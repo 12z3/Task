@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class TOTO extends TotoA {
+public class TOTO extends TOTOLogic {
 
     // TODO: Пренапиши го грамотно използвайки ООП
 
@@ -214,12 +214,34 @@ public class TOTO extends TotoA {
                     + "Изтеглени: " + last.toString() + "\n");
             writer.append("------------------------------------" + "\n");
             writer.newLine();
+
+//            TODO: Оправи си времената.... че е Мазало.
+//            LocalDateTime resultLDT = getLocalDateTime();
+//            writer.write(
+//                    whatTimeToTotoIs(resultLDT));
+
             writer.close();
         } catch (IOException exp) {
             exp.printStackTrace();
         }
         if (choice) System.out.println("Резултатът е записан в: " + path);
+    }
 
+    private static LocalDateTime getLocalDateTime() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Кога е следващият Тираж? " +
+                "\nВъведи (година месец ден час минути) разделени с интервал: ");
+
+        String[] dataTimeFormatAnswer = scanner.nextLine()
+                .trim()
+                .split(" ");
+        int year = Integer.parseInt(dataTimeFormatAnswer[0]);
+        int month = Integer.parseInt(dataTimeFormatAnswer[1]);
+        int dayOfMonth = Integer.parseInt(dataTimeFormatAnswer[2]);
+        int hour = Integer.parseInt(dataTimeFormatAnswer[3]);
+        int minute = Integer.parseInt(dataTimeFormatAnswer[4]);
+
+        return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
     }
 
     public static String totoTimeAndData() {
