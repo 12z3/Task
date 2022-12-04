@@ -53,12 +53,11 @@ public class CountWord {
     }
 
     private static int searchThisWord3(String text, String word) {
-        int count = 0, nextIndex = -1;
-        int currentIndex = text.indexOf(word, nextIndex + 1);
+        int count = 0;
+        int currentIndex = text.indexOf(word);
         while (currentIndex != -1) {
             count++;
-            nextIndex = currentIndex;
-            currentIndex = text.indexOf(word, nextIndex + word.length());
+            currentIndex = text.indexOf(word, currentIndex + word.length());
         }
 
         return count;
