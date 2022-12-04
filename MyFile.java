@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class MyFile {
+public class MyFile extends TOTOLogic {
 
     /**
      * @Source: <a href="https://www.geeksforgeeks.org/file-class-in-java/">...</a>
