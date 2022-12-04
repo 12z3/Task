@@ -28,6 +28,7 @@ public class CountWord {
         System.out.println(searchThisWord(text, word));
         System.out.println(searchThisWord1(text, word));
         System.out.println(searchThisWord2(text, word));
+        System.out.println(searchThisWord3(text, word));
 
     }
 
@@ -48,6 +49,18 @@ public class CountWord {
                 nextIndex = currentIndex + word.length();   // Следващото търсене ще е от този индекс на татък в думата.
             }
         }
+        return count;
+    }
+
+    private static int searchThisWord3(String text, String word) {
+        int count = 0, nextIndex = -1;
+        int currentIndex = text.indexOf(word, nextIndex + 1);
+        while (currentIndex != -1) {
+            count++;
+            nextIndex = currentIndex;
+            currentIndex = text.indexOf(word, nextIndex + word.length());
+        }
+
         return count;
     }
 
