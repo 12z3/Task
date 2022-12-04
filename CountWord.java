@@ -20,10 +20,10 @@ public class CountWord {
     private static int searchThisWord(String text, String word) {
         int count = 0, nextIndex = 0;
         for (int i = 0; i < text.length(); i++) {
-            int currentIndex = text.indexOf(word, nextIndex);
+            int currentIndex = text.indexOf(word, nextIndex);    // намира индекса на Първото срещане. Нещо си или -1.
             if (currentIndex != -1) {
                 count++;
-                nextIndex = currentIndex + word.length();
+                nextIndex = currentIndex + word.length();   // Следващото търсене ще е от този индекс на татък в думата.
             }
         }
         return count;
