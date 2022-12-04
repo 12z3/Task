@@ -18,12 +18,12 @@ public class CountWord {
     }
 
     private static int searchThisWord(String text, String word) {
-        int count = 0, index = 0;
+        int count = 0, nextIndex = 0;
         for (int i = 0; i < text.length(); i++) {
-            int currentIndex = text.indexOf(word, index);
+            int currentIndex = text.indexOf(word, nextIndex);
             if (currentIndex != -1) {
                 count++;
-                index = currentIndex + word.length();
+                nextIndex = currentIndex + word.length();
             }
         }
         return count;
