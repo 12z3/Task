@@ -15,8 +15,8 @@ public class TOTO extends TOTOLogic {
         timeAndData();
 
         //TODO: Резултат от тиража:
-        List<Integer> lastLotteryResult = new ArrayList<>(List.of(6, 13, 20, 24, 35, 40));
-        //TODO: 96-и тираж - Твоя залог:  6, 9, 19, 34, 38, 49
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(4, 14, 31, 32, 37, 48));
+        //TODO: 97-и тираж - Твоя залог:  7, 8, 14, 16, 38, 46
 
         letsGo(lastLotteryResult);
     }
@@ -147,6 +147,8 @@ public class TOTO extends TOTOLogic {
             } else if (tmp[i] != 0) {
                 System.out.print(tmp[i]);
                 counter--;
+            } else if (tmp.length == 0) {
+                System.out.println("Нема се отказваш само...!");
             }
             if (counter == 0) break;
         }
@@ -215,10 +217,10 @@ public class TOTO extends TOTOLogic {
             writer.append("------------------------------------" + "\n");
             writer.newLine();
 
-//            TODO: Оправи си времената.... че е Мазало.
-//            LocalDateTime resultLDT = getLocalDateTime();
-//            writer.write(
-//                    whatTimeToTotoIs(resultLDT));
+//          TODO: Оправи си времената.... че е Мазало.
+            LocalDateTime resultLDT = getLocalDateTime();
+            writer.write(
+                    Objects.requireNonNull(whatTimeToTotoIs(resultLDT)));
 
             writer.close();
         } catch (IOException exp) {
@@ -230,7 +232,7 @@ public class TOTO extends TOTOLogic {
     private static LocalDateTime getLocalDateTime() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Кога е следващият Тираж? " +
-                "\nВъведи (година месец ден час минути) разделени с интервал: ");
+                "\nВъведи (година месец ден час минути) разделени с интервал: ");           // 2022 12 8 18 45
 
         String[] dataTimeFormatAnswer = scanner.nextLine()
                 .trim()
@@ -244,12 +246,12 @@ public class TOTO extends TOTOLogic {
         return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
     }
 
-    public static String totoTimeAndData() {
-        LocalDateTime localTime = LocalDateTime.now();
-        DateTimeFormatter formatDate =
-                DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
-        return localTime.format(formatDate);
-    }
+//    public static String totoTimeAndData() {
+//        LocalDateTime localTime = LocalDateTime.now();
+//        DateTimeFormatter formatDate =
+//                DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
+//        return localTime.format(formatDate);
+//    }
 }
 
 /* ----------------------------------------------------------------------------------------------------------

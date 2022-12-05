@@ -71,7 +71,7 @@ public class TOTOLogic extends Methods {
                         if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
                             list.add(el);                                         // ... и да е != 0.
                         } else {
-                            if (k != 0 && k > - 1) {            // k e от -0.99 до - 0.001 и от 0.001 до...безкрайност)
+                            if (k != 0 && k > -1) {            // k e от -0.99 до - 0.001 и от 0.001 до...безкрайност)
                                 k--;
                             }
                         }
@@ -164,7 +164,7 @@ public class TOTOLogic extends Methods {
                         } else {
                             // if (k != 0 && k > - 1)            // k e от -0.99 до - 0.001 и от 0.001 до...безкрайност)
 //                            if (k > 0) {
-                                k--;
+                            k--;
                             //}
                         }
                     }
@@ -193,26 +193,33 @@ public class TOTOLogic extends Methods {
     }
 
     public static String whatTimeToTotoIs(LocalDateTime timeOfToto) {
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");;
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
+
         LocalDateTime now = LocalDateTime.now();
 
         int count = 0;
-        int days = timeOfToto.getDayOfMonth() - now.getDayOfMonth();
-        while (days != 0){
-            days--;
+        int dDays = timeOfToto.getDayOfMonth() - now.getDayOfMonth();
+        while (dDays != 0) {
+            dDays--;
             count++;
         }
-        long time1 = now.getHour();
-        long time2 = timeOfToto.getHour();
+        long hour1 = now.getHour();
+        long hour2 = timeOfToto.getHour();
+        long dHours = Math.abs(hour1 - hour2);
 
         long min1 = now.getMinute();
         long min2 = timeOfToto.getMinute();
+        long dMins = Math.abs(min1 - min2);
 
-        return ("The Day is: " + timeOfToto.format(formatDate) + "\n"
-                +"Reminders: "
-                + count + " days (" + now.getDayOfWeek() + ") "
-                + (Math.abs((time1 - time2))) + " hours " + "and "
-                + (Math.abs(min1 - min2)) + " minutes");
+        if (dDays == 1 && dHours == 0 && dMins == 0) count = 0;
+
+        System.out.println("The Day is: " + timeOfToto.format(formatDate));
+        System.out.println("ToDay is: " + now.format(formatDate) + "\n" + "\n"
+                + "Reminders: "
+                + count + " days (in " + timeOfToto.getDayOfWeek() + ") - "
+                + (dHours + " hours " + "and "
+                + (dMins + " minutes")));
+        return null;
     }
 }
 
