@@ -1,6 +1,7 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class FirstDuplicated {
@@ -10,6 +11,8 @@ public class FirstDuplicated {
         int[] a = {2, 1, 3, 1, 3, 2};    // 2 ?= 1 No -> 21 - 1 ?= 3 No -> 213
         int result = a[0], count = 0;
 
+        System.out.println(duplicate(a));
+        System.out.println(duplicateHis(a));
         duplicate1(a);
         duplicate2(a);
     }
@@ -27,6 +30,33 @@ public class FirstDuplicated {
         System.out.println(count);
     }
 
+    private static int duplicate(int[] a) {
+        int count = 0;
+        HashSet<Integer> list = new HashSet<>();
+        for (int i = 0; i < a.length; i++) {
+            if (list.contains(a[i])){
+                count++;
+            } else {
+                list.add(a[i]);
+            }
+
+        }
+        return  count;
+    }
+
+    private static int duplicateHis(int[] a) {
+        int count = 0;
+        HashSet<Integer> list = new HashSet<>();
+        for (int i = 0; i < a.length; i++) {
+            if (list.contains(a[i])){
+                return a[i];
+            } else {
+                list.add(a[i]);
+            }
+
+        }
+        return  -1;
+    }
     private static void duplicate1(int[] a) {
         int count = 0;
         List<Integer> list = new ArrayList<>();
