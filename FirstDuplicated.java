@@ -5,6 +5,11 @@ import java.util.HashSet;
 import java.util.List;
 
 public class FirstDuplicated {
+
+    /**
+     *   <p> Google Coding Interview Question - firstDuplicate </p>
+     *   <a href="https://www.youtube.com/watch?v=XSdr_O-XVRQ">...</a>
+     */
     public static void main(String[] args) {
 
         //TODO: Find firstDuplicate:
