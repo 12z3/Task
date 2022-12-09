@@ -15,20 +15,27 @@ public class TOTO extends TOTOLogic {
         timeAndData();
 
         //TODO: Резултат от тиража:
-        List<Integer> lastLotteryResult = new ArrayList<>(List.of(4, 14, 31, 32, 37, 48));
-        //TODO: 97-и тираж - Твоя залог:  7, 8, 14, 16, 38, 46
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(12, 16, 27, 31, 36, 42));
+        //TODO: 97-и тираж - Твоя залог:  7, 8, 14, 16, 38, 46 ->current:  2022 12 11 18 45  -   next: 2022 12 11 18 45
 
         letsGo(lastLotteryResult);
     }
 
     private static void letsGo(List<Integer> last) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.print("Проверяваме или играем? (c / p): ");
         String thisAnswer = scanner.nextLine().trim();
+        String string = checkAnswer(thisAnswer);
 
-        if ("p".equalsIgnoreCase(checkAnswer(thisAnswer))) {
+//        while (!thisAnswer.equalsIgnoreCase("c")
+//                && !thisAnswer.equalsIgnoreCase("p")) {
+//            System.out.println("Айде сега.... 'c' или 'p'?");
+//            thisAnswer = scanner.nextLine().trim();
+//        }
+        if ("p".equalsIgnoreCase(string)) {
             play(last);
-        } else if ("c".equalsIgnoreCase(checkAnswer(thisAnswer))) {
+        } else if ("c".equalsIgnoreCase(string)) {
             checkResults(last);
         }
     }
@@ -215,7 +222,7 @@ public class TOTO extends TOTOLogic {
             writer.write("Избрал си: " + result.toString() + "\n"
                     + "Изтеглени: " + last.toString() + "\n");
             writer.append("------------------------------------" + "\n");
-            writer.newLine();
+//            writer.newLine();
 
 //          TODO: Оправи си времената.... че е Мазало.
             LocalDateTime resultLDT = getLocalDateTime();
