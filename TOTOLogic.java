@@ -213,13 +213,13 @@ public class TOTOLogic extends Methods {
 
         if (dDays == 1 && dHours == 0 && dMins == 0) count = 0;
 
-        System.out.println("The Day is: " + timeOfToto.format(formatDate));
-        System.out.println("ToDay is: " + now.format(formatDate) + "\n" + "\n"
+        //System.out.println("The Day is: " + timeOfToto.format(formatDate));
+
+        return ("ToDay is: " + now.format(formatDate) + "\n"
                 + "Reminders: "
                 + count + " days (in " + timeOfToto.getDayOfWeek() + ") - "
                 + (dHours + " hours " + "and "
                 + (dMins + " minutes")));
-        return null;
     }
 }
 
