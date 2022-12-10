@@ -9,14 +9,22 @@ public class Reader {
 
         readerBuffer();
         readerScanner();
-       // readerBufferBad();
+        // readerBufferBad();
     }
 
     private static void readerBuffer() {
         try {
             FileReader file = new FileReader("totoNew.txt");
+            File myFile = new File("totoNew.txt");
+
             BufferedReader reader = new BufferedReader(file);
             String line = "";
+
+            String answer = myFile.canRead() ? "YES" : "NO";
+
+            System.out.println("Is " + myFile.getName() + " is readable? -> " + answer);
+            System.out.println("It is on " + myFile.getAbsoluteFile() +
+                    " and file sizes is " + myFile.length() + " bytes.");
 
             while (line != null) {
                 line = reader.readLine();
@@ -42,10 +50,11 @@ public class Reader {
                     System.out.println(line);
                 }
             }
-
             reader.close();
-        } catch (IOException ex) {
+        } catch (FileNotFoundException ex) {
             ex.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
