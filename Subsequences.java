@@ -1,60 +1,91 @@
-package hackerRank;
+package task;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Subsequences {
 
+    // TODO: Time limit exceeded <-
+
     /**
-     * in: {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};              {1, 2, 1, 2, 1, 2};
-     * out:
-     * [3, 4, 5, 6, 7]                                                        [1, 2]
-     * [1, 2, 3, 4, 5, 6, 7, 8]                                               [1, 2]
-     * [3, 4, 5, 6]                                                           [1, 2]
-     * 14                                                                     3
+     *Jigar got a sequence of n positive integers as his birthday present!
+     * He likes consecutive subsequences whose sum is divisible by k.
+     * He asks you to write a program to count them for him.
+     * <p>
+     * Input Format
+     * The first line contains T, the number of testcases.
+     * T testcases follow. Each testcase consists of 2 lines.
+     * The first line contains n and k separated by a single space.
+     * And the second line contains n space separated integers.
+     *<p>
+     * Output Format
+     * For each test case, output the number of consecutive -
+     * - subsequenences whose sum is divisible by k in a newline.
+     *<p>
+     * Constraints
+     * 1 ≤ T ≤ 20
+     * 1 ≤ n ≤ 106
+     * 1 ≤ k ≤ 100
+     * 1 ≤ a[i] ≤ 104
+     *<p>
+     * Sample Input
+     *<p>
+     * 2
+     * 5 3
+     * 1 2 3 4 1
+     * 6 2
+     * 1 2 1 2 1 2
+     * Sample Output
+     *<p>
+     * 4
+     * 9
      */
 
     public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
 
-        int[] a2 = {1, 2, 3, 6, 7, 8};
-        int[] a = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 6, 7};
-        int[] a1 = {3, 4, 5, 6, 7, 1, 2, 3, 4, 5, 6, 7, 8, 3, 4, 5, 6};
-        int[] a3 = {1, 2, 1, 2, 1, 2};
+        int testCases = Integer.parseInt(scanner.nextLine());
+        List<Integer> allCount  = new ArrayList<>();
 
-        consecutiveSubsequences(a);
-    }
+        while (testCases > 0) {
+            int cases = testCases;
+            String[] line1 = scanner.nextLine().split(" ");
+            int n = Integer.parseInt(line1[0]);
+            int k = Integer.parseInt(line1[1]);
 
-    private static void consecutiveSubsequences(int[] a) {
-        List<Integer> ls;
-        int count = 0;
+            String[] line2 = scanner.nextLine().split(" ");
+            List<Integer> input = new ArrayList<>();
+            List<Integer> result = null;
 
-        for (int i = 0; i < a.length - 1; i++) {
-            boolean PreviouslyAdded = false;
-
-            ls = new ArrayList<>();
-            int el1 = a[i], el2 = a[i + 1],
-                    index = i + 1, endElIdx = a.length - 1;
-            count++;
-
-            while (compare(el1, el2) && index < endElIdx) {
-                if (!PreviouslyAdded) ls.add(el1);
-                ls.add(el2);
-                PreviouslyAdded = true;
-                el1 = a[index];
-                el2 = a[index + 1];
-                i = index;                     // <-
-                index++;
+            for (int i = 0; i < line2.length; i++) {
+                input.add(Integer.parseInt(line2[i]));
             }
-            if ((index == endElIdx) && (el2 == el1 + 1)) {
-                if (!PreviouslyAdded) ls.add(el1);
-                ls.add(el2);
+
+            int count = 0, sumA = 0;
+            for (int i = 0; i < n; i++) {
+                result = new ArrayList<>();
+
+                result.add(input.get(i));
+                sumA = input.get(i);
+                if (input.get(i) % k == 0) {
+                    count++;
+                    //System.out.println(result);
+                }
+                for (int j = i + 1; j < n; j++) {
+                    sumA += input.get(j);
+                    result.add(input.get(j));
+
+                    if (sumA % k == 0) {
+                        count++;
+                        //System.out.println(result);
+                    }
+                }
             }
-            System.out.println(ls);
+            System.out.println(count);
+            allCount.add(count);
+            testCases--;
         }
-        System.out.println(count);
-    }
-
-    private static boolean compare(int el1, int el2) {
-        return el1 + 1 == el2;
+        //for (int el: allCount) System.out.println(el);
     }
 }
