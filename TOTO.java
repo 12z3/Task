@@ -16,7 +16,7 @@ public class TOTO extends TOTOLogic {
 
         //TODO: Резултат от тиража:
         List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 11, 18, 36, 44, 48));
-        //TODO: 100-и тираж - Твоя залог: ->current: 1, 8, 13, 22, 24, 42  2022 12 17 18 45  -   next: 2022 12 18 18 45
+        //TODO: 100-и тираж - Твоя залог: -> current: 1, 8, 13, 22, 24, 42 / 2022 12 17 18 45 - next: 2022 12 18 18 45
 
         letsGo(lastLotteryResult);
     }
