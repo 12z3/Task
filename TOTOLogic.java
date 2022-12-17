@@ -104,17 +104,6 @@ public class TOTOLogic extends Methods {
         for (List<Integer> el : allNumbers) System.out.print(isASameElementsOfLists(last, el) + " / ");
     }
 
-    private static boolean check(List<Integer> l1, int l2) {
-        boolean isMatch = false;
-        for (int i = 0; i < l1.size(); i++) {
-            if (l1.get(i) == l2) {
-                isMatch = true;
-                break;
-            }
-        }
-        return isMatch;
-    }
-
     private static int isThisContains(List<Integer> list, int thisNumber) {
         int contains = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -142,6 +131,17 @@ public class TOTOLogic extends Methods {
     // ----------------------------------------------------------------------------------------------------------
     // Методчетата по-долу се използват в TOTO.java. Тези от горе са друга бира.....
 
+    private static boolean check(List<Integer> l1, int l2) {
+        boolean isMatch = false;
+        for (int i = 0; i < l1.size(); i++) {
+            if (l1.get(i) == l2) {
+                isMatch = true;
+                break;
+            }
+        }
+        return isMatch;
+    }
+
     static List<List<Integer>> generateTotoNum(List<Integer> lastN, int variants) {
         Scanner scanner = new Scanner(System.in);
         Random rnd = new Random();
@@ -152,11 +152,16 @@ public class TOTOLogic extends Methods {
         System.out.print("Да се отчита ли предишният тираж? (y / n): ");
         char thisAnswer = scanner.nextLine().charAt(0);
 
-        int counter = 0;
+        // TODO: Генерирай 10 числа и избери от тях 3-и.
+        int counter = 0, el = 0;
         while (counter < variants) {
             list = new ArrayList<>();
             for (int k = 0; k < 6; k++) {
-                int el = rnd.nextInt(50);                                   // ... до 50!
+                int n = 10;
+                while (n > 0) {
+                    el = rnd.nextInt(50);                                   // ... до 50!
+                    n--;
+                }
                 switch (thisAnswer) {
                     case 'n' -> {
                         if (!check(list, el) && el != 0) {                        // Да не се съдържа в "last" и "List"
@@ -190,36 +195,6 @@ public class TOTOLogic extends Methods {
 
     private static void printTotoResult(List<List<Integer>> allNumbers, List<Integer> lastN) {
         System.out.println(allNumbers + "\n");
-    }
-
-    public static String whatTimeToTotoIs(LocalDateTime timeOfToto) {
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
-
-        LocalDateTime now = LocalDateTime.now();
-
-        int count = 0;
-        int dDays = timeOfToto.getDayOfMonth() - now.getDayOfMonth();
-        while (dDays != 0) {
-            dDays--;
-            count++;
-        }
-        long hour1 = now.getHour();
-        long hour2 = timeOfToto.getHour();
-        long dHours = Math.abs(hour1 - hour2);
-
-        long min1 = now.getMinute();
-        long min2 = timeOfToto.getMinute();
-        long dMins = Math.abs(min1 - min2);
-
-        if (dDays == 1 && dHours == 0 && dMins == 0) count = 0;
-
-        //System.out.println("The Day is: " + timeOfToto.format(formatDate));
-
-        return ("ToDay is: " + now.format(formatDate) + "\n"
-                + "Reminders: "
-                + count + " days (in " + timeOfToto.getDayOfWeek() + ") - "
-                + (dHours + " hours " + "and "
-                + (dMins + " minutes")));
     }
 }
 
