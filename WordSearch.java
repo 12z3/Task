@@ -16,28 +16,28 @@ public class WordSearch {
     }
 
     public static int wordSearchInText(String text, String word) {
-        int count = 0, index = 0, fromIndex = 0;
+        int count = 0, index = 0, fromIndex = 0, j = 0;
 
-        while (index < text.length()) {
+        while (j < text.length()) {
             index = text.indexOf(word, fromIndex);
             if (index != -1) {
                 fromIndex = index + 1;
                 count++;
             }
-            index++;
+            j++;
         }
         return count;
     }
 
     public static int charSearchInText(String text, char x) {
-        int count = 0, index = 0, fromIndex = 0;
-        while (index < text.length()) {
+        int count = 0, index = 0, fromIndex = 0, j = 0;
+        while (j < text.length()) {
             index = text.indexOf(x, fromIndex);
             if (index != -1) {
                 fromIndex = index + 1;
                 count++;
             }
-            index++;
+            j++;
         }
         return count;
     }
