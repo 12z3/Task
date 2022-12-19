@@ -9,33 +9,35 @@ public class WordSearch {
         char a = 'a';
 
         System.out.printf
-                ("Word '%s' is matched %d times in text: %s%n", word, wordSearchInText(line, word), line);
-        System.out.printf("Char '%c' is matched %d times in text: %s", a,charSearchInText(line, a), line);
+                ("Word '%s' is matched %d times in text: %s%n",
+                        word, wordSearchInText(line, word), line);
+        System.out.printf("Char '%c' is matched %d times in text: %s",
+                a, charSearchInText(line, a), line);
     }
 
     public static int wordSearchInText(String text, String word) {
-        int count = 0, j = 0, fromIndex = 0;
+        int count = 0, index = 0, fromIndex = 0;
 
-        while (j < text.length()) {
-            int index = text.indexOf(word, fromIndex);
+        while (index < text.length()) {
+            index = text.indexOf(word, fromIndex);
             if (index != -1) {
                 fromIndex = index + 1;
                 count++;
             }
-            j++;
+            index++;
         }
         return count;
     }
 
     public static int charSearchInText(String text, char x) {
-        int count = 0, j = 0, fromIndex = 0;
-        while (j < text.length()){
-           int index = text.indexOf(x, fromIndex);
-            if (index != -1){
+        int count = 0, index = 0, fromIndex = 0;
+        while (index < text.length()) {
+            index = text.indexOf(x, fromIndex);
+            if (index != -1) {
                 fromIndex = index + 1;
                 count++;
             }
-            j++;
+            index++;
         }
         return count;
     }
