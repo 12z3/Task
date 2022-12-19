@@ -9,7 +9,7 @@ public class WordSearch {
         char a = 'a';
 
         System.out.printf
-                ("Word \\%s\\ is matched %d times in text: %s%n", word, wordSearchInText(line, word), line);
+                ("Word %s is matched %d times in text: %s%n", word, wordSearchInText(line, word), line);
         System.out.printf("Char %c is matched %d times in text: %s", a,charSearchInText(line, a), line);
     }
 
