@@ -4,10 +4,7 @@ import training.Methods;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class one extends Methods {
     /**
@@ -38,10 +35,17 @@ public class one extends Methods {
 //            }
 //            System.out.println();
 //        }
-
+//
 //        int a = 5;
 //        int b = a++;    // b = a и след това а += 1;
 //        int c = ++a;    // а += 1 и след това c = 1;
+//
+//        boolean t = true;
+//        String ans = c > 222 ? "YES" : "NO";
+//        String ans1 = t ? "YES" : "NO";
+//
+//        System.out.println(ans);
+//        System.out.println(ans1);
 //
 //        System.out.println(a);
 //        System.out.println(b);
@@ -60,20 +64,26 @@ public class one extends Methods {
 //        DateTimeFormatterBuilder date = new DateTimeFormatterBuilder();
 
 
-        //TODO: Find firstDuplicate:
-        int[] a = {2, 1, 3, 1, 3, 2};
-        int index = 0, sum = 0, count = 0;
+        //String str = "asta la vista baby";
+        String str = "astasta la vista babyastasta";
+        String line = str.substring(0, 7);
+        System.out.println(line);
 
-        while (index < a.length) {
-            sum += a[index];
-            if (index != 0) {
-                if (sum % a[index] == 0) {
-                    count++;
-                }
+        char targetCH = 'y';
+        String targetSTR = "asta";
+
+        int count = 0, j = 0, fromIndexCH = j, fromIndexSTR = j;
+        while (j < str.length()) {
+           // int chars = str.indexOf(targetCH, fromIndexCH);
+            int strings = str.indexOf(targetSTR, fromIndexSTR);
+            if (strings != -1) {
+               // fromIndexCH = str.indexOf(targetCH, fromIndexCH) + 1;
+                fromIndexSTR  = str.indexOf(targetSTR, fromIndexSTR) + 1;
+                count++;
             }
-            index++;
+            j++;
         }
-        System.out.println(count);
 
+        System.out.println(count);
     }
 }
