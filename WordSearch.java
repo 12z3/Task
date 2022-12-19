@@ -8,8 +8,9 @@ public class WordSearch {
         String word = "asta";
         char a = 'a';
 
-        System.out.println(wordSearchInText(line, word));
-        System.out.println(charSearchInText(line, a));
+        System.out.printf
+                ("Word \\%s\\ is matched %d times in text: %s%n", word, wordSearchInText(line, word), line);
+        System.out.printf("Char %c is matched %d times in text: %s", a,charSearchInText(line, a), line);
     }
 
     public static int wordSearchInText(String text, String word) {
