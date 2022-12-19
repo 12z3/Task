@@ -16,7 +16,7 @@ public class TOTO extends TOTOLogic {
 
         //TODO: Резултат от тиража:
         List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 11, 18, 36, 44, 48));
-        //TODO: 100-и тираж - Твоя залог: -> current: 1, 8, 13, 22, 24, 42 / 2022 12 17 18 45 - next: 2022 12 18 18 45
+        //TODO: 101-и тираж - Твоя залог: -> current: 7, 12, 14, 31, 33, 39 / 2022 12 18 18 45 - next: 2022 12 22 18 45
 
         letsGo(lastLotteryResult);
     }
@@ -227,7 +227,7 @@ public class TOTO extends TOTOLogic {
 //          TODO: Оправи си времената.... че е Мазало.
             LocalDateTime resultLDT = getLocalDateTime();
             writer.write(
-                    Objects.requireNonNull(whatTimeToTotoIs(resultLDT)));
+                    Objects.requireNonNull(whenTotoTimeIs(resultLDT)));
 
             writer.newLine();
             writer.newLine();
@@ -255,13 +255,19 @@ public class TOTO extends TOTOLogic {
         return LocalDateTime.of(year, month, dayOfMonth, hour, minute);
     }
 
-    public static String whatTimeToTotoIs(LocalDateTime timeOfToto) {
+    public static String whenTotoTimeIs(LocalDateTime timeOfToto) {
         DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
 
         LocalDateTime now = LocalDateTime.now();
 
         int count = 0;
         int dDays = timeOfToto.getDayOfMonth() - now.getDayOfMonth();
+
+        while (dDays < 0) {
+            System.out.println("... Я си оправи времената");
+            dDays = getLocalDateTime().getDayOfMonth() - now.getDayOfMonth();
+        }
+
         while (dDays != 0) {
             dDays--;
             count++;
