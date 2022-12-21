@@ -2,10 +2,7 @@ package task;
 
 import training.Methods;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 public class WordSearch extends Methods {
 
@@ -60,8 +57,11 @@ public class WordSearch extends Methods {
         boolean isNoMatch = true;
 
         Map<Integer, Character> different = new LinkedHashMap<>();
-        Stack<Character> aWord = new Stack<>();
-        Stack<Character> bWord = new Stack<>();
+        ArrayDeque<Character> aWord = new ArrayDeque<>();
+        ArrayDeque<Character> bWord = new ArrayDeque<>();
+
+        //Stack<Character> aWord = new Stack<>();
+        //Stack<Character> bWord = new Stack<>();
 
         if (wordA.length() != wordB.length()) return false;
 
@@ -72,14 +72,17 @@ public class WordSearch extends Methods {
 
         for (int i = 0; i < wordA.length(); i++) {
             isNoMatch = true;
-            if (aWord.get(i) != bWord.get(i)) {
+            char el1 = aWord.pop();
+            char el2 = bWord.pop();
+            if (el1 != el2) {
                 isNoMatch = false;
-                different.put(i, aWord.get(i));
+                different.put(i, el1);
             }
         }
 
         if (!isNoMatch) {
-            System.out.println("Different are: ");
+            System.out.printf("%nThat words are: '%s' and '%s'%n", wordA, wordB);
+            System.out.println("Different symbol is: ");
             for (Map.Entry<Integer, Character> el : different.entrySet()) {
                 System.out.printf("Index: %d, Char: %c%n", el.getKey(), el.getValue());
             }
