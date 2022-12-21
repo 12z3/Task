@@ -57,7 +57,7 @@ public class WordSearch extends Methods {
         boolean isNoMatch = true;
 
         Map<Integer, Character> different = new LinkedHashMap<>();
-        ArrayDeque<Character> aWord = new ArrayDeque<>();
+        ArrayDeque<Character> aWord = new ArrayDeque<>();                           // pop, push, peek
         ArrayDeque<Character> bWord = new ArrayDeque<>();
 
         //Stack<Character> aWord = new Stack<>();
