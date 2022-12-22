@@ -12,16 +12,30 @@ import java.util.Random;
 public class TotoPoint {
     public static void main(String[] args) throws IOException {
 
-        matchCheckers(getListsOfDigits(), 11);
+        //matchCheckers(getListsOfDigits(), 11);
         //writeToFile(matchCheckers(memo,11));
+
+        System.out.println(getFinalListOfNumbers());
+    }
+
+    public static List<List<Integer>> getFinalListOfNumbers() {
+        List<List<Integer>> tmp = new ArrayList<>();
+        int i = 50;
+        while (i >= 0) {
+            tmp = getListsOfDigits();
+            i--;
+        }
+        System.out.println(tmp);
+        return tmp;
     }
 
     private static List<List<Integer>> getListsOfDigits() {
         List<List<Integer>> memo = new ArrayList<>();
+
         for (int i = 0; i < 3; i++) {
             memo.add(generateNumbers());
         }
-        for (List<Integer> el : memo) System.out.print(el + " ");
+        // for (List<Integer> el : memo) System.out.print(el + " ");
         return memo;
     }
 
@@ -47,9 +61,10 @@ public class TotoPoint {
             listOfDigits.add(digit);
             if (i > 0) {
                 for (int j = 0; j < listOfDigits.size() - 1; j++) {
-                    if (digit == listOfDigits.get(j)) {
+                    int el = listOfDigits.get(j);
+                    if (digit == el) {
                         digit = rnd.nextInt(1, 50);
-                        listOfDigits.add(digit);                                    // Добави на поз. j и премахни от поз. j + 1
+                        listOfDigits.add(j, digit);                                    // Добави на поз. j и премахни от поз. j + 1
                         listOfDigits.remove(j + 1);
                     }
                 }
@@ -119,4 +134,6 @@ public class TotoPoint {
         writer.newLine();
         writer.close();
     }
+
+
 }
