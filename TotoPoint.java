@@ -11,7 +11,7 @@ public class TotoPoint {
             memo.add(generateNumbers());
         }
         for (List<Integer> el : memo) System.out.print(el + " ");
-        matchCheckers(memo, 12);
+        matchCheckers(memo, 11);
     }
 
     // Генерира резултат 1 @ count
@@ -41,21 +41,32 @@ public class TotoPoint {
         return a;
     }
 
-    // [20, 29, 29, 24, 13, 26] [24, 48, 44, 45, 7, 12] [17, 38, 11, 32, 43, 1]
-    // [0, 0, 0, 0, 0, 0]       [0, 0, 0, 0, 0, 1]      [0, 0, 0, 0, 0, 0]
-    private static boolean matchCheckers(List<List<Integer>> list, int el) {
+    // [32, 17, 32, 27, 22, 9] [34, 47, 37, 11, 12, 36] [32, 36, 5, 34, 14, 46] -> 11
+    // [0, 0, 0, 0, 0, 0]      [0, 0, 0, 1, 0, 0]       [0, 0, 0, 0, 0, 0]
+    // [32, 17, 32, 27, 22, 9] [34, 47, 37, 22, 12, 36] [32, 36, 5, 34, 14, 46]
+    private static List<List<Integer>> matchCheckers(List<List<Integer>> list, int el) {
         List<List<Integer>> matchers = new ArrayList<>();
+        Random rnd = new Random();
         for (int i = 0; i < list.size(); i++) {
             List<Integer> matcher = new ArrayList<>();
             for (int j = 0; j < list.get(i).size(); j++) {
-                if (list.get(i).get(j) != el) {
+                int digit = list.get(i).get(j);
+                if (digit != el) {
                     matcher.add(j, 0);
-                } else matcher.add(j, 1);
+                } else {
+                    digit = rnd.nextInt(1, 49);
+                    list.get(i).add(j, digit);                                    // Добавя digit на позиция j
+                    list.get(i).remove(j + 1);                              // Премахва 11 от позиция j + 1
+                    matcher.add(j, 1);
+                }
             }
+
             matchers.add(i, matcher);
         }
         System.out.println();
         for (List<Integer> e : matchers) System.out.print(e + " ");
-        return false;
+        System.out.println();
+        for (List<Integer> e : list) System.out.print(e + " ");
+        return matchers;
     }
 }
