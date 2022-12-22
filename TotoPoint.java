@@ -11,8 +11,6 @@ public class TotoPoint {
             memo.add(generateNumbers());
         }
         for (List<Integer> el : memo) System.out.print(el + " ");
-
-
         matchCheckers(memo, 12);
     }
 
