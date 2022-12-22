@@ -1,4 +1,4 @@
-package task;
+package task.TOTO;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -7,16 +7,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
-public class TOTO extends TOTOLogic {
+public class TOTO extends TotoPoint {  // extends TOTOLogic.
 
     // TODO: Пренапиши го грамотно използвайки ООП
 
     public static void main(String[] args) {
-        timeAndData();
+        //timeAndData();
 
         //TODO: Резултат от тиража:
-        List<Integer> lastLotteryResult = new ArrayList<>(List.of(7, 11, 18, 36, 44, 48));
-        //TODO: 101-и тираж - Твоя залог: -> current: 7, 12, 14, 31, 33, 39 / 2022 12 18 18 45 - next: 2022 12 22 18 45
+        List<Integer> lastLotteryResult = new ArrayList<>(List.of(15, 18, 23, 33, 38, 39));
+        //TODO: 102-и тираж - Твоя залог: -> current: 5, 17, 24, 28, 29, 47 / 2022 12 22 18 45 - next: 2022 12 24 18 45
 
         letsGo(lastLotteryResult);
     }
@@ -59,11 +59,12 @@ public class TOTO extends TOTOLogic {
         String answer = checkAnswerAgain();
 
         if (answer.equalsIgnoreCase("y")) {
-            listResult = generateTotoNum(last, 3);
+            // listResult = generateTotoNum(last, 3);
+            listResult = getFinalListOfNumbers();
 
             System.out.print("Избери между 1, 2 и 3 вариант: ");
             String yourChoice = scanner.nextLine();
-            while (!yourChoice.equalsIgnoreCase("1") &&     // -> false == на 1, 2 или 3
+            while (!yourChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
                     !yourChoice.equalsIgnoreCase("3")) {     // while търси true;
                 System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
@@ -92,8 +93,8 @@ public class TOTO extends TOTOLogic {
 
     private static String checkAnswerAgain() {
         Scanner scanner = new Scanner(System.in);
-
         String thisAnswer = scanner.nextLine();
+
         while (!thisAnswer.equalsIgnoreCase("y") &&
                 !thisAnswer.equalsIgnoreCase("n")) {
             System.out.println("Айде сега.... 'y' или 'n'?");
@@ -147,20 +148,27 @@ public class TOTO extends TOTOLogic {
 
         int[] tmp = Objects.requireNonNull(compareResults(a, b));
         int counter = getCounts(a, b);
+        boolean isZero = false;
+
         for (int i = 0; i < tmp.length; i++) {
-            if (tmp[i] != 0 && counter > 1) {
-                System.out.print(tmp[i] + ", ");
+            if (tmp[i] != 0 && counter >= 1) {
+               if (counter > 1) {
+                   System.out.print(tmp[i] + ", ");
+               } else {
+                   System.out.print(tmp[i] + " ");
+               }
                 counter--;
             } else if (tmp[i] != 0) {
                 System.out.print(tmp[i]);
                 counter--;
-            } else if (tmp.length == 0) {
-                System.out.println("Нема се отказваш само...!");
+            } else if (tmp[i] == 0) {
+                if (!isZero && counter <= 3) System.out.print("... Нема Се Отказваш Само ;)" + " ");
+                isZero = true;
             }
             if (counter == 0) break;
         }
-        System.out.println();
-    }
+        System.out.println();   // 4, 7, 13, 35, 38, 45
+    }                           // 4, 10, 13, 35, 38, 45
 
     private static int[] compareResults(int[] a, int[] b) {
         if (a.length != b.length) {
@@ -182,6 +190,7 @@ public class TOTO extends TOTOLogic {
                 }
             }
             if (isMatch) tmp[i] = a[i];
+
         }
         return tmp;
     }
@@ -213,7 +222,7 @@ public class TOTO extends TOTOLogic {
             File file = new File("totoNew.txt");
             if (file.exists()) path = file.getAbsolutePath();
 
-            writer.write(String.valueOf(timeAndData()));
+            // writer.write(String.valueOf(timeAndData()));
             writer.newLine();
             for (List<Integer> el : input) {
                 writer.write(el.toString() + "\n");
