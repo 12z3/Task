@@ -25,7 +25,8 @@ public class TotoPoint {
             tmp = getListsOfDigits();
             i--;
         }
-        System.out.println(tmp);
+        for (List<Integer> el: tmp) System.out.print(el + " ");
+        System.out.println();
         return tmp;
     }
 
@@ -35,7 +36,7 @@ public class TotoPoint {
         for (int i = 0; i < 3; i++) {
             memo.add(generateNumbers());
         }
-        // for (List<Integer> el : memo) System.out.print(el + " ");
+         //for (List<Integer> el : memo) System.out.print(el + " ");
         return memo;
     }
 
@@ -97,6 +98,9 @@ public class TotoPoint {
                             digitA = rnd.nextInt(1, 50);    // k е позоцията на която има съвпадение
                             list.get(i).add(k, digitA);                            // Добавя digit на позиция k
                             list.get(i).remove(k + 1);                       // Премахва 11 от позиция k + 1
+
+                            // list.get(i).remove(k);
+                            // list.get(i).add(k, digitA);              // Има същият ефект върху списъка
                         }
                     }
                     matcher.add(j, 1);
