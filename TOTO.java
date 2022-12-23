@@ -19,18 +19,15 @@ public class TOTO extends TotoPoint {
     private List<Integer> result = new ArrayList<>();
     private List<Integer> yourSuppose = new ArrayList<>();
     private List<Integer> variantResult = new ArrayList<>();
-
     private List<List<Integer>> variant = new ArrayList<>();
     String yourChoice = "";
 
-    public TOTO() {
-
-    }
-
+    public TOTO() {}
+    
     public void play() throws IOException {
         setResult();
         setYourSuppose();
-        writeResult(this.variant, this.yourSuppose, this.result);
+        writeResult(this.variant, this.result);
         printToto();
     }
 
@@ -134,7 +131,7 @@ public class TOTO extends TotoPoint {
 
         System.out.printf("%s", "Вариантите са три: ");
         this.variant = getFinalListOfNumbers();
-        for (List<Integer> el : this.variant){
+        for (List<Integer> el : this.variant) {
             Collections.sort(el);
         }
         System.out.print("Избери между 1, 2, 3: ");
@@ -164,8 +161,7 @@ public class TOTO extends TotoPoint {
                 "Залогът, който си избрал е вариант: %s %s ", this.result, this.yourChoice, this.yourSuppose);
     }
 
-    private void writeResult(List<List<Integer>> variants,
-                             List<Integer> yourSupposes, List<Integer> lastResult) throws IOException {
+    private void writeResult(List<List<Integer>> variants, List<Integer> lastResult) {
         Scanner scanner = new Scanner(System.in);
         String path = "";
         boolean choice = false;
@@ -198,7 +194,6 @@ public class TOTO extends TotoPoint {
             writer.append("------------------------------------" + "\n");
 //            writer.newLine();
 
-//          TODO: Оправи си времената.... че е Мазало.
             LocalDateTime resultLDT = getLocalDateTime();
             writer.write(
                     Objects.requireNonNull(whenTotoTimeIs(resultLDT)));
@@ -258,13 +253,13 @@ public class TOTO extends TotoPoint {
 
         //System.out.println("The Day is: " + timeOfToto.format(formatDate));
 
-        //TODO: Оправи името на деня в гайла да бъде на Кирилица.
+        //TODO: Оправи името на деня в файла да бъде на Кирилица.
 //        LocalDateTime day = null;
 //        switch (timeOfToto.getDayOfWeek()){
 //            case MONDAY -> day.;
 //        }
 
-        return ("Днес е божи ден: " + now.format(formatDate) + "\n"
+        return ("Днес е: " + now.format(formatDate) + "\n"
                 + "До следващият тираж остават: "
                 + count + " дни (ден: " + timeOfToto.getDayOfWeek() + ") - "
                 + (dHours + " часа " + "и "
