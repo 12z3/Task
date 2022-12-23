@@ -3,6 +3,12 @@ package task.TOTO.Projects;
 import java.util.*;
 
 public class TOTO {
+
+    // TODO: Трябват: Метод за сравняване на резултатите.
+    //                Метод за генериране на залог.
+    //                Метод за записване във файл (или файлове в зависимост от деня на залога).
+    //
+
     public static void main(String[] args) {
         TOTO toto = new TOTO();
 
@@ -26,6 +32,7 @@ public class TOTO {
         } else System.out.println("Въведи резултата. Не се Ослушвай!");
         return Collections.singletonList(-1);
     }
+
     //TODO: Виж какво пише отгоре.
     public List<Integer> getYourSuppose() {
         return this.yourSuppose;
@@ -41,7 +48,8 @@ public class TOTO {
 
     public void setResult() {
 
-        System.out.print("Валидни числа са всички положителни Двуцифрени (12) числа от 1 до 49 разделени с ', ' \n" +
+        System.out.print("Валидни числа са всички положителни Двуцифрени (12) числа " +
+                "от 1 до 49 разделени с ', ' \n" +
                 "Комбинациите от сорта: (1а,а1,  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
 
         Scanner scanner = new Scanner(System.in);
@@ -50,7 +58,8 @@ public class TOTO {
         boolean isIt = digitVerification(input);
 
         while (!isIt) {
-            System.out.print("ЗаПри се Вихъре. Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61'." +
+            System.out.print("ЗаПри се Вихъре. " +
+                    "Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61'." +
                     "\n" + "Дай пак:");
             input = scanner.nextLine().trim().split(", ");
             if (digitVerification(input)) isIt = true;
@@ -93,8 +102,7 @@ public class TOTO {
     private boolean digitVerification(String[] input) {
         return isNotAString(input) && (input.length == 6);
     }
-
-
+    
     public void setYourSuppose() {
         Scanner scanner = new Scanner(System.in);
         System.out.printf("%s", "Какъв е твоят залог: ");
@@ -102,7 +110,9 @@ public class TOTO {
         boolean isIt = digitVerification(input);
 
         while (!isIt) {
-            System.out.print("Погледни КАКВО въвеждаш. Трябва да бъде нещо от сорта: '1, 2, 3, 4'." +
+            System.out.print(
+                    "Погледни Каква Чудесия въвеждаш. " +
+                            "Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61''." +
                     "\n" + "Дай пак:");
             input = scanner.nextLine().trim().split(", ");
             if (digitVerification(input)) isIt = true;
