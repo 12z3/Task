@@ -1,13 +1,14 @@
 package task.TOTO.Projects;
 
+import task.TOTO.TotoPoint;
+
 import java.util.*;
 
-public class TOTO {
+public class TOTO extends TotoPoint {
 
     // TODO: Трябват: Метод за сравняване на резултатите.
-    //                Метод за генериране на залог.
     //                Метод за записване във файл (или файлове в зависимост от деня на залога).
-    //
+
 
     public static void main(String[] args) {
         TOTO toto = new TOTO();
@@ -46,14 +47,15 @@ public class TOTO {
         return digits;
     }
 
-    public void setResult() {
+    public List<Integer> setResult() {
 
         System.out.print("Валидни числа са всички положителни Двуцифрени (12) числа " +
                 "от 1 до 49 разделени с ', ' \n" +
                 "Комбинациите от сорта: (1а,а1,  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
 
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("%s", "Какъв резултата от последният тираж: ");
+        System.out.println();
+        System.out.printf("%s", "Какъв e резултата от последният тираж: ");
         String[] input = scanner.nextLine().trim().split(", ");
         boolean isIt = digitVerification(input);
 
@@ -63,19 +65,22 @@ public class TOTO {
                     "\n" + "Дай пак:");
             input = scanner.nextLine().trim().split(", ");
             if (digitVerification(input)) isIt = true;
-
         }
         this.result = getDigitFromInput(input);
+        return this.result;
     }
 
     private boolean isNotAString(String[] input) {                       // alskjdlaks, sa - 22, a
         boolean isNotAString = false;                                    // 12, 23, 12, 12, 34, 56
         for (int i = 0; i < input.length; i++) {                         // asd,as, 12, wewewew, -98, d
-            if ((input[i].length() < 2)) {
+            if ((input[i].length() <= 2)) {
                 if (isADoubleDigits(input[i])) {
                     int el = Integer.parseInt(input[i]);
                     for (int j = 58; j <= 126; j++) {
-                        if (el != j) isNotAString = true;
+                        if (el != j) {
+                            isNotAString = true;
+                            break;
+                        }
                     }
                 }
             } else return false;
@@ -102,26 +107,46 @@ public class TOTO {
     private boolean digitVerification(String[] input) {
         return isNotAString(input) && (input.length == 6);
     }
-    
+
     public void setYourSuppose() {
+        List<Integer> variantResult = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.printf("%s", "Какъв е твоят залог: ");
-        String[] input = scanner.nextLine().trim().split(", ");
-        boolean isIt = digitVerification(input);
+        boolean condition = false;
 
-        while (!isIt) {
-            System.out.print(
-                    "Погледни Каква Чудесия въвеждаш. " +
-                            "Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61''." +
-                    "\n" + "Дай пак:");
-            input = scanner.nextLine().trim().split(", ");
-            if (digitVerification(input)) isIt = true;
+        System.out.print("Играем ли?: (y / n) ");
+        String answer = scanner.nextLine().trim();
 
+        while (!answer.equalsIgnoreCase("y")
+                && !answer.equalsIgnoreCase("n")) {
+            System.out.println("Дай ми Коректен отговор: (y / n) ?");
+            answer = scanner.nextLine().trim();
         }
-        this.yourSuppose = getDigitFromInput(input);
+
+        System.out.printf("%s", "Вариантите са три: ");
+        List<List<Integer>> variant = getFinalListOfNumbers();
+        System.out.print("Избери между 1, 2, 3: ");
+
+        String yourChoice = scanner.nextLine();
+        while (!yourChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
+                !yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
+                !yourChoice.equalsIgnoreCase("3")) {     // while търси true;
+            System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
+            yourChoice = scanner.nextLine();
+        }
+
+        switch (yourChoice) {
+            case "1" -> variantResult = variant.get(0);
+            case "2" -> variantResult = variant.get(1);
+            case "3" -> variantResult = variant.get(2);
+        }
+        System.out.println("Избрал си: " + variantResult.toString() + "\n");
+        this.yourSuppose =  variantResult;
     }
 
     public void printToto() {
-        System.out.printf("Last Result is %s. Your suppose are %s ", this.result, this.yourSuppose);
+        Collections.sort(this.result);
+        Collections.sort(this.yourSuppose);
+        System.out.printf("Резултата от последният тираж е:  %s. \n" +
+                "Залогът, който си избрал е: %s ", this.result, this.yourSuppose);
     }
 }
