@@ -4,7 +4,6 @@ import task.TOTO.TotoPoint;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +14,8 @@ public class TOTO extends TotoPoint {
     // TODO: Трябват: Метод за сравняване на резултатите.
     //                Метод за записване във файл (или файлове в зависимост от деня на залога).
 
-    private int CIRCULATION = 101;
+    private final int TODAY_CIRCULATION = 101;
+    private int CIRCULATION = TODAY_CIRCULATION;
     private List<Integer> result = new ArrayList<>();
     private List<Integer> yourSuppose = new ArrayList<>();
     private List<Integer> variantResult = new ArrayList<>();
@@ -25,6 +25,7 @@ public class TOTO extends TotoPoint {
     public TOTO() {}
 
     public void play() throws IOException {
+        this.CIRCULATION++;
         setResult();
         setYourSuppose();
         writeResult(this.variant, this.result);
@@ -59,7 +60,7 @@ public class TOTO extends TotoPoint {
 
         Scanner scanner = new Scanner(System.in);
         System.out.println();
-        System.out.printf("%s (%d-и) %s", "Какъв e резултата от последният", CIRCULATION, "тираж: ");
+        System.out.printf("%s (%d-и) %s", "Какъв e резултата от последният", this.CIRCULATION, "тираж: ");
         String[] input = scanner.nextLine().trim().split(", ");
         boolean isIt = digitVerification(input);
 
@@ -70,7 +71,7 @@ public class TOTO extends TotoPoint {
             input = scanner.nextLine().trim().split(", ");
             if (digitVerification(input)) isIt = true;
         }
-        CIRCULATION++;
+
         this.result = getDigitFromInput(input);
         return this.result;
     }
@@ -94,7 +95,6 @@ public class TOTO extends TotoPoint {
     }
 
     private boolean isADoubleDigits(String input) {
-        boolean isADigit = false;
         int count = 0;
 
         for (int i = 0; i < input.length(); i++) {
@@ -116,7 +116,6 @@ public class TOTO extends TotoPoint {
     public void setYourSuppose() {
 
         Scanner scanner = new Scanner(System.in);
-        boolean condition = false;
 
         System.out.print("\nИграем ли?: (y / n) ");
         String answer = scanner.nextLine().trim();
