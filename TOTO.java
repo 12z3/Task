@@ -23,7 +23,7 @@ public class TOTO extends TotoPoint {
     String yourChoice = "";
 
     public TOTO() {}
-    
+
     public void play() throws IOException {
         setResult();
         setYourSuppose();
@@ -31,7 +31,6 @@ public class TOTO extends TotoPoint {
         printToto();
     }
 
-    //TODO: Оправи го, че е меко  казано Интересно.
     public List<Integer> getResult() {
         if (this.result == null) {
             System.out.println("Въведи резултата. Не се Ослушвай!");
@@ -39,7 +38,6 @@ public class TOTO extends TotoPoint {
         return this.result;
     }
 
-    //TODO: Виж какво пише отгоре.
     public List<Integer> getYourSuppose() {
         return this.yourSuppose;
     }
