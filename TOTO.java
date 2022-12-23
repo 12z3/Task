@@ -9,16 +9,6 @@ public class TOTO extends TotoPoint {
     // TODO: Трябват: Метод за сравняване на резултатите.
     //                Метод за записване във файл (или файлове в зависимост от деня на залога).
 
-
-    public static void main(String[] args) {
-        TOTO toto = new TOTO();
-
-        toto.setResult();
-        toto.setYourSuppose();
-        toto.printToto();
-
-    }
-
     private List<Integer> result = new ArrayList<>();
     private List<Integer> yourSuppose = new ArrayList<>();
 
@@ -49,9 +39,10 @@ public class TOTO extends TotoPoint {
 
     public List<Integer> setResult() {
 
-        System.out.print("Валидни числа са всички положителни Двуцифрени (12) числа " +
-                "от 1 до 49 разделени с ', ' \n" +
-                "Комбинациите от сорта: (1а,а1,  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
+        System.out.print("-> Валидни числа са всички положителни Двуцифрени (12) числа " +
+                "от 1 до 49 разделени с запетая и интервал. ', ' \n" +
+                "Комбинациите от сорта: (1а,b3, г6  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
+
 
         Scanner scanner = new Scanner(System.in);
         System.out.println();
@@ -113,7 +104,7 @@ public class TOTO extends TotoPoint {
         Scanner scanner = new Scanner(System.in);
         boolean condition = false;
 
-        System.out.print("Играем ли?: (y / n) ");
+        System.out.print("\nИграем ли?: (y / n) ");
         String answer = scanner.nextLine().trim();
 
         while (!answer.equalsIgnoreCase("y")
