@@ -12,7 +12,7 @@ import java.util.Random;
 public class TotoPoint {
     public static void main(String[] args) throws IOException {
 
-        //matchCheckers(getListsOfDigits(), 11);
+        //matchCheckers(getFinalListOfNumbers(), 11);
         //writeToFile(matchCheckers(memo,11));
 
         System.out.println(getFinalListOfNumbers());
@@ -70,7 +70,7 @@ public class TotoPoint {
                 }
             }
         }
-        //for (int el: a) System.out.print(el + " ");
+        //for (int el: listOfDigits) System.out.print(el + " ");
         return listOfDigits;
     }
 
@@ -94,9 +94,9 @@ public class TotoPoint {
                     list.get(i).remove(j + 1);                               // Премахва 11 от позиция j + 1
                     for (int k = 0; k < list.get(i).size(); k++) {
                         if (list.get(i).get(k) == digitA) {
-                            digitA = rnd.nextInt(1, 50);
-                            list.get(i).add(j, digitA);                            // Добавя digit на позиция j
-                            list.get(i).remove(j + 1);                       // Премахва 11 от позиция j + 1
+                            digitA = rnd.nextInt(1, 50);    // k е позоцията на която има съвпадение
+                            list.get(i).add(k, digitA);                            // Добавя digit на позиция k
+                            list.get(i).remove(k + 1);                       // Премахва 11 от позиция k + 1
                         }
                     }
                     matcher.add(j, 1);
@@ -110,7 +110,7 @@ public class TotoPoint {
         for (List<Integer> e : matchers) System.out.print(e + " ");
         System.out.println();
         for (List<Integer> e : list) System.out.print(e + " ");
-        writeToFile(list, matchers, tmp);
+       // writeToFile(list, matchers, tmp);
         return matchers;
     }
 
