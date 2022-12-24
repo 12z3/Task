@@ -15,7 +15,7 @@ public class TOTO extends TotoPoint {
     //                Метод за записване във файл (или файлове в зависимост от деня на залога).
 
     /**
-     * Днешна дата: 
+     * Днешна дата:
      * Номер на тираж:
      * Резултат от тиража:
      * Твоят залог:
@@ -66,27 +66,31 @@ public class TOTO extends TotoPoint {
                 "от 1 до 49 разделени с запетая и интервал (', ') - (6, 15, 18, 23, 25, 39). \n" +
                 "-> Комбинации от сорта: (1а,b3, г6  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
 
-
         Scanner scanner = new Scanner(System.in);
         System.out.println();
         System.out.printf("%s (%d-и) %s", "Какъв e резултата от последният", this.CIRCULATION, "тираж: ");
+
         String[] input = scanner.nextLine().trim().split(", ");
-        boolean isIt = digitVerification(input);
+        boolean isIt = inputVerification(input);
 
         while (!isIt) {
             System.out.print("ЗаПри се Вихъре. " +
                     "Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61'." +
                     "\n" + "Дай пак: ");
             input = scanner.nextLine().trim().split(", ");
-            if (digitVerification(input)) isIt = true;
+            if (inputVerification(input)) isIt = true;
         }
 
         this.result = getDigitFromInput(input);
         return this.result;
     }
 
+    private boolean inputVerification(String[] input) {
+        return isNotAString(input) && (input.length == 6);
+    }
+
     private boolean isNotAString(String[] input) {                       // alskjdlaks, sa - 22, a
-        boolean isNotAString = false;                                    // 12, 23, 13, 15, 34, 56
+        boolean isNotAString = false;                                    // 12, 23, 13, 15, 34, as
         for (int i = 0; i < input.length; i++) {                         // asd,as, 12, wewewew, -98, d
             if ((input[i].length() <= 2)) {
                 if (isADoubleDigits(input[i])) {                         // next: 2022 12 25 18 45
@@ -97,29 +101,24 @@ public class TOTO extends TotoPoint {
                             break;                                       //  -> if (el == j) false break;
                         }
                     }
-                }
+                } else return false;
             } else return false;
         }
         return isNotAString;
     }
 
-    private boolean isADoubleDigits(String input) {
+    private boolean isADoubleDigits(String input) {                      // 12
         int count = 0;
-
         for (int i = 0; i < input.length(); i++) {
             for (int j = 49; j <= 57; j++) {
                 int el = (int) input.charAt(i);
-                if (el == j && el > 0) {
+                if (el == j) {
                     count++;
                     break;
                 }
             }
         }
         return count == input.length();
-    }
-
-    private boolean digitVerification(String[] input) {
-        return isNotAString(input) && (input.length == 6);
     }
 
     public void setYourSuppose() {
