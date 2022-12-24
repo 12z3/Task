@@ -94,7 +94,7 @@ public class GenerateUniqueTotoList extends TotoPoint {
                 if (el1 == el2) {
                     list.get(i).remove(j);
                     list.get(i).add(j, rnd.nextInt(1, 50));
-                    for (int k = 0; k < list.get(i).size(); k++) {
+                    for (int k = 0; k < list.get(i).size(); k++) {          // Търси дали новото се среща в j-я лист.
                         int el3 = list.get(i).get(k);
                         if (j != k && (Objects.equals(list.get(i).get(j), list.get(i).get(k)))) {
                             list.get(i).remove(j);
