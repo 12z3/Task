@@ -52,14 +52,6 @@ public class TOTO extends TotoPoint {
         return this.yourSuppose;
     }
 
-    private List<Integer> getDigitFromInput(String[] input) {                 // TODO: Обмисло го все пак.
-        List<Integer> digits = new ArrayList<>();
-        for (int i = 0; i < input.length; i++) {
-            digits.add(Integer.parseInt(input[i]));
-        }
-        return digits;
-    }
-
     public List<Integer> setResult() {
 
         System.out.print("-> Валидни числа са всички положителни Двуцифрени (12) числа " +
@@ -85,20 +77,28 @@ public class TOTO extends TotoPoint {
         return this.result;
     }
 
+    private List<Integer> getDigitFromInput(String[] input) {                 // TODO: Обмисло го все пак.
+        List<Integer> digits = new ArrayList<>();
+        for (int i = 0; i < input.length; i++) {
+            digits.add(Integer.parseInt(input[i]));
+        }
+        return digits;
+    }
+
     private boolean inputVerification(String[] input) {
         return isNotAString(input) && (input.length == 6);
     }
 
     private boolean isNotAString(String[] input) {                       // alskjdlaks, sa - 22, a
-        boolean isNotAString = false;                                    // 12, 23, 13, 15, 34, as
+        boolean isNotAString = true;                                     // 12, 7, re, 15, 34, -44
         for (int i = 0; i < input.length; i++) {                         // asd,as, 12, wewewew, -98, d
-            if ((input[i].length() <= 2)) {
+            if ((input[i].length() <= 2)) {                              // 12, 7, 13, 15, 34, 44
                 if (isADoubleDigits(input[i])) {                         // next: 2022 12 25 18 45
                     int el = Integer.parseInt(input[i]);
                     for (int j = 58; j <= 126; j++) {
-                        if (el != j) {                                   // TODO: Виж условието: if (el != j)
-                            isNotAString = true;                         //  Идеята е да не минава през целия цикъл -
-                            break;                                       //  -> if (el == j) false break;
+                        if (el == j) {                               // TODO: Стопира ако намери буква в "el".
+                            isNotAString = false;                    //       Идеята е да не минава през целия цикъл
+                            break;
                         }
                     }
                 } else return false;
@@ -107,7 +107,7 @@ public class TOTO extends TotoPoint {
         return isNotAString;
     }
 
-    private boolean isADoubleDigits(String input) {                      // 12
+    private boolean isADoubleDigits(String input) {                      // 12, ad
         int count = 0;
         for (int i = 0; i < input.length(); i++) {
             for (int j = 49; j <= 57; j++) {
