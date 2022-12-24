@@ -14,27 +14,36 @@ public class TOTO extends TotoPoint {
     // TODO: Трябват: Метод за сравняване на резултатите.
     //                Метод за записване във файл (или файлове в зависимост от деня на залога).
 
+    /**
+     * Днешна дата: 
+     * Номер на тираж:
+     * Резултат от тиража:
+     * Твоят залог:
+     */
+
     private final int TODAY_CIRCULATION = 101;
     private int CIRCULATION = TODAY_CIRCULATION;
     private List<Integer> result = new ArrayList<>();
     private List<Integer> yourSuppose = new ArrayList<>();
     private List<Integer> variantResult = new ArrayList<>();
-    private List<List<Integer>> variant = new ArrayList<>();
-    String yourChoice = "";
+    private List<List<Integer>> variants = new ArrayList<>();
+    String yourVariantChoice = "";
 
-    public TOTO() {}
+    public TOTO() {
+    }
 
     public void play() throws IOException {
         this.CIRCULATION++;
         setResult();
         setYourSuppose();
-        writeResult(this.variant, this.result);
+        writeResult(this.variants, this.result);
         printToto();
     }
 
     public List<Integer> getResult() {
-        if (this.result == null) {
+        while (this.result == null) {
             System.out.println("Въведи резултата. Не се Ослушвай!");
+            this.result = this.setResult();
         }
         return this.result;
     }
@@ -43,7 +52,7 @@ public class TOTO extends TotoPoint {
         return this.yourSuppose;
     }
 
-    private List<Integer> getDigitFromInput(String[] input) {
+    private List<Integer> getDigitFromInput(String[] input) {                 // TODO: Обмисло го все пак.
         List<Integer> digits = new ArrayList<>();
         for (int i = 0; i < input.length; i++) {
             digits.add(Integer.parseInt(input[i]));
@@ -54,8 +63,8 @@ public class TOTO extends TotoPoint {
     public List<Integer> setResult() {
 
         System.out.print("-> Валидни числа са всички положителни Двуцифрени (12) числа " +
-                "от 1 до 49 разделени с запетая и интервал (', '). \n" +
-                "Комбинациите от сорта: (1а,b3, г6  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
+                "от 1 до 49 разделени с запетая и интервал (', ') - (6, 15, 18, 23, 25, 39). \n" +
+                "-> Комбинации от сорта: (1а,b3, г6  ааа, -98, ЗЯхF, 654, -1) се приемат за невалидни!\n");
 
 
         Scanner scanner = new Scanner(System.in);
@@ -77,15 +86,15 @@ public class TOTO extends TotoPoint {
     }
 
     private boolean isNotAString(String[] input) {                       // alskjdlaks, sa - 22, a
-        boolean isNotAString = false;                                    // 12, 23, 12, 12, 34, 56
+        boolean isNotAString = false;                                    // 12, 23, 13, 15, 34, 56
         for (int i = 0; i < input.length; i++) {                         // asd,as, 12, wewewew, -98, d
             if ((input[i].length() <= 2)) {
                 if (isADoubleDigits(input[i])) {                         // next: 2022 12 25 18 45
                     int el = Integer.parseInt(input[i]);
                     for (int j = 58; j <= 126; j++) {
-                        if (el != j) {
-                            isNotAString = true;
-                            break;
+                        if (el != j) {                                   // TODO: Виж условието: if (el != j)
+                            isNotAString = true;                         //  Идеята е да не минава през целия цикъл -
+                            break;                                       //  -> if (el == j) false break;
                         }
                     }
                 }
@@ -127,24 +136,24 @@ public class TOTO extends TotoPoint {
         }
 
         System.out.printf("%s", "Вариантите са три: ");
-        this.variant = getFinalListOfNumbers();
-        for (List<Integer> el : this.variant) {
+        this.variants = getFinalListOfNumbers();
+        for (List<Integer> el : this.variants) {
             Collections.sort(el);
         }
         System.out.print("Избери между 1, 2, 3: ");
 
-        this.yourChoice = scanner.nextLine();
-        while (!this.yourChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
-                !this.yourChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
-                !this.yourChoice.equalsIgnoreCase("3")) {     // while търси true;
+        this.yourVariantChoice = scanner.nextLine();
+        while (!this.yourVariantChoice.equalsIgnoreCase("1") &&      // -> false == на 1, 2 или 3
+                !this.yourVariantChoice.equalsIgnoreCase("2") &&     // -> true != от 1, 2 или 3
+                !this.yourVariantChoice.equalsIgnoreCase("3")) {     // while търси true;
             System.out.print("Избери между 1, 2 и 3 вариант: ");     // true && true = true; true && false = false;
-            yourChoice = scanner.nextLine();
+            this.yourVariantChoice = scanner.nextLine();
         }
 
-        switch (yourChoice) {
-            case "1" -> this.variantResult = this.variant.get(0);
-            case "2" -> this.variantResult = this.variant.get(1);
-            case "3" -> this.variantResult = this.variant.get(2);
+        switch (yourVariantChoice) {
+            case "1" -> this.variantResult = this.variants.get(0);
+            case "2" -> this.variantResult = this.variants.get(1);
+            case "3" -> this.variantResult = this.variants.get(2);
         }
         Collections.sort(this.variantResult);
         System.out.println("Избрал си: " + variantResult.toString() + "\n");
@@ -155,7 +164,7 @@ public class TOTO extends TotoPoint {
         Collections.sort(this.result);
         Collections.sort(this.yourSuppose);
         System.out.printf("Резултата от последният тираж е:  %s. \n" +
-                "Залогът, който си избрал е вариант: %s %s ", this.result, this.yourChoice, this.yourSuppose);
+                "Залогът, който си избрал е вариант: %s %s ", this.result, this.yourVariantChoice, this.yourSuppose);
     }
 
     private void writeResult(List<List<Integer>> variants, List<Integer> lastResult) {
@@ -181,14 +190,15 @@ public class TOTO extends TotoPoint {
 
             // writer.write(String.valueOf(timeAndData()));
             writer.newLine();
+            writer.write("Вариантите са три: \n");
             for (List<Integer> el : variants) {
                 writer.write(el.toString() + "\n");
             }
-            writer.append("------------------------------------" + "\n");
-            writer.write("Избрал си вариант: " + this.yourChoice
-                    + " " + this.yourSuppose.toString() + "\n"
+            writer.append("----------------------------------------------" + "\n");
+            writer.write("Избрал си вариант " + this.yourVariantChoice + ": " +
+                    this.yourSuppose.toString() + "\n"
                     + "Последен тираж: " + lastResult.toString() + "\n");
-            writer.append("------------------------------------" + "\n");
+            writer.append("----------------------------------------------" + "\n");
 //            writer.newLine();
 
             LocalDateTime resultLDT = getLocalDateTime();
@@ -222,7 +232,7 @@ public class TOTO extends TotoPoint {
     }
 
     public static String whenTotoTimeIs(LocalDateTime timeOfToto) {
-        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч ");
+        DateTimeFormatter formatDate = DateTimeFormatter.ofPattern("dd MMM yyyy, E - a c 'ден:' HH:hh:ss ч. ");
 
         LocalDateTime now = LocalDateTime.now();
 
@@ -256,11 +266,15 @@ public class TOTO extends TotoPoint {
 //            case MONDAY -> day.;
 //        }
 
+        int dDay = count;
+        String sDay = " дни ";
+        if (dDay == 1) sDay = " ден ";
+
         return ("Днес е: " + now.format(formatDate) + "\n"
                 + "До следващият тираж остават: "
-                + count + " дни (ден: " + timeOfToto.getDayOfWeek() + ") - "
+                + count + sDay + "(денят е: " + timeOfToto.getDayOfWeek() + ") - "
                 + (dHours + " часа " + "и "
-                + (dMins + " минути"))
+                + (dMins + " минути."))
                 + "\n");
     }
 }
