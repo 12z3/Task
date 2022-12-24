@@ -27,9 +27,32 @@ public class TOTO extends TotoPoint {
     private List<Integer> yourSuppose = new ArrayList<>();
     private List<Integer> variantResult = new ArrayList<>();
     private List<List<Integer>> variants = new ArrayList<>();
+
+    protected int counter = 0;
+    private final String MESSAGE1 = "Нема да се плашиш само... Продължавай.";
+    private final String MESSAGE2 = "Имаш %d съвпадения: ";
+    private final String MESSAGE3 = "Имаш %d съвпадение: ";
     String yourVariantChoice = "";
 
     public TOTO() {
+    }
+
+    protected void totoPlay( ) throws IOException {
+        TOTO toto = new TOTO();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Залагаме или проверяваме резултат? (p / c): ");
+        String answer = scanner.nextLine().trim();
+        while (!answer.equalsIgnoreCase("p")
+                && !answer.equalsIgnoreCase("c")) {
+            System.out.print("Айде пак се почна....  (p / c) ?: ");
+            answer = scanner.nextLine().trim();
+        }
+
+        if (answer.equalsIgnoreCase("p")) {
+            toto.play();
+        } else if (answer.equalsIgnoreCase("c")) {
+            toto.checkResult();
+        }
     }
 
     public void play() throws IOException {
@@ -38,6 +61,10 @@ public class TOTO extends TotoPoint {
         setYourSuppose();
         writeResult(this.variants, this.result);
         printToto();
+    }
+
+    public void checkResult() {
+        printCheckedResult(cherResults(this.result, this.yourSuppose), this.counter);
     }
 
     public List<Integer> getResult() {
@@ -67,12 +94,11 @@ public class TOTO extends TotoPoint {
 
         while (!isIt) {
             System.out.print("ЗаПри се Вихъре. " +
-                    "Трябва да бъде нещо от сорта: '1, 12, 34, 47, 53, 61'." +
+                    "Трябва да бъде нещо от сорта: 6, 15, 18, 23, 25, 39" +
                     "\n" + "Дай пак: ");
             input = scanner.nextLine().trim().split(", ");
             if (inputVerification(input)) isIt = true;
         }
-
         this.result = getDigitFromInput(input);
         return this.result;
     }
@@ -164,6 +190,79 @@ public class TOTO extends TotoPoint {
         Collections.sort(this.yourSuppose);
         System.out.printf("Резултата от последният тираж е:  %s. \n" +
                 "Залогът, който си избрал е вариант: %s %s ", this.result, this.yourVariantChoice, this.yourSuppose);
+    }
+
+
+    protected List<Integer> cherResults(List<Integer> result, List<Integer> suppose) {
+        Scanner scanner = new Scanner(System.in);
+
+        //TODO: Валидирай Input!
+        System.out.print("Въведи последният резултат от тиража: ");
+        String[] resInput = scanner.nextLine().trim().split(", ");   // 112, 12, aa,
+        result = getDigitFromInput(resInput);
+
+        System.out.print("Въведи твоят залог: ");
+        String[] suppInput = scanner.nextLine().trim().split(", ");
+        suppose = getDigitFromInput(suppInput);
+
+        List<Integer> tmp = new ArrayList<>();
+        int count = 0;
+        boolean isMatch = false;
+        for (int i = 0; i < result.size(); i++) {
+            isMatch = false;
+            count = 0;
+            int el1 = result.get(i);
+            for (int j = 0; j < suppose.size(); j++) {
+                int el2 = suppose.get(j);
+                if (el1 == el2) {
+                    count++;
+                    isMatch = true;
+                }
+            }
+            if (count > 1) {
+                System.out.println("Не може да има повече от едно съвпадение....");
+                return null;
+            }
+            this.counter += count;
+            if (isMatch) tmp.add(el1);
+        }
+        return tmp;
+    }
+
+    //TODO: Оправи си Логиката....
+    protected void printCheckedResult(List<Integer> tmp, int counter) {
+        if (counter < 0) {
+            System.out.println("ERROR < 0");                // MESSAGE1 = "Нема да се плашиш само... Продължавай.";
+            return;                                         // MESSAGE2 = "Имаш %d съвпадения: ";
+        }
+        if (counter ==  1) {
+            System.out.println("\n" + this.MESSAGE1);
+            System.out.printf(this.MESSAGE3, counter);
+            printListResult(tmp);
+            return;
+        }
+
+        if (counter > 1 && counter < 4) {
+            System.out.println("\n" + this.MESSAGE1);
+            System.out.printf(this.MESSAGE2, counter);
+            printListResult(tmp);
+        } else if (counter == 0) {
+            System.out.println(this.MESSAGE1);
+        } else {
+            System.out.printf("\n" + this.MESSAGE2, counter);
+            printListResult(tmp);
+        }
+
+    }
+
+    private void printListResult(List<Integer> tmp) {
+        for (int i = 0; i < tmp.size(); i++) {
+            if (tmp.get(i) != 0 && i < tmp.size() - 1) {
+                System.out.print(tmp.get(i) + ", ");
+            } else if (i == tmp.size() - 1) {
+                System.out.println(tmp.get(i) + ".");
+            }
+        }
     }
 
     private void writeResult(List<List<Integer>> variants, List<Integer> lastResult) {
@@ -265,9 +364,8 @@ public class TOTO extends TotoPoint {
 //            case MONDAY -> day.;
 //        }
 
-        int dDay = count;
         String sDay = " дни ";
-        if (dDay == 1) sDay = " ден ";
+        if (count == 1) sDay = " ден ";
 
         return ("Днес е: " + now.format(formatDate) + "\n"
                 + "До следващият тираж остават: "
