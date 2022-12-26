@@ -48,20 +48,20 @@ public class SearchDuplicates {
         for (int el : matchesArr) System.out.print(el + " ");
     }
 
-    private static int findDuplicated(int[] arr, int el1, int index) {
+    private static int findDuplicated(int[] arr, int el1, int fromIndex) {
         int matches = 1;
-        for (int i = index; i < arr.length; i++) {
+        for (int i = fromIndex; i < arr.length; i++) {
             int el2 = arr[i];
             if (el1 == el2) {
                 matches++;
+                fromIndex++;
             }
-            index++;
         }
         return matches;
     }
 
-    private static boolean isChecked(int[] arr, int el, int index) {
-        for (int j = index - 1; j >= 0; j--) {
+    private static boolean isChecked(int[] arr, int el, int fromIndex) {
+        for (int j = fromIndex - 1; j >= 0; j--) {
             if (el == arr[j]) return true;
         }
         return false;
