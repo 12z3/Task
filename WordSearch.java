@@ -6,12 +6,27 @@ import java.util.*;
 
 public class WordSearch extends Methods {
 
+    // Word 'aba' is matched 4 times in text: ababababa
+    // Char 'a' is matched 5 times in text: ababababa
+
+    // That words are: 'qikar' and 'picas.'
+    // Different symbol is:
+    // Index: 0, Char: q
+    // Index: 2, Char: k
+    // Index: 4, Char: r
+    // Are that words same?: false
+
     public static void main(String[] args) {
 
-        String line = "astasta la vista babyastasta";
-        String word = "asta";
 
-        String wordA = "lijap";
+
+        //String line = "astasta la vista babyastasta";
+        //String word = "asta";
+
+        String line = "ababababa";
+        String word = "aba";
+
+        String wordA = "qikar";
         String wordB = "picas";
         char a = 'a';
 
@@ -71,7 +86,6 @@ public class WordSearch extends Methods {
         }
 
         for (int i = 0; i < wordA.length(); i++) {
-            isNoMatch = true;
             char el1 = aWord.pop();
             char el2 = bWord.pop();
             if (el1 != el2) {
@@ -80,14 +94,13 @@ public class WordSearch extends Methods {
             }
         }
 
+        System.out.printf("%nThat words are: '%s' and '%s.'%n", wordA, wordB);
         if (!isNoMatch) {
-            System.out.printf("%nThat words are: '%s' and '%s'%n", wordA, wordB);
             System.out.println("Different symbol is: ");
             for (Map.Entry<Integer, Character> el : different.entrySet()) {
                 System.out.printf("Index: %d, Char: %c%n", el.getKey(), el.getValue());
             }
         }
-
         return isNoMatch;
     }
 }
