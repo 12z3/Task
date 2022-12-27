@@ -10,13 +10,14 @@ public class Brackets {
         String input = "1 *2+ (3 - 5 *2 + 4/2 + 2*6 - 6/3)+ 3* (4+5*6) +..... ((3-2)*5)";
         ArrayDeque<String> a1 = new ArrayDeque<>();
 
-        String equation = createdEquation(input);
+        StringBuilder equation = (createdEquation(input));
         System.out.println(equation);
 
         idx1 = getBracketsIndexes(equation).get(0);
         idx2 = getBracketsIndexes(equation).get(1);
-        String equ1 = getEquationIntoBracketsIndexes(equation);
-        System.out.println(equ1 + " = " + calculateEquation(equ1));
+
+        StringBuilder equ1 = (getEquationIntoBrackets(equation));
+        System.out.println(equ1 + " = " + calculateEquation(new StringBuilder(equ1)));
         System.out.println(equ1);
 
         int result = 0;
@@ -32,16 +33,14 @@ public class Brackets {
 //        return multiPidx;
 //    }
 
-    private static int findIndexOfOperation(String input, String operation, int index) {
-        int multiPidx = 0;
-        multiPidx = input.indexOf(operation, index);
-        if (multiPidx != -1) {
-            return multiPidx;
-        }
-        return multiPidx;
+    private static int findIndexOfOperation(StringBuilder input, String operation, int index) {
+        int multiPIdx = 0;
+        multiPIdx = input.indexOf(operation, index);
+        return multiPIdx;
     }
-
-    private static List<Integer> getBracketsIndexes(String equation) {
+                                                  // "1 *2+ (3 - 5 *2 + 4/2 + 2*6 - 6/3)+ 3* (4+5*6) +..... ((3-2)*5)"
+                                                  // ... грешно брои скобите
+    private static List<Integer> getBracketsIndexes(StringBuilder equation) {      // <- оправи го
         List<Integer> bracketsPositions = new ArrayList<>();
         int idx1 = 0, idx2 = 0;
         for (int i = 0; i < equation.length(); i++) {
@@ -53,36 +52,36 @@ public class Brackets {
         return bracketsPositions;
     }
 
-    private static String getEquationIntoBracketsIndexes(String equation) {
-        StringBuilder equationIntoBracketsIndexes = new StringBuilder();
+    private static StringBuilder getEquationIntoBrackets(StringBuilder equation) {
+        StringBuilder equationIntoBrackets = new StringBuilder();
         int index1 = getBracketsIndexes(equation).get(0) + 1; // Това е вярно само за случая когато има само
         int index2 = getBracketsIndexes(equation).get(1);     // * и / -> 3 - 5*2 + 4/2
-        // 3 - 5*2 + 4/2 + 2*6 - 6/3 се чупи.
+
         for (int i = index1, j = 0; i < index2; i++, j++) {
-            equationIntoBracketsIndexes.append(equation.charAt(i));
+            equationIntoBrackets.append(equation.charAt(i));
+
         }
-        return equationIntoBracketsIndexes.toString();
+        return createdEquation(String.valueOf(equationIntoBrackets));
     }
 
-    private static int calculateEquation(String equation) {
-        Map<Integer, Integer> multiArr = new TreeMap<>();
-        Map<Integer, Integer> dervArr = new TreeMap<>();
-        int counterM = 0, counterD = 0, indexMM = 0, indexDD = 0;
+    private static int calculateEquation(StringBuilder equation) {
+        Map<Integer, Integer> multiMap = new TreeMap<>();
+        Map<Integer, Integer> dervMap = new TreeMap<>();
 
-        ArrayDeque<Integer> ard1 = new ArrayDeque();
+        ArrayDeque<Integer> ard = new ArrayDeque();
         ArrayDeque<Integer> ardResult = new ArrayDeque();              // 0 1 234 5 6 7
         List<Integer> indexes = new ArrayList<>();                     // 3 - 5*2 + 3 - 1 + 4/2 + 1 + 2 + 2*6 + 6 - 6/3
         int mediumResultM = 0, mediumResultD = 0, result = 0;          // 3 - 5*2 + 4/2
         char charX;
 
-        for (int i = 0; i < equation.length(); i++) {
+        for (int i = 0, indexMM = 0, indexDD = 0, counterM = 0, counterD = 0; i < equation.length(); i++) {
             int indexM = findIndexOfOperation(equation, "*", indexMM);
             if (indexM != -1) {
                 counterM++;
                 int x1 = Integer.parseInt(String.valueOf(equation.charAt(indexM - 1)));
                 int x2 = Integer.parseInt(String.valueOf(equation.charAt(indexM + 1)));
                 mediumResultM = x1 * x2;
-                multiArr.put(indexM -1, mediumResultM);
+                multiMap.put(indexM -1, mediumResultM);
                 indexMM = ++indexM;
             }
             int indexD = findIndexOfOperation(equation, "/", indexDD);
@@ -91,7 +90,7 @@ public class Brackets {
                 int x1 = Integer.parseInt(String.valueOf(equation.charAt(indexD - 1)));
                 int x2 = Integer.parseInt(String.valueOf(equation.charAt(indexD + 1)));
                 mediumResultD = x1 / x2;
-                dervArr.put(indexD -1, mediumResultD);
+                dervMap.put(indexD -1, mediumResultD);
                 indexDD = ++ indexD;
             }
         }
@@ -119,28 +118,28 @@ public class Brackets {
         for (int i = 0; i < equation.length(); i++) {                  // 3 - 5*2 + 3 - 1 + 4/2 + 1 + 2 + 2*6 + 6 - 6/3
             charX = equation.charAt(i);
             if (Character.isDigit(charX)) {
-                ard1.push(Integer.parseInt(String.valueOf(charX)));
+                ard.push(Integer.parseInt(String.valueOf(charX)));
             } else {
                 switch (charX) {
                     case '+' -> {
-                        //result = ard1.pop() +
+                        //result = ard.pop() +
                         i += 3;
-                        ard1.push(result);
+                        ard.push(result);
                     }
                     case '-' -> {
-                        //result = ard1.pop() -
+                        //result = ard.pop() -
                         i += 3;
-                        ard1.push(result);
+                        ard.push(result);
                     }
                 }
             }
         }
 
 
-        return ard1.pop();
+        return ard.pop();
     }
 
-    private static String createdEquation(String input) {
+    private static StringBuilder createdEquation(String input) {
         StringBuilder equation = new StringBuilder();
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) != ' ' && input.charAt(i) != '.') {
@@ -148,6 +147,6 @@ public class Brackets {
 
             }
         }
-        return equation.toString();
+        return equation;
     }
 }
