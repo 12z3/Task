@@ -27,6 +27,8 @@ public class IntoBrackets {
         intoBrackets(expression2);
     }
 
+    // Пазя индексите + 1 на "(" и push-ам. Когато стигна индекса "i" на ")" през for (int j = tmp.pop(); j < i ; j++)
+    // печатам всичко между тях.
     private static void intoBrackets(String expression){                             // (1+(2*(3+4))+6)
         ArrayDeque<Integer> tmp = new ArrayDeque<>();
         for (int i = 0; i < expression.length(); i++) {
