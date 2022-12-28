@@ -17,7 +17,7 @@ public class IntoBrackets {
         String expression4 = "(1+(2*(3+4))+6)";
         String expression1 = "1+(2*(3+4))+6";
 
-        // Тук -> "(1+(2*(3+4)/(2*8))+6)" се Чупи ;)
+        // Тук -> "(1+(2*(3+4)/(2*8))+6)" се Чупи ;) не броиш никъде скобите.
         boolean condition = true;
         while (condition) {
             String tmp = getEquationsIntoBrackets(expression);
@@ -40,12 +40,12 @@ public class IntoBrackets {
             if (expression.charAt(i) == ' ') continue;
             if (expression.charAt(i) == '(') tmp.push(i + 1);
             if (expression.charAt(i) == ')') {
-                for (int j = tmp.pop(); j < i; j++) {
-                    System.out.print(expression.charAt(j));
-                }
-                System.out.println();
+//                for (int j = tmp.pop(); j < i; j++) {
+//                    System.out.print(expression.charAt(j));
+//                }
+                String result = expression.substring(tmp.pop(), i);
+                System.out.println(result);
             }
-
         }
     }
 
@@ -61,7 +61,7 @@ public class IntoBrackets {
 
         int counter = 0, index = 0;
         boolean condition = true;
-
+//                                                                                // (1+(2*(3+4)/(2*8))+6)
         for (int i = 0; i < exprArr.length; i++) {                                // (1+(2*(3+4))+6)
             if (exprArr[i] == symbolA) {
                 //tmp.push(exprArr[i]);                                           // Най-външните скоби
