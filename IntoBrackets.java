@@ -38,12 +38,12 @@ public class IntoBrackets {
         ArrayDeque<Integer> tmp = new ArrayDeque<>();
         for (int i = 0; i < expression.length(); i++) {
             if (expression.charAt(i) == ' ') continue;
-            if (expression.charAt(i) == '(') tmp.push(i + 1);
+            if (expression.charAt(i) == '(') tmp.push(i + 1);                     // i = 1 -> взима и скобите
             if (expression.charAt(i) == ')') {
 //                for (int j = tmp.pop(); j < i; j++) {
 //                    System.out.print(expression.charAt(j));
-//                }
-                String result = expression.substring(tmp.pop(), i);                 // {fromIndex, toIndex]; <-
+//                }                                           // substring(fromIndex, toIndex) -> {fromIndex, toIndex];
+                String result = expression.substring(tmp.pop(), i);                  // i + 1 -> взима и скобите
                 System.out.println(result);
             }
         }
