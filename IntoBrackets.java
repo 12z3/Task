@@ -44,6 +44,9 @@ public class IntoBrackets {
         }
     }
 
+    // Първи вариант. Това ми дойде първо като стратегия.
+    // Подвърждава факта, за 100-н път, че ако едно решение е сложно -
+    // - следователно Винаги Съществува друго по-прост такова!
     private static String getEquationsIntoBrackets(String expression) {
         StringBuilder result = new StringBuilder();
         ArrayDeque<Character> tmp = new ArrayDeque<>();
