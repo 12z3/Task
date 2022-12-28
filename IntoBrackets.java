@@ -49,9 +49,9 @@ public class IntoBrackets {
         }
     }
 
-    // Първи вариант. Това ми дойде първо като стратегия.
+    // Първи вариант. Това ми дойде първо като стратегия - но се чупи.
     // Подвърждава факта, за 100-н път, че ако едно решение е сложно -
-    // - То Винаги Съществува друго по-прост такова!
+    // - То Винаги Съществува друго по-просто такова!
     private static String getEquationsIntoBrackets(String expression) {
         StringBuilder result = new StringBuilder();
         ArrayDeque<Character> tmp = new ArrayDeque<>();
