@@ -43,7 +43,7 @@ public class IntoBrackets {
 //                for (int j = tmp.pop(); j < i; j++) {
 //                    System.out.print(expression.charAt(j));
 //                }
-                String result = expression.substring(tmp.pop(), i);
+                String result = expression.substring(tmp.pop(), i);                 // {fromIndex, toIndex]; <-
                 System.out.println(result);
             }
         }
