@@ -9,10 +9,15 @@ public class IntoBrackets {
         // 2*(3+4)
         // 3+4
 
-        String expression = "(1+(2*(3+4))+6)";
+
+        String expression = "(1+(2*(3+4)/(2*8))+6)";
+        String expression3 = "(1+(2*(3+4)/(2*8))+6)";
+
         String expression2 = "(1+(2*(3+4))+6)";
+        String expression4 = "(1+(2*(3+4))+6)";
         String expression1 = "1+(2*(3+4))+6";
 
+        // Тук -> "(1+(2*(3+4)/(2*8))+6)" се Чупи ;)
         boolean condition = true;
         while (condition) {
             String tmp = getEquationsIntoBrackets(expression);
@@ -24,18 +29,18 @@ public class IntoBrackets {
         }
 
         System.out.println("Хитро.... ;)");
-        intoBrackets(expression2);
+        intoBrackets(expression3);
     }
 
     // Пазя индексите + 1 на "(" и push-ам. Когато стигна индекса "i" на ")" през "for (int j = tmp.pop(); j < i ; j++)"
     // печатам всичко между тях.
-    private static void intoBrackets(String expression){                             // (1+(2*(3+4))+6)
+    private static void intoBrackets(String expression) {                             // (1+(2*(3+4))+6)
         ArrayDeque<Integer> tmp = new ArrayDeque<>();
         for (int i = 0; i < expression.length(); i++) {
             if (expression.charAt(i) == ' ') continue;
             if (expression.charAt(i) == '(') tmp.push(i + 1);
             if (expression.charAt(i) == ')') {
-                for (int j = tmp.pop(); j < i ; j++) {
+                for (int j = tmp.pop(); j < i; j++) {
                     System.out.print(expression.charAt(j));
                 }
                 System.out.println();
