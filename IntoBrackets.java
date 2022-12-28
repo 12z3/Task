@@ -27,7 +27,7 @@ public class IntoBrackets {
         intoBrackets(expression2);
     }
 
-    // Пазя индексите + 1 на "(" и push-ам. Когато стигна индекса "i" на ")" през for (int j = tmp.pop(); j < i ; j++)
+    // Пазя индексите + 1 на "(" и push-ам. Когато стигна индекса "i" на ")" през "for (int j = tmp.pop(); j < i ; j++)"
     // печатам всичко между тях.
     private static void intoBrackets(String expression){                             // (1+(2*(3+4))+6)
         ArrayDeque<Integer> tmp = new ArrayDeque<>();
@@ -46,7 +46,7 @@ public class IntoBrackets {
 
     // Първи вариант. Това ми дойде първо като стратегия.
     // Подвърждава факта, за 100-н път, че ако едно решение е сложно -
-    // - следователно Винаги Съществува друго по-прост такова!
+    // - То Винаги Съществува друго по-прост такова!
     private static String getEquationsIntoBrackets(String expression) {
         StringBuilder result = new StringBuilder();
         ArrayDeque<Character> tmp = new ArrayDeque<>();
