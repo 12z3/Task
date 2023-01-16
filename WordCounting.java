@@ -6,8 +6,8 @@ import java.util.Map;
 public class WordCounting {
 
     /**
-     Намаира колко пъти всяка една дума се съдържа в текста.
-     Идеята: Търси индекса на " ". Съставя дума и търси колко пъти тази дума се среща в текста.
+     * Намаира колко пъти всяка една дума се съдържа в текста.
+     * Идеята: Търси индекса на " ". Съставя дума и търси колко пъти тази дума се среща в текста.
      */
 
     public static void main(String[] args) {
@@ -18,8 +18,38 @@ public class WordCounting {
         countingWordsInTextA(text);
         System.out.println();
         countingWordsInTextB(text);
+        System.out.println();
+        countingWordsInTextC(text);
 
     }
+
+    private static void countingWordsInTextC(String text) {
+        Map<String, Integer> words = new LinkedHashMap<>();
+        StringBuilder stb = new StringBuilder();
+        int indexFrom = 0, j = 0, index = 0;
+        Integer countThisWord = null;
+
+        String[] word = text.trim().split(" ");
+
+        while (j < word.length) {
+            stb.append(word[j]);
+            if (words.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
+                countThisWord = words.get(stb.toString());
+                countThisWord++;
+            } else {
+                countThisWord = 1;
+                //System.out.println(stb);
+            }
+            words.put(stb.toString(), countThisWord);
+            stb.delete(0, stb.length());
+            j++;
+        }
+        for (Map.Entry<String, Integer> el : words.entrySet()) {
+            System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
+
+        }
+    }
+
 
     private static void countingWordsInTextA(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
@@ -34,10 +64,10 @@ public class WordCounting {
                 stb.append(text.substring(index, indexFrom - 1));
                 index = indexFrom;
 
-                if (words.containsKey(stb.toString())){                          //  if (countThisWord != null)....
+                if (words.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
                     countThisWord = words.get(stb.toString());
                     countThisWord++;
-                    words.put(stb.toString(),countThisWord);
+                    words.put(stb.toString(), countThisWord);
                     stb.delete(0, stb.length());
                 } else {
                     countThisWord = 1;
