@@ -12,9 +12,47 @@ public class WordCounting {
 
     public static void main(String[] args) {
 
-        String text = "You have seen the use of the print and format() seen have methods use" +
-                " to print output the print with have to You formatted numbers print output you ";
+        String text = "You You have numbers seen the use of output the print and format() seen have methods use" +
+                " to print output the print with have to You the formatted numbers print output seen you ";
 
+        countingWordsInTextA(text);
+        //countingWordsInText(text);
+
+    }
+
+    private static void countingWordsInTextA(String text) {
+        Map<String, Integer> words = new LinkedHashMap<>();
+        System.out.println(text.length());
+        int indexFrom = 0, j = 0, countThisWord = 0, index = 0, p = 0, indexA = 0;
+        StringBuilder stb = new StringBuilder();
+
+        while (j < text.length()) {
+            countThisWord = 0;
+            if (text.indexOf(32, indexFrom) != -1) {
+                indexFrom = text.indexOf(32, indexFrom) + 1;
+                stb.append(text.substring(index, indexFrom - 1));
+                index = indexFrom;
+
+                if (words.containsKey(stb.toString())){
+                    countThisWord = words.get(stb.toString());
+                    countThisWord++;
+                    words.put(stb.toString(),countThisWord);
+                    stb.delete(0, stb.length());
+                } else {
+                    countThisWord = 1;
+                    words.put(stb.toString(), countThisWord);
+                    //System.out.println(stb);
+                    stb.delete(0, stb.length());
+                }
+            }
+            j++;
+        }
+        for (Map.Entry<String, Integer> el : words.entrySet()) {
+            System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
+        }
+    }
+
+    private static void countingWordsInText(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
         System.out.println(text.length());
         int indexFrom = 0, j = 0, countThisWord = 0, index = 0, p = 0, indexA = 0;
@@ -26,7 +64,7 @@ public class WordCounting {
                 indexFrom = text.indexOf(32, indexFrom) + 1;                   // indexFrom = 3 + 1 = 4
                 stb.append(text.substring(index, indexFrom - 1));                  // stb = You
                 index = indexFrom;                                                 // index = 4
-                while (p < text.length()) {
+                while (p < text.length()) {                                        // TODO: използвай containsKey()...
                     if (text.indexOf(stb.toString(), indexA) != -1) {
                         countThisWord++;
                         indexA = text.indexOf(stb.toString(), indexA) + 1;
@@ -43,7 +81,5 @@ public class WordCounting {
         for (Map.Entry<String, Integer> el : words.entrySet()) {
             System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
         }
-
-
     }
 }
