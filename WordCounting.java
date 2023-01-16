@@ -24,7 +24,8 @@ public class WordCounting {
     private static void countingWordsInTextA(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
         StringBuilder stb = new StringBuilder();
-        int indexFrom = 0, j = 0, countThisWord = 0, index = 0;
+        int indexFrom = 0, j = 0, index = 0;
+        Integer countThisWord = null;
 
 
         while (j < text.length()) {
@@ -33,7 +34,7 @@ public class WordCounting {
                 stb.append(text.substring(index, indexFrom - 1));
                 index = indexFrom;
 
-                if (words.containsKey(stb.toString())){
+                if (words.containsKey(stb.toString())){                          //  if (countThisWord != null)....
                     countThisWord = words.get(stb.toString());
                     countThisWord++;
                     words.put(stb.toString(),countThisWord);
