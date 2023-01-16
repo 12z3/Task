@@ -26,14 +26,12 @@ public class WordCounting {
     private static void countingWordsInTextC(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
         StringBuilder stb = new StringBuilder();
-        int indexFrom = 0, j = 0, index = 0;
-        Integer countThisWord = null;
+        int countThisWord = 0, j = 0;
 
         String[] word = text.trim().split(" ");
-
         while (j < word.length) {
             stb.append(word[j]);
-            if (words.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
+            if (words.containsKey(stb.toString())) {
                 countThisWord = words.get(stb.toString());
                 countThisWord++;
             } else {
