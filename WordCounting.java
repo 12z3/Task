@@ -16,7 +16,7 @@ public class WordCounting {
                 " to print output the print with have to You the formatted numbers print output seen you ";
 
         countingWordsInTextA(text);
-        //countingWordsInText(text);
+        //countingWordsInTextB(text);
 
     }
 
@@ -52,7 +52,7 @@ public class WordCounting {
         }
     }
 
-    private static void countingWordsInText(String text) {
+    private static void countingWordsInTextB(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
         System.out.println(text.length());
         int indexFrom = 0, j = 0, countThisWord = 0, index = 0, p = 0, indexA = 0;
