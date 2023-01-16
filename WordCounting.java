@@ -16,18 +16,18 @@ public class WordCounting {
                 " to print output the print with have to You the formatted numbers print output seen you ";
 
         countingWordsInTextA(text);
-        //countingWordsInTextB(text);
+        System.out.println();
+        countingWordsInTextB(text);
 
     }
 
     private static void countingWordsInTextA(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
-        System.out.println(text.length());
-        int indexFrom = 0, j = 0, countThisWord = 0, index = 0, p = 0, indexA = 0;
         StringBuilder stb = new StringBuilder();
+        int indexFrom = 0, j = 0, countThisWord = 0, index = 0;
+
 
         while (j < text.length()) {
-            countThisWord = 0;
             if (text.indexOf(32, indexFrom) != -1) {
                 indexFrom = text.indexOf(32, indexFrom) + 1;
                 stb.append(text.substring(index, indexFrom - 1));
@@ -54,9 +54,9 @@ public class WordCounting {
 
     private static void countingWordsInTextB(String text) {
         Map<String, Integer> words = new LinkedHashMap<>();
-        System.out.println(text.length());
-        int indexFrom = 0, j = 0, countThisWord = 0, index = 0, p = 0, indexA = 0;
         StringBuilder stb = new StringBuilder();
+        int indexFrom = 0, j = 0, countThisWord = 0,
+                index = 0, p = 0, indexA = 0;
 
         while (j < text.length()) {                                                // index = indexFrom = 0;
             p = indexA = 0;                                                        // text.indexOf(32, indexFrom) = 3 ->
