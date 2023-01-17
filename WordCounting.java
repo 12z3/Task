@@ -24,33 +24,32 @@ public class WordCounting {
     }
 
     private static void countingWordsInTextC(String text) {
-        Map<String, Integer> words = new LinkedHashMap<>();
+        Map<String, Integer> wordsCounts = new LinkedHashMap<>();
         StringBuilder stb = new StringBuilder();
         int countThisWord = 0, j = 0;
 
         String[] word = text.trim().split(" ");
         while (j < word.length) {
             stb.append(word[j]);
-            if (words.containsKey(stb.toString())) {
-                countThisWord = words.get(stb.toString());
+            if (wordsCounts.containsKey(stb.toString())) {
+                countThisWord = wordsCounts.get(stb.toString());
                 countThisWord++;
             } else {
                 countThisWord = 1;
                 //System.out.println(stb);
             }
-            words.put(stb.toString(), countThisWord);
+            wordsCounts.put(stb.toString(), countThisWord);
             stb.delete(0, stb.length());
             j++;
         }
-        for (Map.Entry<String, Integer> el : words.entrySet()) {
+        for (Map.Entry<String, Integer> el : wordsCounts.entrySet()) {
             System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
 
         }
     }
 
-
     private static void countingWordsInTextA(String text) {
-        Map<String, Integer> words = new LinkedHashMap<>();
+        Map<String, Integer> wordsCounts = new LinkedHashMap<>();
         StringBuilder stb = new StringBuilder();
         int indexFrom = 0, j = 0, index = 0;
         Integer countThisWord = null;
@@ -62,27 +61,27 @@ public class WordCounting {
                 stb.append(text.substring(index, indexFrom - 1));
                 index = indexFrom;
 
-                if (words.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
-                    countThisWord = words.get(stb.toString());
+                if (wordsCounts.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
+                    countThisWord = wordsCounts.get(stb.toString());
                     countThisWord++;
-                    words.put(stb.toString(), countThisWord);
+                    wordsCounts.put(stb.toString(), countThisWord);
                     stb.delete(0, stb.length());
                 } else {
                     countThisWord = 1;
-                    words.put(stb.toString(), countThisWord);
+                    wordsCounts.put(stb.toString(), countThisWord);
                     //System.out.println(stb);
                     stb.delete(0, stb.length());
                 }
             }
             j++;
         }
-        for (Map.Entry<String, Integer> el : words.entrySet()) {
+        for (Map.Entry<String, Integer> el : wordsCounts.entrySet()) {
             System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
         }
     }
 
     private static void countingWordsInTextB(String text) {
-        Map<String, Integer> words = new LinkedHashMap<>();
+        Map<String, Integer> wordsCounts = new LinkedHashMap<>();
         StringBuilder stb = new StringBuilder();
         int indexFrom = 0, j = 0, countThisWord = 0,
                 index = 0, p = 0, indexA = 0;
@@ -100,14 +99,14 @@ public class WordCounting {
                     }
                     p++;
                 }
-                words.put(stb.toString(), countThisWord);
+                wordsCounts.put(stb.toString(), countThisWord);
                 //System.out.println(stb);
                 stb.delete(0, stb.length());
                 countThisWord = 0;
             }
             j++;
         }
-        for (Map.Entry<String, Integer> el : words.entrySet()) {
+        for (Map.Entry<String, Integer> el : wordsCounts.entrySet()) {
             System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
         }
     }
