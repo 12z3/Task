@@ -22,7 +22,7 @@ public class SearchDuplicates {
 
     public static void main(String[] args) {
         int[] a = {19, 1, 3, 3, 4, 5, 2, 1, 3, 4, 1, 3, 5};
-        // = {4, 0, 3, 0, 2, 1, 1, 0, 0, 0, 0};
+        //      = {1   3  4  0  2  2  1  0  0  0  0  0  0 };
 
         searchDuplicates(a);
     }
