@@ -1,9 +1,11 @@
 package task;
 
+import training.Methods;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class StreamArrayComparator {
+public class StreamArrayComparator extends Methods {
 
     /**
      * @WhatIsThis: Arrays.stream(arr11).mapToInt(Integer : : parseInt).sorted().toArray();
@@ -15,6 +17,7 @@ public class StreamArrayComparator {
 
 
     public static void main(String[] args) {
+        timeAndData();
         int[] arr1 = {1, 2, 13, 4, 5};
         int[] arr3 = {1, 2, 3, 4, 5};
         int[] arr2 = {13, 2, 23, 14, 45};
