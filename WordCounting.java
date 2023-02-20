@@ -15,7 +15,12 @@ public class WordCounting {
         String text = "You You have numbers seen the use of output the print and format() seen have methods use" +
                 " to print output the print with have to You the formatted numbers print output seen you ";
 
-        countingWordsInTextA(text);
+//        String text = "Build a strong foundation of knowledge in Java programming! " +
+//                "In this lesson we take a look at lists and their application!";
+
+
+
+        countingWordsInTextCA(text);
         System.out.println();
         countingWordsInTextB(text);
         System.out.println();
@@ -24,22 +29,43 @@ public class WordCounting {
     }
 
     private static void countingWordsInTextC(String text) {
-        Map<String, Integer> wordsCounts = new LinkedHashMap<>();
-        StringBuilder stb = new StringBuilder();
+        Map<String, Integer> wordsCounts = new LinkedHashMap<>();          // Map<Дума, Повторения>
+        StringBuilder thisWord = new StringBuilder();
         int countThisWord = 0, j = 0;
 
-        String[] word = text.trim().split(" ");
-        while (j < word.length) {
-            stb.append(word[j]);
-            if (wordsCounts.containsKey(stb.toString())) {
-                countThisWord = wordsCounts.get(stb.toString());
+        String[] words = text.trim().split(" ");
+        while (j < words.length) {
+            thisWord.append(words[j]);
+            if (wordsCounts.containsKey(thisWord.toString())) {             // Има ли ключ съответстващ на тази дума?
+                countThisWord = wordsCounts.get(thisWord.toString());       // ... дай ми на тази дума повторенията
                 countThisWord++;
             } else {
                 countThisWord = 1;
-                //System.out.println(stb);
+                //System.out.println(thisWord);
             }
-            wordsCounts.put(stb.toString(), countThisWord);
-            stb.delete(0, stb.length());
+            wordsCounts.put(thisWord.toString(), countThisWord);          //  Обново Map-a
+            thisWord.delete(0, thisWord.length());
+            j++;
+        }
+        for (Map.Entry<String, Integer> el : wordsCounts.entrySet()) {
+            System.out.printf("%s -> %d%n", el.getKey(), el.getValue());
+
+        }
+    }
+    private static void countingWordsInTextCA(String text) {
+        Map<String, Integer> wordsCounts = new LinkedHashMap<>();          // Map<Дума, Повторения>
+        int countThisWord = 0, j = 0;
+
+        String[] words = text.trim().split(" ");
+        while (j < words.length) {
+            String currentWord = words[j];
+            if (wordsCounts.containsKey(currentWord)) {             // Има ли ключ съответстващ на тази дума?
+                countThisWord = wordsCounts.get(currentWord);       // ... дай ми на тази дума повторенията
+                countThisWord++;
+            } else {
+                countThisWord = 1;
+            }
+            wordsCounts.put(currentWord, countThisWord);          //  Обново Map-a
             j++;
         }
         for (Map.Entry<String, Integer> el : wordsCounts.entrySet()) {
@@ -50,7 +76,7 @@ public class WordCounting {
 
     private static void countingWordsInTextA(String text) {
         Map<String, Integer> wordsCounts = new LinkedHashMap<>();
-        StringBuilder stb = new StringBuilder();
+        StringBuilder thisWord = new StringBuilder();
         int indexFrom = 0, j = 0, index = 0;
         Integer countThisWord = null;
 
@@ -58,19 +84,19 @@ public class WordCounting {
         while (j < text.length()) {
             if (text.indexOf(32, indexFrom) != -1) {
                 indexFrom = text.indexOf(32, indexFrom) + 1;
-                stb.append(text.substring(index, indexFrom - 1));
+                thisWord.append(text.substring(index, indexFrom - 1));
                 index = indexFrom;
 
-                if (wordsCounts.containsKey(stb.toString())) {                          //  if (countThisWord != null)....
-                    countThisWord = wordsCounts.get(stb.toString());
+                if (wordsCounts.containsKey(thisWord.toString())) {                  //  if (countThisWord != null)....
+                    countThisWord = wordsCounts.get(thisWord.toString());
                     countThisWord++;
-                    wordsCounts.put(stb.toString(), countThisWord);
-                    stb.delete(0, stb.length());
+                    wordsCounts.put(thisWord.toString(), countThisWord);
+                    thisWord.delete(0, thisWord.length());
                 } else {
                     countThisWord = 1;
-                    wordsCounts.put(stb.toString(), countThisWord);
-                    //System.out.println(stb);
-                    stb.delete(0, stb.length());
+                    wordsCounts.put(thisWord.toString(), countThisWord);
+                    //System.out.println(thisWord);
+                    thisWord.delete(0, thisWord.length());
                 }
             }
             j++;
@@ -82,7 +108,7 @@ public class WordCounting {
 
     private static void countingWordsInTextB(String text) {
         Map<String, Integer> wordsCounts = new LinkedHashMap<>();
-        StringBuilder stb = new StringBuilder();
+        StringBuilder thisWord = new StringBuilder();
         int indexFrom = 0, j = 0, countThisWord = 0,
                 index = 0, p = 0, indexA = 0;
 
@@ -90,18 +116,18 @@ public class WordCounting {
             p = indexA = 0;                                                        // text.indexOf(32, indexFrom) = 3 ->
             if (text.indexOf(32, indexFrom) != -1) {                           // -> индекса на " " = 32
                 indexFrom = text.indexOf(32, indexFrom) + 1;                   // indexFrom = 3 + 1 = 4
-                stb.append(text.substring(index, indexFrom - 1));                  // stb = You
+                thisWord.append(text.substring(index, indexFrom - 1));                  // stb = You
                 index = indexFrom;                                                 // index = 4
                 while (p < text.length()) {                                        // TODO: използвай containsKey()...
-                    if (text.indexOf(stb.toString(), indexA) != -1) {
+                    if (text.indexOf(thisWord.toString(), indexA) != -1) {
                         countThisWord++;
-                        indexA = text.indexOf(stb.toString(), indexA) + 1;
+                        indexA = text.indexOf(thisWord.toString(), indexA) + 1;
                     }
                     p++;
                 }
-                wordsCounts.put(stb.toString(), countThisWord);
-                //System.out.println(stb);
-                stb.delete(0, stb.length());
+                wordsCounts.put(thisWord.toString(), countThisWord);
+                //System.out.println(thisWord);
+                thisWord.delete(0, thisWord.length());
                 countThisWord = 0;
             }
             j++;
