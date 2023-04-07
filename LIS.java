@@ -14,6 +14,15 @@ public class LIS extends Methods {
         //ArrayList<Integer> input = new ArrayList<>(List.of(3, 10, 2, 1, 20));
         ArrayList<Integer> input = new ArrayList<>(List.of(7, 3, 5, 8, -1, 0, 6, 7));
         //                                                    3, 5,           6, 7
+
+        int[] nums = {7, 3, 5, 8, -1, 0, 6, 7};
+
+        //System.out.println(lisA(input));
+        System.out.println(longestIncreasingSubsequence(nums));
+        System.out.println(longestIncreasingSubsequenceА(nums));
+        System.out.println(lengthOfLIS(nums));
+
+
         System.out.println(lisA(input));
 
         int max = 0;
@@ -24,13 +33,12 @@ public class LIS extends Methods {
             }
         }
 
-        long time = (getEndTime(start) - start) / 6000;
+        long time = (getEndTime() - start) / 6000;
         if (time > 0) {
-            System.out.printf("%s: %ds", "time", time);
+            System.out.printf("%s: %d ms", "time", time);
         } else {
-            System.out.printf("%s: %dms", "time", (getEndTime(start) - start));
+            System.out.printf("%s: %d ms", "time", (getEndTime() - start));
         }
-
     }
 
 
@@ -70,16 +78,74 @@ public class LIS extends Methods {
             result = new StringBuilder();
             int elA = input.get(i);
             result.append(elA).append(" ");
-            for (int j = i + 1; j < input.size(); j++) {
+            for (int j = i + 1; j < input.size()-1; j++) {
                 int elB = input.get(j);
                 if (elA < elB) {
                     result.append(elB).append(" ");
-                    // elA = elB;
-                    if ((input.get(j + 1)) > elB) elA = elB;
+                     elA = elB;
+                    //if ((input.get(j + 1)) > elB) elA = elB;
                 }
             }
             resultA.add(result);
         }
         return resultA;
+    }                      // 1,1,2,3,1,2,3,4
+
+    public static int longestIncreasingSubsequence(int[] nums) {
+        StringBuilder list = null;
+        ArrayList<StringBuilder> x = new ArrayList<>();
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1);
+
+        for (int i = 1; i < n; i++) {
+            list = new StringBuilder();
+            for (int j = 0; j < i; j++) {
+                if (nums[i] > nums[j]) {                                        // nums[i] = 7, 3, 5, 8, -1, 0, 6, 7
+                    dp[i] = Math.max(dp[i], dp[j] + 1);                         // dp[i] =   1, 1, 2, 3,  1, 2, 3, 4
+                }
+            }
+        }
+
+        int max = 1;
+        for (int i = 0; i < n; i++) {
+            max = Math.max(max, dp[i]);
+        }
+        return max;
     }
+
+    public static int longestIncreasingSubsequenceА(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        int len = 0;
+
+        for (int num : nums) {
+            int i = Arrays.binarySearch(dp, 0, len, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            dp[i] = num;
+            if (i == len) {
+                len++;
+            }
+        }
+
+        return len;
+    }
+
+        public static int lengthOfLIS(int[] nums) {
+            List<Integer> dp = new ArrayList<>();
+            for (int num : nums) {
+                int i = Collections.binarySearch(dp, num);
+                if (i < 0) {
+                    i = -(i + 1);
+                }
+                if (i == dp.size()) {
+                    dp.add(num);
+                } else {
+                    dp.set(i, num);
+                }
+            }
+            return dp.size();
+        }
 }
