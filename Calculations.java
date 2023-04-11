@@ -5,11 +5,11 @@ import java.util.concurrent.TimeUnit;
 
 public class Calculations {
     public static void main(String[] args) throws InterruptedException {
-        runTest(55);
-        //dequeTest(55);
+        runTestA(55);
+        //runTestB(55);
     }
 
-    static void runTest(int numOfTests) throws InterruptedException {
+    static void runTestA(int numOfTests) throws InterruptedException {
         while (numOfTests > 0) {
             test();
             TimeUnit.SECONDS.sleep((long) 1.5);
@@ -44,7 +44,7 @@ public class Calculations {
         return list;
     }
 
-    static void dequeTest(int numOfTest) throws InterruptedException {
+    static void runTestB(int numOfTest) throws InterruptedException {
         ArrayDeque<Integer> stack = new ArrayDeque<>(List.of(3, 4, 5, 6, 7, 8, 9));
         Random random = new Random();
         String operand = "";
