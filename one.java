@@ -1,89 +1,92 @@
 package task;
-
-import training.Methods;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatterBuilder;
+import org.apache.commons.math4.legacy.util.ComplexFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
-public class one extends Methods {
-    /**
-     * 4-4:
-     * 7 11 14 16
-     * 4 8 12 15
-     * 2 5 9 13
-     * 1 3 6 10               // 30 - 20 - 31
-     */                        // 10 -
+class Some implements Comparator {
+    public int compare(Object o1, Object o2) {
+        if ((int) o1 > (int) o2) return -1;
+        return 1;
+    }
+}
+
+public class one {
     public static void main(String[] args) {
-        timeAndData();
-//        int[][] arr = new int[4][4];
-//
-//        int val = 1, startRow = arr.length - 1, startCol = 0; //col = 0;
-//        boolean flag = false;
+        int[] a = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+        int[] b = new int[a.length];
+        Random rmd = new Random();
+        int j = 5;
 
-//        for (int row = startRow; row >= 0; row--) {      // 30 -> 21 -> 31
-//            for (col = startCol; col < arr[row].length; col++) {
-//                   arr[row][col] = val++;
-//
-//
-//            }
-//        }
-//
-//        for (int i = 0; i < arr.length; i++) {
-//            for (int j = 0; j < arr[i].length; j++) {
-//                System.out.print(arr[i][j] + " ");
-//            }
-//            System.out.println();
-//        }
-//
-//        int a = 5;
-//        int b = a++;    // b = a и след това а += 1;
-//        int c = ++a;    // а += 1 и след това c = 1;
-//
-//        boolean t = true;
-//        String ans = c > 222 ? "YES" : "NO";
-//        String ans1 = t ? "YES" : "NO";
-//
-//        System.out.println(ans);
-//        System.out.println(ans1);
-//
-//        System.out.println(a);
-//        System.out.println(b);
-//        System.out.println(c);
-//
-//        String s = " 23@5@2021@2024  ";
-//        System.out.println(s.length());
-//        String[] sa = s.trim().split("@", 22);    // "limit" -> ограничава броят на изведените субстрингове.
-//        System.out.println(Arrays.toString(sa));
-//        System.out.println(sa.length);
-//        System.out.println();
-//
-//        LocalDateTime dt = LocalDateTime.now();
-//        System.out.println(dt);
-//
-//        DateTimeFormatterBuilder date = new DateTimeFormatterBuilder();
-
-
-        //String str = "asta la vista baby";
-        String str = "astasta la vista babyastasta";
-        String line = str.substring(0, 7);
-        System.out.println(line);
-
-        char targetCH = 'y';
-        String targetSTR = "asta";
-
-        int count = 0, j = 0, fromIndexCH = j, fromIndexSTR = j;
-        while (j < str.length()) {
-           // int chars = str.indexOf(targetCH, fromIndexCH);
-            int strings = str.indexOf(targetSTR, fromIndexSTR);
-            if (strings != -1) {
-               // fromIndexCH = str.indexOf(targetCH, fromIndexCH) + 1;
-                fromIndexSTR  = str.indexOf(targetSTR, fromIndexSTR) + 1;
-                count++;
+        while (j-- > 0) {
+            for (int i = 0; i < a.length; i++) {
+                b[i] = a[rmd.nextInt(9)];
             }
-            j++;
+            System.out.println(Arrays.toString(b));
         }
 
-        System.out.println(count);
+        String s = "alskjdclakd";
+        int i = 0;
+        String[] split = s.split("");
+
+        for (String el : split) {
+            if (++i < s.length()) {
+                System.out.print(el + ", ");
+            } else System.out.print(el);
+        }
+
+        int[] c = {4, 3, 9, 2, 1};
+        int p = 0;
+
+        while (p++ < c.length) {                                // Не използва p в цикъла -> Само тогава е валидно
+            for (int k = 0; k < c.length - 1; k++) {
+                if (c[k] > c[k + 1]) {
+                    int tmp = c[k + 1];
+                    c[k + 1] = c[k];
+                    c[k] = tmp;
+                }
+            }
+        }
+
+        System.out.println("\n" + Arrays.toString(c));
+
+        boolean isSorted = false;
+        while (!isSorted) {
+            for (int k = 0; k < c.length - 1; k++) {
+                if (c[k] > c[k + 1]) {
+                    int tmp = c[k + 1];
+                    c[k + 1] = c[k];
+                    c[k] = tmp;
+                    isSorted = false;
+                } else isSorted = true;
+            }
+        }
+
+        System.out.println("\n" + Arrays.toString(c));
+
+
+        // Comparator<Integer> com = (o1, o2) ->{};
+        Comparator<Integer> com = new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                if (o1 > o2) {
+                    return 1;
+                } else if (o1.equals(o2)) return 0;
+                return -1;
+            }
+        };
+
+        List<Integer> list = new ArrayList<>(List.of(1, 12, 6, 3, 2, 8, 1));
+
+        List<Integer> collect = list.stream().
+                 filter(el -> el > 0)
+                .sorted()
+                .toList();
+
+
+        System.out.println(collect.toString());
+
+        Collections.sort(list, com);
+        System.out.println(list.toString());
+
     }
 }
