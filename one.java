@@ -1,5 +1,7 @@
 package task;
+
 import org.apache.commons.math4.legacy.util.ComplexFormat;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,23 +49,25 @@ public class one {
             }
         }
 
-        System.out.println("\n" + Arrays.toString(c));
+         System.out.println("\n" + Arrays.toString(c));
 
-        boolean isSorted = false;
+        boolean isSorted = false;                            // {4, 3, 9, 2, 1}
         while (!isSorted) {
+            isSorted = true;
             for (int k = 0; k < c.length - 1; k++) {
                 if (c[k] > c[k + 1]) {
                     int tmp = c[k + 1];
                     c[k + 1] = c[k];
                     c[k] = tmp;
                     isSorted = false;
-                } else isSorted = true;
+                }
+
+
             }
         }
-
         System.out.println("\n" + Arrays.toString(c));
 
-
+//
         // Comparator<Integer> com = (o1, o2) ->{};
         Comparator<Integer> com = new Comparator<Integer>() {
             @Override
@@ -87,6 +91,7 @@ public class one {
 
         Collections.sort(list, com);
         System.out.println(list.toString());
+
 
     }
 }
