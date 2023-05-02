@@ -7,18 +7,18 @@ public class Brackets {
         int idx1 = 0, idx2 = 0;
         char bracket1 = '(';
         char bracket2 = ')';
-        String input = "1 *2+ (3 - 5 *2 + 4/2 + 2*6 - 6/3)+ 3* (4+5*6) +..... ((3-2)*5)";
+        String input = "1 *22+ (3 - 5 *2 + 40/2 + 2*6 - 6/3)+ 13* (4+5*6) +..... ((3-2)*51)";
         ArrayDeque<String> a1 = new ArrayDeque<>();
 
         StringBuilder equation = (createdEquation(input));
         System.out.println(equation);
-
-        idx1 = getBracketsIndexes(equation).get(0);
-        idx2 = getBracketsIndexes(equation).get(1);
-
-        StringBuilder equ1 = (getEquationIntoBrackets(equation));
-        System.out.println(equ1 + " = " + calculateEquation(new StringBuilder(equ1)));
-        System.out.println(equ1);
+//
+//        idx1 = getBracketsIndexes(equation).get(0);
+//        idx2 = getBracketsIndexes(equation).get(1);
+//
+//        StringBuilder equ1 = (getEquationIntoBrackets(equation));
+//        System.out.println(equ1 + " = " + calculateEquation(new StringBuilder(equ1)));
+//        System.out.println(equ1);
 
         int result = 0;
         for (int i = idx1; i < idx2; i++) {
@@ -40,6 +40,7 @@ public class Brackets {
     }
                                                   // "1 *2+ (3 - 5 *2 + 4/2 + 2*6 - 6/3)+ 3* (4+5*6) +..... ((3-2)*5)"
                                                   // ... грешно брои скобите
+    //TODO: Оправи го.
     private static List<Integer> getBracketsIndexes(StringBuilder equation) {      // <- оправи го
         List<Integer> bracketsPositions = new ArrayList<>();
         int idx1 = 0, idx2 = 0;
@@ -128,14 +129,12 @@ public class Brackets {
                     }
                     case '-' -> {
                         //result = ard.pop() -
-                        i += 3;
+                        i -= 3;
                         ard.push(result);
                     }
                 }
             }
         }
-
-
         return ard.pop();
     }
 
