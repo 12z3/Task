@@ -20,11 +20,11 @@ public class StringTask {
                 "OS for security purpose while Windows is mostly employed by business users and gamers.";
         String wordA = "Linux", wordB = "Windows";
 
-        //textA(word, text);
-        System.out.println();
-        textB(word1, text1);
+        textA(word, text);
         System.out.println();
         textC(word, text);
+        System.out.println();
+        textB(word1, text1);
         System.out.println(wordReplacement(wordReplacement(text2, wordA), wordB));
         System.out.println(wordReplacementA(text2, list));
     }
@@ -47,7 +47,8 @@ public class StringTask {
         for (String banned : bannedWords) {
             replacementWord.append("*".repeat(banned.length()));
             text = text.replace(banned, replacementWord);
-            replacementWord.delete(0, replacementWord.length());
+            //replacementWord.delete(0, replacementWord.length());
+            replacementWord.setLength(0);
         }
         return text;
     }
