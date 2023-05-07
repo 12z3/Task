@@ -3,11 +3,20 @@ package task;
 public class StringTask {
     public static void main(String[] args) {
         String word = "ice", word1 = "key";
-        String text = "kicealkiicecelice", text1 = "keytextkey";
+        String text = "icekicealkiicecelice", text1 = "kkeyeytextkey";
 
-        textA(word, text);
+        //textA(word, text);
         System.out.println();
         textB(word1, text1);
+        System.out.println();
+        textC(word,text);
+    }
+
+    private static void textC(String word, String text) {
+        while (text.contains(word)) {
+            text = text.replace(word, "");
+            System.out.println(text);
+        }
     }
 
     private static void textB(String word, String text) {
