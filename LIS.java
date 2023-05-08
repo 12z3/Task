@@ -17,13 +17,14 @@ public class LIS extends Methods {
 
         int[] nums = {7, 3, 5, 8, -1, 0, 6, 7};
 
-        //System.out.println(lisA(input));
+        System.out.println(lisA(input));
         System.out.println(longestIncreasingSubsequence(nums));
-        System.out.println(longestIncreasingSubsequenceА(nums));
+        System.out.println(longestIncreasingSubsequenceA(nums));
+        //System.out.println(lis(Arrays.toString(nums)));
         System.out.println(lengthOfLIS(nums));
 
 
-        System.out.println(lisA(input));
+        //System.out.println(lisA(input));
 
         int max = 0;
         for (Map.Entry<StringBuilder, Integer> el : lisM(input).entrySet()) {
@@ -78,11 +79,11 @@ public class LIS extends Methods {
             result = new StringBuilder();
             int elA = input.get(i);
             result.append(elA).append(" ");
-            for (int j = i + 1; j < input.size()-1; j++) {
+            for (int j = i + 1; j < input.size() - 1; j++) {
                 int elB = input.get(j);
                 if (elA < elB) {
                     result.append(elB).append(" ");
-                     elA = elB;
+                    elA = elB;
                     //if ((input.get(j + 1)) > elB) elA = elB;
                 }
             }
@@ -92,15 +93,13 @@ public class LIS extends Methods {
     }                      // 1,1,2,3,1,2,3,4
 
     public static int longestIncreasingSubsequence(int[] nums) {
-        StringBuilder list = null;
         ArrayList<StringBuilder> x = new ArrayList<>();
         int n = nums.length;
         int[] dp = new int[n];
         Arrays.fill(dp, 1);
 
-        for (int i = 1; i < n; i++) {
-            list = new StringBuilder();
-            for (int j = 0; j < i; j++) {
+        for (int i = 1; i < n; i++) {                           // Трябва да мине последователно през всички елементи
+            for (int j = 0; j < i; j++) {                       // Сравнява Всяко със Всички предходни.
                 if (nums[i] > nums[j]) {                                        // nums[i] = 7, 3, 5, 8, -1, 0, 6, 7
                     dp[i] = Math.max(dp[i], dp[j] + 1);                         // dp[i] =   1, 1, 2, 3,  1, 2, 3, 4
                 }
@@ -114,7 +113,7 @@ public class LIS extends Methods {
         return max;
     }
 
-    public static int longestIncreasingSubsequenceА(int[] nums) {
+    public static int longestIncreasingSubsequenceA(int[] nums) {
         int n = nums.length;
         int[] dp = new int[n];
         int len = 0;
@@ -133,19 +132,50 @@ public class LIS extends Methods {
         return len;
     }
 
-        public static int lengthOfLIS(int[] nums) {
-            List<Integer> dp = new ArrayList<>();
-            for (int num : nums) {
-                int i = Collections.binarySearch(dp, num);
-                if (i < 0) {
-                    i = -(i + 1);
-                }
-                if (i == dp.size()) {
-                    dp.add(num);
-                } else {
-                    dp.set(i, num);
+    public static String lis(String str) {
+        int n = str.length();
+        int[] dp = new int[n];
+        int[] prev = new int[n];
+        int maxLen = 1;
+        int endIndex = 0;
+
+        for (int i = 0; i < n; i++) {
+            dp[i] = 1;
+            prev[i] = -1;
+            for (int j = 0; j < i; j++) {
+                if (str.charAt(j) < str.charAt(i) && dp[j] + 1 > dp[i]) {
+                    dp[i] = dp[j] + 1;
+                    prev[i] = j;
                 }
             }
-            return dp.size();
+            if (dp[i] > maxLen) {
+                maxLen = dp[i];
+                endIndex = i;
+            }
         }
+
+        StringBuilder sb = new StringBuilder();
+        while (endIndex != -1) {
+            sb.insert(0, str.charAt(endIndex));
+            endIndex = prev[endIndex];
+        }
+        return sb.toString();
+    }
+
+
+    public static int lengthOfLIS(int[] nums) {
+        List<Integer> dp = new ArrayList<>();
+        for (int num : nums) {
+            int i = Collections.binarySearch(dp, num);
+            if (i < 0) {
+                i = -(i + 1);
+            }
+            if (i == dp.size()) {
+                dp.add(num);
+            } else {
+                dp.set(i, num);
+            }
+        }
+        return dp.size();
+    }
 }
