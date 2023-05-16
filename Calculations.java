@@ -4,9 +4,10 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 public class Calculations {
+    public static final int TEST_COUNT = 55;
     public static void main(String[] args) throws InterruptedException {
-        //runTestA(55);
-        runTestB(55);
+        //runTestA(TEST_COUNT);
+        runTestB(TEST_COUNT);
     }
 
     static void runTestA(int numOfTests) throws InterruptedException {
@@ -51,8 +52,8 @@ public class Calculations {
 
         while (numOfTest > 0) {
             operand = (random.nextInt(0, 2) == 1) ? "+" : "*";
-            int el1 = getElementFromStack(stack);
-            int el2 = getElementFromStack(stack);
+            int el1 = getElementFrom(stack);
+            int el2 = getElementFrom(stack);
             if (el1 == -1 || el2 == -1) {
                 System.out.println("Stack is Empty!");
                 return;
@@ -69,7 +70,7 @@ public class Calculations {
         }
     }
 
-    public static int getElementFromStack(ArrayDeque<Integer> stack) {
+    public static int getElementFrom(ArrayDeque<Integer> stack) {
         if (stack.size() > 1) {
             int el = stack.poll();
             stack.addLast(el);
