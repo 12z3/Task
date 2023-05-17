@@ -5,9 +5,33 @@ import java.util.concurrent.TimeUnit;
 
 public class Calculations {
     public static final int TEST_COUNT = 55;
+
     public static void main(String[] args) throws InterruptedException {
-        //runTestA(TEST_COUNT);
+        runTestA(TEST_COUNT);
         runTestB(TEST_COUNT);
+
+//        Thread testA = new Thread(() -> {
+//            try {
+//                runTestA(TEST_COUNT);
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//
+//        Thread testB = new Thread(() -> {
+//            try {
+//                runTestB(TEST_COUNT);
+//                Thread.sleep(3000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+//        });
+//
+//        testA.start();
+//        System.out.println();
+//        testB.start();
+
     }
 
     static void runTestA(int numOfTests) throws InterruptedException {
