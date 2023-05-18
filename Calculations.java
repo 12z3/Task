@@ -7,34 +7,35 @@ public class Calculations {
     public static final int TEST_COUNT = 55;
 
     public static void main(String[] args) throws InterruptedException {
-        runTestA(TEST_COUNT);
-        runTestB(TEST_COUNT);
+//        runTestA(TEST_COUNT);
+//        runTestB(TEST_COUNT);
 
-//        Thread testA = new Thread(() -> {
-//            try {
-//                runTestA(TEST_COUNT);
-//                Thread.sleep(3000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//
-//        Thread testB = new Thread(() -> {
-//            try {
-//                runTestB(TEST_COUNT);
-//                Thread.sleep(3000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-//        });
-//
-//        testA.start();
-//        System.out.println();
-//        testB.start();
+        Thread testA = new Thread(() -> {
+            try {
+                runTestA(TEST_COUNT);
+                //Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
+        Thread testB = new Thread(() -> {
+            try {
+                runTestB(TEST_COUNT);
+                //Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        testB.start();
+        testA.start();
+
+//        testA.join();
+//        testB.join();
     }
 
-    static void runTestA(int numOfTests) throws InterruptedException {
+    synchronized static void runTestA(int numOfTests) throws InterruptedException {
         while (numOfTests > 0) {
             test();
             TimeUnit.SECONDS.sleep((long) 1.5);
@@ -42,7 +43,6 @@ public class Calculations {
         }
     }
 
-    // Направи го с две Нишки!
     static void test() throws InterruptedException {
         Random random = new Random();
         List<String> operations = new ArrayList<>(List.of("+", "*"));
@@ -54,8 +54,8 @@ public class Calculations {
         int el2 = digit.get(random.nextInt(0, digit.size()));
 
         System.out.printf("%d %s %d = ", el1, operand, el2);
-        TimeUnit.SECONDS.sleep((long) 1.3);
-        //Thread.sleep(1300);
+        TimeUnit.SECONDS.sleep((long) 0.3);
+        Thread.sleep(1300);
         switch (operand) {
             case ("+") -> System.out.printf("%d%n", el1 + el2);
             case ("*") -> System.out.printf("%d%n", el1 * el2);
@@ -69,7 +69,7 @@ public class Calculations {
         return list;
     }
 
-    static void runTestB(int numOfTest) throws InterruptedException {
+    synchronized static void runTestB(int numOfTest) throws InterruptedException {
         ArrayDeque<Integer> stack = new ArrayDeque<>(List.of(3, 4, 5, 6, 7, 8, 9));
         Random random = new Random();
         String operand = "";
