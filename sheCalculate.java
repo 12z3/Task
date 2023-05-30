@@ -127,9 +127,9 @@ public class sheCalculate {
                 (this.randomNumber1 / this.randomNumber2), (this.randomNumber2) * 2,
                 (this.randomNumber1 + this.randomNumber2)));
 
-        for (int i = 0; i < chars.size(); i++) {
+        for (int indexes = 0; indexes < chars.size(); indexes++) {
             int index = rnd.nextInt(0, chars.size());
-            swap(chars, i, index);
+            swap(chars, indexes, index);
         }
 
         System.out.println("A: " + chars.get(0));
