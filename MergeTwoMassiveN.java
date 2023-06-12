@@ -3,6 +3,8 @@ package dynamicsStructhure;
 import training.Methods;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MergeTwoMassiveN extends Methods {
@@ -16,14 +18,50 @@ public class MergeTwoMassiveN extends Methods {
         timeAndData();
 
         int[] a = {1, 2, 3, 5, 45, 66};
-        int[] b = {11, 2, 3, 1, 34, 1, 121, 3};
+        int[] b = {11, 2, 3, 1, 34, 1, 121, 3, 89, 1, 99};
+        int[] c = {0, 0, 3, 0, 45, 66};
 
         System.out.println("a = " + Arrays.toString(a));
         System.out.println("b = " + Arrays.toString(b));
-        mergeTwoMassive(a, b);
+
+        long s = System.currentTimeMillis();
+
+        mergeTwoMassiveB(a, b);
+        mergeTwoMassiveA(a, b);
+        System.out.println();
+        printNoZeroIntArray(c);
+
+        long e = System.currentTimeMillis();
+        System.out.println((double) (e - s) + " ms");
     }
 
-    public  static int findZeros(int[] a, int[] b){
+    // ->  else mapB.replace(a[i], 1):  При условие, че mapB съдържа ключ a[i]
+    // (масива b[] съдържа текущият елемент от масива а[]), то промени стойността на Value със ключ Key на 1;
+    // -> if (mapB.get(b[i - a.length]) != 1): Ако mapB не съдържа ключ чието Value = 1,
+    // то добави го към result. (Ако елемнта от масива b[] не се съдържа в масива a[] -> mapB<b[i], 0>)
+    private static void mergeTwoMassiveA(int[] a, int[] b) {
+        Map<Integer, Integer> result = new LinkedHashMap<>();
+        Map<Integer, Integer> bMap = new LinkedHashMap<>();
+        int size = a.length + b.length;
+
+        for (int el : b) bMap.put(el, 0);
+        for (int i = 0; i < size; i++) {
+            if (i < a.length) {
+                if (!bMap.containsKey(a[i])) {
+                    result.put(a[i], 0);
+                } else bMap.replace(a[i], 1);
+            } else {
+                if (bMap.get(b[i - a.length]) != 1) {
+                    result.put(b[i - a.length], 0);
+                }
+            }
+        }
+        System.out.print("Result = ");
+        for (Map.Entry<Integer, Integer> el : result.entrySet())
+            System.out.print(el.getKey() + " ");
+    }
+
+    public static int findZeros(int[] a, int[] b) {
         int countA = 0, countB = 0;
         boolean isMatch;
 
@@ -44,29 +82,29 @@ public class MergeTwoMassiveN extends Methods {
         return countA + countB;
     }
 
-    public static void mergeTwoMassive(int[] a, int[] b) {
-        int  idxA = 0, idxB = 0;
+    public static void mergeTwoMassiveB(int[] a, int[] b) {
+        int idxA = 0, idxB = 0;
 
-        int[] tmp = new int[(a.length + b.length) - (findZeros(a,b))];
-        for (int i = 0; i < tmp.length; i++) {
+        int[] result = new int[(a.length + b.length) - (findZeros(a, b))];
+        for (int i = 0; i < result.length; i++) {
             if (idxA < a.length) {
                 if (a[idxA] == 0) {
                     idxA++;
                     i--;
-                } else tmp[i] = a[idxA++];
+                } else result[i] = a[idxA++];
             } else {
                 if (idxB < b.length) {
                     if (b[idxB] == 0) {
                         idxB++;
                         i--;
-                    } else tmp[i] = b[idxB++];
+                    } else result[i] = b[idxB++];
                 }
             }
         }
 
         System.out.println("a = " + Arrays.toString(a));
         System.out.println("b = " + Arrays.toString(b));
-        System.out.println("Result = " + Arrays.toString(tmp));
+        System.out.println("Result = " + Arrays.toString(result));
     }
 
     /**
@@ -83,7 +121,7 @@ public class MergeTwoMassiveN extends Methods {
     // ВАЖНО:
     // Печата ", " ако е изпълнено условието -> (index > countZeroElement).
     // И едва След това печата елемента ако е различен от нула независимо от условието за запетаята.
-    public static void printNoZeroIntDArray(int[] arr) {
+    public static void printNoZeroIntArray(int[] arr) {
         int count, countZeroElement = 0;
 
         System.out.print("[");
