@@ -4,6 +4,8 @@ import java.util.*;
 
 public class Brackets {
     public static void main(String[] args) {
+        String expression = "1+(2*3+(5-4))+(12+14)";
+        ArrayDeque<Integer> idx = new ArrayDeque<>();
         int idx1 = 0, idx2 = 0;
         char bracket1 = '(';
         char bracket2 = ')';
@@ -12,6 +14,24 @@ public class Brackets {
 
         StringBuilder equation = (createdEquation(input));
         System.out.println(equation);
+
+
+
+        int idxA = 0, idxB = 0;
+        System.out.println(expression);
+        for (int i = 0; i < expression.length(); i++) {            // 1+(2*3+(5-4))+(12+14)
+            if (expression.charAt(i) == '(') {
+                idx.push(i);
+            } else if (expression.charAt(i) == ')') {
+                idxB = i + 1;
+                String tmpString = expression.substring(idx.pop(), idxB);
+                System.out.println(tmpString);
+            }
+        }
+
+
+
+
 //
 //        idx1 = getBracketsIndexes(equation).get(0);
 //        idx2 = getBracketsIndexes(equation).get(1);
@@ -19,11 +39,6 @@ public class Brackets {
 //        StringBuilder equ1 = (getEquationIntoBrackets(equation));
 //        System.out.println(equ1 + " = " + calculateEquation(new StringBuilder(equ1)));
 //        System.out.println(equ1);
-
-        int result = 0;
-        for (int i = idx1; i < idx2; i++) {
-
-        }
 
     }
 
