@@ -5,8 +5,8 @@ import java.util.TreeMap;
 
 public class doStringsMatches {
     public static void main(String[] args) {
-        String s = "alabalakanala";
-        String target = "ala";
+        String s = "alabalakanalaalab";
+        String target = "alab";
         doTheseMatches(s, target);
         doTheseMatches1(s, target);
     }
