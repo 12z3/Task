@@ -14,8 +14,8 @@ public class Reader {
 
     private static void readerBuffer() {
         try {
-            FileReader file = new FileReader("totoNew.txt");
-            File myFile = new File("totoNew.txt");
+            FileReader file = new FileReader("TMPResult-TEST.txt");
+            File myFile = new File("TMPResult-TEST.txt");
 
             BufferedReader reader = new BufferedReader(file);
             String line = "";
@@ -40,9 +40,9 @@ public class Reader {
 
     private static void readerScanner() {
         try {
-            File file = new File("toto.txt");
+            File file = new File("TMPResult-TEST.txt");
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            Scanner scanner = new Scanner(file);
+            Scanner scanner = new Scanner(file);                                                 // <-
 
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -60,7 +60,7 @@ public class Reader {
 
     private static void readerBufferBad() {
         try {
-            FileReader file = new FileReader("totoNew.txt");
+            FileReader file = new FileReader("TMPResult-TEST.txt");
             BufferedReader br = new BufferedReader(file);
             String line = "";
 
