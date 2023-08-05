@@ -28,13 +28,15 @@ public class sheCalculate {
             printTestResults();
 
             System.out.print("Дай ми отговор - ЧИСЛО: ");
-            int answer = scanner.nextInt();
+            String input = scanner.nextLine();
+
+            int answer = isItADigit(input);
             if (answer == rightAnswer) {
                 this.successCount++;
                 System.out.println("Позна. Брой верни отговори: " + this.successCount);
             } else {
                 this.failureCount++;
-                System.out.println("... Лошо гошо. Дай пак. Брой грешни отговори до тук: " + this.failureCount);
+                System.out.println("... Лошо гошо. Брой грешни отговори до тук: " + this.failureCount);
             }
             this.count++;
         }
@@ -63,13 +65,15 @@ public class sheCalculate {
             printTestResults();
 
             System.out.print("Дай ми отговор - ЧИСЛО: ");
-            int answer = scanner.nextInt();
+            String input = scanner.nextLine();
+
+            int answer = isItADigit(input);
             if (answer == rightAnswer) {
                 this.successCount++;
                 System.out.println("Позна. Брой верни отговори: " + this.successCount);
             } else {
                 this.failureCount++;
-                System.out.println("... Лошо гошо. Дай пак. Брой грешни отговори до тук: " + this.failureCount);
+                System.out.println("... Лошо гошо. Брой грешни отговори до тук: " + this.failureCount);
             }
             this.count++;
         }
@@ -95,30 +99,27 @@ public class sheCalculate {
         return result;
     }
 
-    public static void main(String[] args) {
-        sheCalculate test = new sheCalculate();
-        String yourChoose = sheCalculate.choose();
-
-        switch (yourChoose) {
-            case ("s") -> {
-                test.summation();
-            }
-            case ("m") -> {
-                test.multiplication();
-            }
-            default -> System.out.println("Кво Праим... ?");
-        }
-    }
-
     private int countTestValidation() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Колко опита искаш?: ");
-        this.allTestCount = scanner.nextInt();
+        String input = scanner.nextLine();
+
+        this.allTestCount = isItADigit(input);
         while (this.allTestCount < 3) {
             System.out.print("... ;) Хайде да не ХиТрУвАмЕ - Имаш не по-малко от ТРИ задачки... Дай пак: ");
             this.allTestCount = scanner.nextInt();
         }
         return this.allTestCount;
+    }
+
+    private int isItADigit(String s) {
+        Scanner scanner = new Scanner(System.in);
+
+        while ( s.length() == 0 || !Character.isDigit(s.charAt(0))) {
+            System.out.print("... ;) Хайде да не ХиТрУвАмЕ - Въведи ми число, не Буква ;) ... ");
+            s = scanner.nextLine();
+        }
+        return Integer.parseInt(s);
     }
 
     private void printTestResults() {
@@ -143,5 +144,20 @@ public class sheCalculate {
         list.set(pos1, list.get(pos2));
         list.set(pos2, tmp);
 
+    }
+
+    public static void main(String[] args) {
+        sheCalculate test = new sheCalculate();
+        String yourChoose = sheCalculate.choose();
+
+        switch (yourChoose) {
+            case ("s") -> {
+                test.summation();
+            }
+            case ("m") -> {
+                test.multiplication();
+            }
+            default -> System.out.println("Кво Праим... ?");
+        }
     }
 }
