@@ -111,16 +111,16 @@ public class doStringsMatch {
         while (k < string.length()) {
             if (toIdx <= string.length()) {
                 tmp = string.substring(fromIdx, toIdx);
-                if (tmp.equals(target)) {
+                if (tmp.equals(target)) {                     // Думите съвпадат:
                     System.out.printf
                             ("string \"%s\" is matches %d on index: %d%n", target, cnt, fromIdx);
-                    fromIdx += (target.length() - 1);
-                    toIdx = fromIdx + (target.length());
-                    cnt++;
+                    fromIdx += (target.length() - 1);         //  Първата буква на следващата дума ще бъде отместена -
+                    toIdx = fromIdx + (target.length());      // с target.length()
+                    cnt++; 
                     // k = toIdx;
-                } else {
-                    fromIdx++;
-                   // k++;
+                } else {                                      // Липсва съвпадение:
+                    fromIdx++;                                // Първата буква на следващата дума е последната -
+                   // k++;                                    // на предишната.
                     toIdx = fromIdx + (target.length());
                 }
             } else break;
