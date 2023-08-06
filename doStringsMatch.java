@@ -5,13 +5,15 @@ import java.util.TreeMap;
 
 public class doStringsMatch {
     public static void main(String[] args) {
-        String s = "sdkalabalakanalaalab";
+        //String s = "sdkalabalakanalaalab";
+        String s = "sdkalabalakanalaalabalanewsoulalaala";
         String target = "ala";
         doTheseMatch_Map(s, target);
-        doTheseMatch(s, target);
+        //doTheseMatch(s, target);
         System.out.println();
         doTheseMatch_IndexOf(s, target);
         doTheseMatch_SubString(s, target);
+        doTheseMatch_SubString1(s, target);
         doTheseMatch_Replace(s, target);
     }
 
@@ -30,7 +32,7 @@ public class doStringsMatch {
             if (tmp.toString().equals(target)) numberOfString.put(i, tmp.toString());
             tmp.delete(0, tmp.length());
         }
-        System.out.printf("'%s' -> matches %d times in string: '%s';%n", target, numberOfString.size(), string);
+        System.out.printf("\"%s\" -> matches %d times in string: \"%s\";%n", target, numberOfString.size(), string);
         for (Map.Entry<Integer, String> el : numberOfString.entrySet()) {
             System.out.printf("On idx: %d -> %s;%n", el.getKey(), el.getValue());
         }
@@ -50,7 +52,7 @@ public class doStringsMatch {
             if (tmp.toString().equals(target)) numberOfString.put(i, tmp.toString());
             tmp.delete(0, tmp.length());
         }
-        System.out.printf("'%s' -> matches %d times in string: '%s';%n", target, numberOfString.size(), string);
+        System.out.printf("\"%s\" -> matches %d times in string: \"%s\";%n", target, numberOfString.size(), string);
         for (Map.Entry<Integer, String> el : numberOfString.entrySet()) {
             System.out.printf("On idx: %d -> %s;%n", el.getKey(), el.getValue());
         }
@@ -65,7 +67,7 @@ public class doStringsMatch {
         for (int i = 0; i < string.length(); i++) {
             if (string.indexOf(target, fromIdx) != -1) {
                 System.out.printf
-                        ("string '%s' is matches %d on index: %d%n", target, cnt, string.indexOf(target, fromIdx));
+                        ("string \"%s\" is matches %d on index: %d%n", target, cnt, string.indexOf(target, fromIdx));
                 //fromIdx = s.indexOf(target, fromIdx) + (target.length());
                 fromIdx = string.indexOf(target, fromIdx) + 1;
                 cnt++;
@@ -76,15 +78,16 @@ public class doStringsMatch {
     }
 
     private static void doTheseMatch_SubString(String string, String target) {        // sdk alabalakanalaalab
+        String tmp;
         long start = System.nanoTime();
-        int cnt = 0, fromIdx = 0, toIdx = target.length();
+        int cnt = 0, fromIdx = 0, toIdx = target.length(), idx = 0;
 
         for (int i = 0; i < string.length(); i++) {
-            if (toIdx <= string.length() - 1) {
-                String tmp = string.substring(fromIdx, toIdx);
+            if (toIdx <= string.length()) {
+                tmp = string.substring(fromIdx, toIdx);
                 if (tmp.equals(target)) {
                     System.out.printf
-                            ("string '%s' is matches %d on index: %d%n", target, cnt, fromIdx);
+                            ("string \"%s\" is matches %d on index: %d%n", target, cnt, fromIdx);
                     fromIdx += (target.length() - 1);
                     toIdx = fromIdx + (target.length());
                     cnt++;
@@ -92,8 +95,40 @@ public class doStringsMatch {
                     fromIdx++;
                     toIdx = fromIdx + (target.length());
                 }
-            }
+            } else break;
+            idx = i;
         }
+        System.out.println(idx);
+        long end = System.nanoTime();
+        System.out.println((end - start) / 1000 + " mSec" + "\n");
+    }
+
+    private static void doTheseMatch_SubString1(String string, String target) {        // sdk alabalakanalaalab
+        String tmp;
+        long start = System.nanoTime();
+        int cnt = 0, fromIdx = 0, toIdx = target.length(), k = 0, idx = 0;
+
+        while (k < string.length()) {
+            if (toIdx <= string.length()) {
+                tmp = string.substring(fromIdx, toIdx);
+                if (tmp.equals(target)) {
+                    System.out.printf
+                            ("string \"%s\" is matches %d on index: %d%n", target, cnt, fromIdx);
+                    fromIdx += (target.length() - 1);
+                    toIdx = fromIdx + (target.length());
+                    cnt++;
+                    // k = toIdx;
+                } else {
+                    fromIdx++;
+                   // k++;
+                    toIdx = fromIdx + (target.length());
+                }
+            } else break;
+            k = toIdx - 1;                               // -1 защото substring(fromIdx, toIdx] -> не включва toIdx
+           // k = fromIdx;
+            idx++;
+        }
+        System.out.println(idx);
         long end = System.nanoTime();
         System.out.println((end - start) / 1000 + " mSec" + "\n");
     }
@@ -101,7 +136,7 @@ public class doStringsMatch {
     private static void doTheseMatch_Replace(String string, String target) {
         long start = System.nanoTime();
 
-        String t = string.replace(target, " " + target.toUpperCase() +" ");
+        String t = string.replace(target, " " + target.toUpperCase() + " ");
         System.out.println(t);
 
         long end = System.nanoTime();
