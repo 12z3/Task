@@ -90,7 +90,7 @@ public class RearrangeBySign {
     }
 
     private static int[] rearrangeBySign4(int[] a) {
-        int posIdx = 0, negIdx = posIdx + 1, idx = 0;
+        int idx = 0;
         int[] res = new int[a.length];
         List<Integer> pos = new ArrayList<>();
         List<Integer> neg = new ArrayList<>();
