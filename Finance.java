@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class Finance {
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("/Users/blagojnikolov/Documents/VSCode/reportDSK3.csv");
+        File file = new File("");
         List<List<String>> data = readData(file);
 
         // printAllInfo(data);
