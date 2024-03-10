@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 public class Finance {
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("");
+        File file = new File("/Users/blagojnikolov/Documents/VSCode/reportDSK3.csv");
         List<List<String>> data = readData(file);
 
         printFindByPeriod(getPeriod(data, "01.01.2024", "02.09.2024"));
@@ -305,11 +305,10 @@ public class Finance {
                 flag1 = true;
             } else if (x.equalsIgnoreCase(toDate)) {
                flag2 = true;
-            } else return false;
-
+            }
             if (flag1 && flag2) return true;
         }
-        return true;
+        return false;
     }
 
     protected static void printFindByPeriod(List<List<String>> periodRes) {
