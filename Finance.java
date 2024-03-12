@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import java.util.regex.Matcher;
@@ -10,17 +9,13 @@ import java.util.regex.Pattern;
 public class Finance {
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("");
+        File file = new File("/Users/blagojnikolov/Documents/VSCode/reportDSK3.csv");
         List<List<String>> data = readData(file);
 
-        printFindByPeriod(getPeriod(data, "01.01.2024", "02.09.2024"));
-//        printAllInfo(data);
+        printAllInfo(data);
         printTransactions(data);
-//        printAllWithdrawal(data);
-//        findByType(data, "1000.00");
 
-//        printAllDebit(data);
-//        printAllWithdrawal(data);
+        printInfoByPeriod(data, getPeriod(data, "01.01.2024", "15.01.2024"));
     }
 
 
@@ -121,31 +116,6 @@ public class Finance {
         }
     }
 
-    protected static void printAllWithdrawalFromIntervalOfDate(List<List<String>> data, String formDate, String toDate) {
-        System.out.println();
-        double withdrawal = 0.0, allWithdrawal = 0.0;
-        String transaction = null, date = null, hour = null;
-
-        System.out.println("Баланс: " + (allDebit(data) - allWithdrawal(data) + "BGN"));
-
-        Pattern p1 = Pattern.compile(formDate);
-        //Matcher m1 = p1.matcher()
-        Pattern p2 = Pattern.compile(toDate);
-
-
-//            if (withdrawal != 0.0) {
-//                System.out.printf("%s / %s: - %s", date, hour, transaction);
-//                spaces(125, (date + hour + transaction));
-//                System.out.printf("%.2f%n", withdrawal);
-//            }
-//        }
-//        if (allWithdrawal != 0.0) {
-//            System.out.println();
-//            spaces(179, (date + hour + transaction));
-//            System.out.printf("%.2f ", allWithdrawal);
-//            System.out.println();
-//        }
-    }
 
     protected static void printAllDebit(List<List<String>> data) {
         System.out.println();
@@ -180,7 +150,7 @@ public class Finance {
     }
 
     protected static String getDate(List<List<String>> data, int numOfRow) {
-        return data.get(numOfRow).get(11);
+        return data.get(numOfRow).get(0);
     }
 
     protected static void getAllDay(List<List<String>> data) {
@@ -270,55 +240,97 @@ public class Finance {
         System.out.printf("%.2f%n", allWithdrawal);
     }
 
-
     protected static List<List<String>> getPeriod(List<List<String>> data, String fromDate,
                                                   String toDate) {
         List<List<String>> lsRes = new ArrayList<>();
-        int cnt = 0;
+        int cnt = 0, idx1 = 0, idx2 = 0;
+        boolean flag1 = false, flag2 = false;
 
         if (!validatePeriods(data, fromDate, toDate)) return null;
-
         Pattern p1 = Pattern.compile(fromDate);
         Pattern p2 = Pattern.compile(toDate);
 
-        LOOP:
-        for (List<String> datum : data) {
+        for (int i = 0; i < data.size(); i++) {
 
-            Matcher m1 = p1.matcher(String.valueOf(datum));
-            Matcher m2 = p2.matcher(String.valueOf(datum));
+            // Matcher m1 = p1.matcher(String.valueOf(data.get(i)).replaceAll("\"", ""));
+            // - намира не само първото, но и второто и третото съвпадение;
+            // "18.01.2024","18.01.2024","516849xxxxxx5165  ТЕГЛЕНЕ НА ATM     -> 17.01.2024 <-    16:18<br/>Авт. код:
+            // B61841<br/>Номер на у-во: AFIB3322","BGR","","КАРТОВА ОПЕРАЦИЯ","","","","400,00","","18.01.2024","17:01"
+            // е валиден отговор.
 
-            if (m1.find() && !m2.find()) {
-                lsRes.add(datum);
-            } else if (m2.find()) {
-                lsRes.add(datum);
+            Matcher m1 = p1.matcher((data.get(i).get(0)).replaceAll("\"", ""));
+            Matcher m2 = p2.matcher((data.get(i).get(0)).replaceAll("\"", ""));
+
+            if (m1.find() && !flag1) {
+                idx1 = i;
+                flag1 = true;
             }
+            if (m2.find()) {
+                idx2 = i;
+            }
+        }
+
+        for (int j = idx1; j <= idx2; j++) {
+            lsRes.add(data.get(j));
         }
         return lsRes;
     }
 
-
-    protected static boolean validatePeriods(List<List<String>> data, String fromDate, String toDate) {
+    //todo: Виж как трябва да се доработи за да може коректно да обработва дата която я няма в периода на отчета.
+    protected static boolean validatePeriodsA(List<List<String>> data, String fromDate, String toDate) {
         boolean flag1 = false, flag2 = false;
         for (List<String> datum : data) {
             String x = datum.get(0).replaceAll("\"", "");
             if (x.equalsIgnoreCase(fromDate)) {
                 flag1 = true;
             } else if (x.equalsIgnoreCase(toDate)) {
-               flag2 = true;
+                flag2 = true;
             }
             if (flag1 && flag2) return true;
         }
         return false;
     }
 
-    protected static void printFindByPeriod(List<List<String>> periodRes) {
-        if (periodRes == null) {
-            System.out.println("\n404: НЕВАЛИДНИ ДАТИ");
-            return;
+    protected static boolean validatePeriods(List<List<String>> data, String fromDate, String toDate) {
+        boolean flag1 = false, flag2 = false, find1 = false, find2 = false;
+        String firstDate = data.get(0).get(0), endDate = data.get(data.size() - 1).get(0);
+        int idx1 = -1, idx2 = -1;
+
+        for (int i = 0; i < data.size(); i++) {
+            if (data.get(i).toString().contains(fromDate)) {
+                idx1 = i;
+                find1 = true;
+            }
+            if (data.get(i).toString().contains(toDate)) {
+                idx2 = i;
+                find2 = true;
+            }
+            if ((idx1 != idx2) && (find1 && find2)) {
+                break;
+            } else if ((idx1 == idx2)) {
+                return false;
+            }
         }
+        if (idx2 < idx1) return false;
+        return find1 && find2;
+    }
+
+    protected static void findDate(List<List<String>> data){
+
+    }
+
+    protected static void printInfoByPeriod(List<List<String>> data, List<List<String>> periodRes) {
         double withdrawal = 0.0, allWithdrawal = 0.0, debit = 0, allDebit = 0.0;
         String transactions = null, hour = null, date = null;
-        int maxLength = 0;
+        int maxLength = 0, cnt = 0;
+
+        System.out.println();
+        if (periodRes == null) {
+            System.out.println("\n404: НЕВАЛИДНИ ДАТИ. " +
+                    "Диапазаноа е от: " + getDate(data, 0) + " до: "
+                    + getDate(data, data.size() - 1) + ".");
+            return;
+        }
 
         for (int i = 0; i < periodRes.size(); i++) {
             date = getDate(periodRes, i);
@@ -332,7 +344,7 @@ public class Finance {
             System.out.printf("%s %s - %s", date, hour, transactions);
             maxLength = maxLength(periodRes);
             int z = String.valueOf(periodRes.get(i).size()).length();
-            int cnt = (maxLength - (date.length() + hour.length() + transactions.length() + 4)) + 30;
+            cnt = (maxLength - (date.length() + hour.length() + transactions.length() + 4)) + 30;
             spacesB(cnt);
             System.out.printf("Постъпили: %.2f", Math.ceil(debit));
             spacesB(10 - String.valueOf(debit).length());
@@ -340,9 +352,13 @@ public class Finance {
         }
 
         assert date != null;
-        spacesB((maxLength + date.length() + hour.length() + 4) + 9 + ("Постъпили: ").length() - 2);
+        System.out.print(" Баланс: " + (allDebit - allWithdrawal));
+        int cnst = String.valueOf(allDebit).length() + String.valueOf(allWithdrawal).length();
+        spacesB((maxLength + date.length() + hour.length() + 4 +
+                "Баланс".length() + String.valueOf(allDebit - allWithdrawal).length()) +
+                ("Постъпили: ").length() - 8 - cnst);
         System.out.printf("%.2f ", allDebit);
-        spacesB(("Изтеглени: ").length() + 2);
+        spacesB(("Изтеглени: ").length() + 3);
         System.out.printf("%.2f ", allWithdrawal);
         System.out.println();
 
@@ -380,7 +396,7 @@ public class Finance {
 
         spaces(142, " ");
         System.out.printf("%.2f", allDebit);
-        spaces(18, String.valueOf(allDebit));
+        spaces(19, String.valueOf(allDebit));
         System.out.printf("%.2f%n", allWithdrawal(data));
     }
 
