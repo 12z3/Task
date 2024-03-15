@@ -12,10 +12,10 @@ public class Finance {
         File file = new File("/Users/blagojnikolov/Documents/VSCode/reportDSK3.csv");
         List<List<String>> data = readData(file);
 
-        printAllInfo(data);
+        //printAllInfo(data);
         printTransactions(data);
 
-        printInfoByPeriod(data, getPeriod(data, "01.01.2024", "15.01.2024"));
+        printInfoByPeriod(data, getPeriod(data, "01.01.2024", "01.02.2024"));
     }
 
 
@@ -203,7 +203,7 @@ public class Finance {
     protected static void findByType(List<List<String>> data, String type) {
         System.out.println();
         double debit = 0, withdrawal, allDebit = 0.0, allWithdrawal = 0.0;
-        String transactions = null, hour = null, date = null, spacesWordA = null, spacesWordB = null, spacesWordC, spacesWordD;
+        String transactions, hour, date, spacesWordA, spacesWordB, spacesWordC, spacesWordD;
         int idxA = 0, idxB = 0;
 
         Pattern typePattern = Pattern.compile(type);
@@ -242,9 +242,9 @@ public class Finance {
 
     protected static List<List<String>> getPeriod(List<List<String>> data, String fromDate,
                                                   String toDate) {
-        List<List<String>> lsRes = new ArrayList<>();
-        int cnt = 0, idx1 = 0, idx2 = 0;
-        boolean flag1 = false, flag2 = false;
+        List<List<String>> periodRes = new ArrayList<>();
+        int idx1 = 0, idx2 = 0;
+        boolean flag = false;
 
         if (!validatePeriods(data, fromDate, toDate)) return null;
         Pattern p1 = Pattern.compile(fromDate);
@@ -261,9 +261,9 @@ public class Finance {
             Matcher m1 = p1.matcher((data.get(i).get(0)).replaceAll("\"", ""));
             Matcher m2 = p2.matcher((data.get(i).get(0)).replaceAll("\"", ""));
 
-            if (m1.find() && !flag1) {
+            if (m1.find() && !flag) {
                 idx1 = i;
-                flag1 = true;
+                flag = true;
             }
             if (m2.find()) {
                 idx2 = i;
@@ -271,12 +271,13 @@ public class Finance {
         }
 
         for (int j = idx1; j <= idx2; j++) {
-            lsRes.add(data.get(j));
+            periodRes.add(data.get(j));
         }
-        return lsRes;
+        return periodRes;
     }
 
-    //todo: Виж как трябва да се доработи за да може коректно да обработва дата която я няма в периода на отчета.
+    // todo: Виж как трябва да се доработи за да може коректно
+    //       да обработва дата която я няма в периода на отчета. - Done.
     protected static boolean validatePeriodsA(List<List<String>> data, String fromDate, String toDate) {
         boolean flag1 = false, flag2 = false;
         for (List<String> datum : data) {
@@ -292,12 +293,13 @@ public class Finance {
     }
 
     protected static boolean validatePeriods(List<List<String>> data, String fromDate, String toDate) {
-        boolean flag1 = false, flag2 = false, find1 = false, find2 = false;
-        String firstDate = data.get(0).get(0), endDate = data.get(data.size() - 1).get(0);
+        boolean find1 = false, find2 = false;
         int idx1 = -1, idx2 = -1;
 
+        if (data.isEmpty()) return false;
+
         for (int i = 0; i < data.size(); i++) {
-            if (data.get(i).toString().contains(fromDate)) {
+            if (data.get(i).toString().contains(fromDate) && !find1) {
                 idx1 = i;
                 find1 = true;
             }
@@ -305,17 +307,18 @@ public class Finance {
                 idx2 = i;
                 find2 = true;
             }
-            if ((idx1 != idx2) && (find1 && find2)) {
-                break;
-            } else if ((idx1 == idx2)) {
-                return false;
-            }
         }
+
         if (idx2 < idx1) return false;
         return find1 && find2;
     }
 
-    protected static void findDate(List<List<String>> data){
+    // todo: Проверяваш единственно дали датата е в даден диапазон от дати:
+    //       1. При валидана дата (в диапазона е) ти хвърля 404.
+    //       2. Трябва да намира първата валидна дата ако изсканата не се среща в масива.
+    //       3.
+    protected static void findDate(List<List<String>> data) {
+
 
     }
 
@@ -324,10 +327,12 @@ public class Finance {
         String transactions = null, hour = null, date = null;
         int maxLength = 0, cnt = 0;
 
+        if (data.isEmpty()) return;
+
         System.out.println();
         if (periodRes == null) {
             System.out.println("\n404: НЕВАЛИДНИ ДАТИ. " +
-                    "Диапазаноа е от: " + getDate(data, 0) + " до: "
+                    "Диапазона е от: " + getDate(data, 0) + " до: "
                     + getDate(data, data.size() - 1) + ".");
             return;
         }
@@ -367,6 +372,11 @@ public class Finance {
 
     protected static void printAllInfo(List<List<String>> data) {
         int cnt = 0;
+
+        if (data.isEmpty()) return;
+
+        System.out.println();
+
         for (int i = 0; i < data.size(); i++) {
 
             System.out.printf("%s: %s - %s;", getDate(data, i), getTransaction(data, i), getHour(data, i));
@@ -402,7 +412,6 @@ public class Finance {
 
     protected static void spaces(int num, String word) {
         int spaceCount = Math.abs(num - word.length());
-
         for (int i = 0; i < spaceCount; i++) {
             System.out.print(" ");
         }
@@ -462,7 +471,9 @@ public class Finance {
     }
 
     protected static void printTransactions(List<List<String>> data) {
-        List<String> types = new ArrayList<>(List.of("ЗАПЛАТА", "АВАНС", "ЕВН", "ЕЛЕКТРОХОЛД", "ЕЛ ЕНЕРГИЯ", "VIVACOM", "ПЛАЩАНЕ ПО ЗАЕМ", "ЛИХВА ОВЪРДРАФТ", "ИНТЕРНЕТ", "BREZOVO", "VIBER"));
+        if (data.isEmpty()) return;
+        List<String> types = new ArrayList<>(List.of("ЗАПЛАТА", "АВАНС", "ЕВН", "ЕЛЕКТРОХОЛД", "ЕЛ ЕНЕРГИЯ",
+                "VIVACOM", "ПЛАЩАНЕ ПО ЗАЕМ", "ЛИХВА ОВЪРДРАФТ", "ИНТЕРНЕТ", "BREZOVO", "VIBER"));
 
         for (String type : types) findByType(data, type);
     }
