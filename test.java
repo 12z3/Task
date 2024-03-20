@@ -1,4 +1,7 @@
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 public class test {
     public static void main(String[] args) {
@@ -11,8 +14,28 @@ public class test {
 //        }
 
         //String input = "1 1 1 2 2 3 3 3 4 4 5 6 7 8";
-        String input = "1 3 1 2 1 3 4 3 4 3 5 6 2 8 3";
+        String input = "1 3 1 2 1 3 4 1 4 3 5 6 2 8 3";
         frequentNumbers(input);
+        frequentNumbersA(input);
+    }
+
+    protected static void frequentNumbersA(String input) {
+        int cnt = 0;
+        String[] digits = input.split(" ");
+        System.out.println(Arrays.toString(digits));
+        Map<String, Integer> numberCount = new HashMap<>();
+
+        for (String digit : digits) {
+            cnt = 0;
+            if (numberCount.containsKey(digit)) {
+                cnt = numberCount.get(digit);
+            }
+            numberCount.put(digit, ++cnt);
+        }
+
+        for (Map.Entry<String, Integer> el : numberCount.entrySet()) {
+            System.out.println(el.getKey() + ": " + el.getValue());
+        }
     }
 
 
@@ -40,6 +63,7 @@ public class test {
 
         System.out.println(Arrays.toString(digits));
         System.out.println(Arrays.toString(countMatches));
+
     }
 
     protected static boolean isChecked(String[] arr, String el) {
