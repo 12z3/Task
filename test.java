@@ -13,7 +13,6 @@ public class test {
 //            System.out.print(i + " ");
 //        }
 
-        //String input = "1 1 1 2 2 3 3 3 4 4 5 6 7 8";
         String input = "1 3 1 2 1 3 4 1 4 3 5 6 2 8 3";
         frequentNumbers(input);
         frequentNumbersA(input);
@@ -48,7 +47,7 @@ public class test {
         String[] digits = new String[numbers.length];
         Arrays.fill(digits, "-1");
 
-        for (int i = 0; i < numbers.length; i++) {
+     LOOP:   for (int i = 0; i < numbers.length; i++) {
             cnt = 1;
             if (isChecked(digits, numbers[i])) continue;
             for (int j = i + 1; j < numbers.length; j++) {
