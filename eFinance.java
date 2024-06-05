@@ -21,19 +21,24 @@ public class eFinance {
     // Реализирана е проверка за валидността на датите.
     // Ако дадена дата не се среща в Листа търси
     // следващата валидна такава. Формата на датата трябва да бъде: "21.01.2024"
+    // todo: Трябва да можеш да търсиш по категория и по дати едновременно. Методите ги имаш.
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("");
+        File file = new File("/Users/blagojnikolov/Documents/VSCode/report.csv");
         List<String> allData = readData(file);
 
         //printListData(allData);
         //print(allData);
         findByType(allData, "ЗАПЛАТА");
         findByType(allData, "АВАНС");
-        //findByType(allData, "VIVA");
+        findByType(allData, "VIVA");
+        //findByType(allData, "ТРАНСФЕР");
         //printListDataTmp(allData, 66, 2);
 
-        findByDate(allData, "30.12.2023", "01.05.2024");
+        findByDate(allData, "30.12.2023", "02.05.2024");
+        //findByDate(allData, "02.05.2024", "31.12.2023");
+        //findByDate(allData, "02.05.2024", "30.04.2024");
+        //findByDate(allData, "30.04.2024", "02.05.2024");
         //findNextValidDate2(allData, "30.12.2023");
         //findNextValidDate1(allData, "01.05.2024");
         //findNextValidDate(allData, "19.05.2024");
@@ -84,6 +89,7 @@ public class eFinance {
             double idx2 = Objects.requireNonNull(getIdxByDate(list, fromDate, toDate))[1];
             double sum = 0.0;
 
+            // Това вече може би е излишно?
             if (idx1 > idx2) {
                 fromIdx = idx2;
                 toIdx = idx1;
@@ -108,17 +114,63 @@ public class eFinance {
 
     // На тез дати съответстват ли валидни индекси?
     static double[] getIdxByDate(List<String> list, String fromDate, String toDate) {
-        Pattern pattern1 = Pattern.compile(fromDate);
-        Pattern pattern2 = Pattern.compile(toDate);
-        Matcher matcher1 = null, matcher2;
-
+        Matcher matcher1, matcher2;
         double[] idxs = new double[2];
         int cnt1 = 0, cnt2 = 0, fromIdx = 0, toIdx = 0;
+        int fromMonthInt, toMonthInt, fromYearInt, toYearInt, fromDayInt, toDayInt;
         boolean fromDateIdxIsFind = false;
 
+        try {
+            fromDayInt = Integer.parseInt(fromDate.substring(0, 2));
+            toDayInt = Integer.parseInt(toDate.substring(0, 2));
+            fromMonthInt = Integer.parseInt(fromDate.substring(3, 5));
+            toMonthInt = Integer.parseInt(toDate.substring(3, 5));
+            fromYearInt = Integer.parseInt(fromDate.substring(6));
+            toYearInt = Integer.parseInt(toDate.substring(6));
+
+            if (String.valueOf(fromYearInt).length() > 4 || String.valueOf(toYearInt).length() > 4) {
+                System.out.println("Oмазал си Датите: " + fromYearInt + " или " + toYearInt);
+                return null;
+            }
+            if (String.valueOf(fromMonthInt).length() > 2 || String.valueOf(toMonthInt).length() > 2) {
+                System.out.println("Oмазал си Датите: " + fromMonthInt + " или " + toMonthInt);
+                return null;
+            }
+        } catch (NumberFormatException ex) {
+            System.out.println("Oмазал си Датите: " + fromDate + " или " + toDate);
+            return null;
+        }
+
+        // todo: Трябва правилно да подредиш from и to индексите щот логиката с fromDateIdxIsFind те проваля.
+        //       from винаги трябва да е преди to ;) Виж какви са ти комбинациите от възможни дати: година/месец/ден.
+        //       Датите в файла са подредени така; От 2024 -> 2023.
+
+
+        // "30.04.2023", "02.05.2024" -> "02.05.2024", "30.04.2023": Това е идеята (!fromDateIdxIsFind).
+        String[] swapArr = swap(fromDate, toDate);
+        if (fromYearInt < toYearInt) {
+            fromDate = swapArr[0];
+            toDate = swapArr[1];
+        } else if (fromYearInt == toYearInt) {
+            if (fromMonthInt < toMonthInt) {
+                fromDate = swapArr[0];
+                toDate = swapArr[1];
+            } else if (fromMonthInt == toMonthInt) {
+                if (fromDayInt < toDayInt) {
+                    fromDate = swapArr[0];
+                    toDate = swapArr[1];
+                }
+            }
+        }
+
+        // Ако преместиш тия два реда преди проверката Pattern ще помни не променените стойности
+        Pattern pattern1 = Pattern.compile("\\b" + fromDate + "\\b");
+        Pattern pattern2 = Pattern.compile("\\b" + toDate + "\\b");
+
         for (int i = 0; i < list.size(); i++) {
-            matcher1 = pattern1.matcher(list.get(i));
-            matcher2 = pattern2.matcher(list.get(i));
+            matcher1 = pattern1.matcher(list.get(i).trim());
+            matcher2 = pattern2.matcher(list.get(i).trim());
+            // За този ред иде реч по-горе.
             if (!fromDateIdxIsFind && matcher1.find()) {
                 cnt1++;
                 fromIdx = i;
@@ -132,17 +184,25 @@ public class eFinance {
         if (cnt1 == 0) {
             System.out.println(fromDate + " е невалидна дата");
             findNextValidDate2(list, fromDate);
+            return null;
         }
 
         if (cnt2 == 0) {
             System.out.println(toDate + " е невалидна дата");
             findNextValidDate2(list, toDate);
+            return null;
         }
-        if (cnt1 == 0 || cnt2 == 0) return null;
 
         idxs[0] = fromIdx;
         idxs[1] = toIdx;
         return idxs;
+    }
+
+    static String[] swap(String fromDate, String toDate) {
+        String[] res = new String[2];
+        res[0] = toDate;
+        res[1] = fromDate;
+        return res;
     }
 
     // Съществува ли != null масив с индекси на датите значи датата е валидна
@@ -194,7 +254,6 @@ public class eFinance {
         System.out.println(rgx + " е следващата валидна дата");
     }
 
-
     static void findNextValidDate1(List<String> list, String date) {
         int intDate, intMonth, intYear;
 
@@ -207,7 +266,7 @@ public class eFinance {
             return;
         }
 
-        while (!searchingMatchesDates(list, date)) {
+        while (searchingMatchesDates(list, date) == -1) {
             String tmpStr = date.substring(2);
             String tmpStrM = date.substring(5);
             String tmpDate = null;
@@ -236,6 +295,11 @@ public class eFinance {
     static void findNextValidDate2(List<String> list, String date) {
         int intDate, intMonth, intYear;
 
+        if (list.isEmpty()){
+            System.out.println("List Size = " + list.size());
+            return;
+        }
+
         try {
             intDate = Integer.parseInt(date.substring(0, 2));
             intMonth = Integer.parseInt(date.substring(3, 5));
@@ -245,7 +309,8 @@ public class eFinance {
             return;
         }
 
-        while (!searchingMatchesDates(list, date)) {
+        // "Малко" Дивашки конструираш датите, но Работи ;)
+        while (searchingMatchesDates(list, date) == -1) {
             String tmpStr = date.substring(2);
             String tmpStrM = date.substring(5);
             String tmpDate = null;
@@ -279,7 +344,7 @@ public class eFinance {
     }
 
 
-    static boolean searchingMatchesDates(List<String> list, String date) {
+    static int searchingMatchesDates(List<String> list, String date) {
         Pattern pattern = Pattern.compile(date);
         Matcher matcher;
         String res = null;
@@ -288,16 +353,15 @@ public class eFinance {
             matcher = pattern.matcher(list.get(i));
             if (matcher.find()) {
                 res = matcher.group();
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
     static void findByType(List<String> list, String thisWord) {
         Pattern pattern = Pattern.compile(thisWord);
         Matcher matcher;
-        String lastLine = "";
         int lastLineLength = 0, cnt = 0;
         double sum = 0.0;
 
