@@ -2,11 +2,7 @@ package exlFinance;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +20,8 @@ public class eFinance {
     // todo: Трябва да можеш да търсиш по категория и по дати едновременно. Методите ги имаш.
 
     public static void main(String[] args) throws FileNotFoundException {
-        File file = new File("/Users/blagojnikolov/Documents/VSCode/report.csv");
+        File file = new File("" +
+                "/Users/blagojnikolov/Library/Mobile Documents/com~apple~CloudDocs/Documents/VSCode/report.csv");
         List<String> allData = readData(file);
 
         //printListData(allData);
@@ -35,7 +32,7 @@ public class eFinance {
         //findByType(allData, "ТРАНСФЕР");
         //printListDataTmp(allData, 66, 2);
 
-        findByDate(allData, "30.12.2023", "02.05.2024");
+        findByDate(allData, "30.12.2023", "02.06.2024");
         //findByDate(allData, "02.05.2024", "31.12.2023");
         //findByDate(allData, "02.05.2024", "30.04.2024");
         //findByDate(allData, "30.04.2024", "02.05.2024");
@@ -43,7 +40,6 @@ public class eFinance {
         //findNextValidDate1(allData, "01.05.2024");
         //findNextValidDate(allData, "19.05.2024");
     }
-
 
     static List<String> readData(File file) {
         ArrayList<String> list = new ArrayList<>();
@@ -75,6 +71,47 @@ public class eFinance {
             System.out.println("Няма ти го Файла пиЧ ;)");
         }
         return list;
+    }
+
+    public static String[] getFirstAndLastRowsFromFile(File file) {
+        Scanner scanner;
+        String row, fRow = "", lRow, tmp = "";
+        String[] flDays = new String[2];
+        try {
+            scanner = new Scanner(file);
+        } catch (FileNotFoundException ex) {
+            System.out.println("404: Файла не съществува");
+            return null;
+        }
+
+        int cnt = 0;
+        while (scanner.hasNext()) {
+            row = scanner.nextLine();
+            if (row.charAt(0) == 1054) break;                                             // O
+            if (cnt > 3 && (row.charAt(1) != 1040 && row.charAt(1) != (1053))) {          // А; Н
+                tmp = row;
+                if (cnt == 4) {
+                    fRow = tmp;
+                }
+            }
+            cnt++;
+        }
+        lRow = tmp;
+        flDays[0] = fRow.trim().split(",")[0];
+        flDays[1] = lRow.trim().split(",")[0];
+        return flDays;
+    }
+
+    static String[] getFirstAndLastRowsFromList(List<String> list) {
+        String[] res = new String[2];
+
+        res[0] = list.getFirst().split("-")[0];
+        res[1] = list.get(list.size() - 2).split("-")[0];
+        return res;
+    }
+
+    static int dateBoundsInt(String[] dates, int idx1, int idx2) {
+        return Integer.parseInt(dates[idx1].split("\\.")[idx2]);
     }
 
 
@@ -112,6 +149,21 @@ public class eFinance {
         }
     }
 
+    static boolean dateBoundsValidCheck(List<String> list, int fromYear,
+                                        int fromMonth, int toYear, int toMonth) {
+        String[] tmpBounds = getFirstAndLastRowsFromList(list);
+        //int fromTmpDay = dateBoundsInt(tmpBounds, 0, 0);
+        int fromTmpMonth = dateBoundsInt(tmpBounds, 0, 1);
+        int fromTmpYear = dateBoundsInt(tmpBounds, 0, 2);
+
+        //int toTmpDay = dateBoundsInt(tmpBounds, 1, 0);
+        int toTmpMonth = dateBoundsInt(tmpBounds, 1, 1);
+        int toTmpYear = dateBoundsInt(tmpBounds, 1, 2);
+
+        return ((fromYear > fromTmpYear) && (toYear > toTmpYear))
+                || ((fromMonth > fromTmpMonth) && (toMonth > toTmpMonth));
+    }
+
     // На тез дати съответстват ли валидни индекси?
     static double[] getIdxByDate(List<String> list, String fromDate, String toDate) {
         Matcher matcher1, matcher2;
@@ -120,6 +172,7 @@ public class eFinance {
         int fromMonthInt, toMonthInt, fromYearInt, toYearInt, fromDayInt, toDayInt;
         boolean fromDateIdxIsFind = false;
 
+        // Проверката е за валиден брой цифри в датите
         try {
             fromDayInt = Integer.parseInt(fromDate.substring(0, 2));
             toDayInt = Integer.parseInt(toDate.substring(0, 2));
@@ -136,15 +189,29 @@ public class eFinance {
                 System.out.println("Oмазал си Датите: " + fromMonthInt + " или " + toMonthInt);
                 return null;
             }
+
+            if (String.valueOf(fromDayInt).length() > 2 || String.valueOf(toDayInt).length() > 2) {
+                System.out.println("Oмазал си Датите: " + fromMonthInt + " или " + toMonthInt);
+                return null;
+            }
         } catch (NumberFormatException ex) {
             System.out.println("Oмазал си Датите: " + fromDate + " или " + toDate);
             return null;
         }
 
+
         // todo: Трябва правилно да подредиш from и to индексите щот логиката с fromDateIdxIsFind те проваля.
         //       from винаги трябва да е преди to ;) Виж какви са ти комбинациите от възможни дати: година/месец/ден.
         //       Датите в файла са подредени така; От 2024 -> 2023.
 
+
+        // 06.2024 е невалидна като Период. Като формат си е 6-10. Последната е 30.05.2024
+        if (dateBoundsValidCheck(list, fromYearInt, fromMonthInt, toYearInt, toMonthInt)) {
+            System.out.println(
+                    "Диапазона от дати е:" + Arrays.toString(getFirstAndLastRowsFromList(list)));
+            System.out.println("404: Оправи си датите ;)");
+            return null;
+        }
 
         // "30.04.2023", "02.05.2024" -> "02.05.2024", "30.04.2023": Това е идеята (!fromDateIdxIsFind).
         String[] swapArr = swap(fromDate, toDate);
@@ -293,15 +360,10 @@ public class eFinance {
     }
 
     static void findNextValidDate2(List<String> list, String date) {
-        int intDate, intMonth, intYear;
-
-        if (list.isEmpty()){
-            System.out.println("List Size = " + list.size());
-            return;
-        }
+        int intDay, intMonth, intYear, cnt = 0;
 
         try {
-            intDate = Integer.parseInt(date.substring(0, 2));
+            intDay = Integer.parseInt(date.substring(0, 2));
             intMonth = Integer.parseInt(date.substring(3, 5));
             intYear = Integer.parseInt(date.substring(6));
         } catch (NumberFormatException ex) {
@@ -315,28 +377,27 @@ public class eFinance {
             String tmpStrM = date.substring(5);
             String tmpDate = null;
 
-            if (intDate >= 10 && intDate < 31) {
-                intDate++;
-                tmpDate = intDate + tmpStr;
-            } else if (intDate > 0 && intDate < 10) {
-                intDate++;
-                tmpDate = STR."0\{intDate}\{tmpStr}";
-            } else if (intDate >= 31) {
-                intDate = 1;
 
+            if (intDay >= 10 && intDay < 31) {
+                intDay++;
+                tmpDate = intDay + tmpStr;
+            } else if (intDay > 0 && intDay < 10) {
+                intDay++;
+                tmpDate = STR."0\{intDay}\{tmpStr}";
+            } else if (intDay >= 31) {
+                intDay = 1;
                 if (intMonth < 12) {
                     intMonth++;
                     if (intMonth < 10) {
-                        tmpDate = STR."0\{intDate}.0\{intMonth}\{tmpStrM}";
+                        tmpDate = STR."0\{intDay}.0\{intMonth}\{tmpStrM}";
                     } else {
-                        tmpDate = intDate + intMonth + tmpStrM;
+                        tmpDate = intDay + intMonth + tmpStrM;
                     }
                 } else {
                     intMonth = 1;
                     intYear++;
-                    tmpDate = "0" + intDate + "." + "0" + intMonth + "." + intYear;
+                    tmpDate = "0" + intDay + "." + "0" + intMonth + "." + intYear;
                 }
-
             }
             date = tmpDate;
         }
@@ -345,7 +406,8 @@ public class eFinance {
 
 
     static int searchingMatchesDates(List<String> list, String date) {
-        Pattern pattern = Pattern.compile(date);
+        //Pattern pattern = Pattern.compile(date);
+        Pattern pattern = Pattern.compile("\\b" + date + "\\b");
         Matcher matcher;
         String res = null;
 
