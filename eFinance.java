@@ -21,7 +21,7 @@ public class eFinance {
 
     public static void main(String[] args) throws FileNotFoundException {
         File file = new File("" +
-                "/Users/blagojnikolov/Library/Mobile Documents/com~apple~CloudDocs/Documents/VSCode/report.csv");
+                "");
         List<String> allData = readData(file);
 
         //printListData(allData);
@@ -29,10 +29,12 @@ public class eFinance {
         findByType(allData, "ЗАПЛАТА");
         findByType(allData, "АВАНС");
         findByType(allData, "VIVA");
+        findByType(allData, "ЕВН");
+        findByType(allData, "ЕЛЕКТРОХОЛД");
         //findByType(allData, "ТРАНСФЕР");
         //printListDataTmp(allData, 66, 2);
 
-        findByDate(allData, "30.12.2023", "02.06.2024");
+        findByDate(allData, "30.12.2023", "03.06.2024");
         //findByDate(allData, "02.05.2024", "31.12.2023");
         //findByDate(allData, "02.05.2024", "30.04.2024");
         //findByDate(allData, "30.04.2024", "02.05.2024");
@@ -372,6 +374,7 @@ public class eFinance {
         }
 
         // "Малко" Дивашки конструираш датите, но Работи ;)
+        // Милионите проверки гарантират, че дата ще я има и while няма да е безкраен. - Малко рисковано е.
         while (searchingMatchesDates(list, date) == -1) {
             String tmpStr = date.substring(2);
             String tmpStrM = date.substring(5);
@@ -428,7 +431,7 @@ public class eFinance {
         double sum = 0.0;
 
         System.out.println();
-        System.out.println("Търсенето е по: " + thisWord);
+        System.out.println("Търсенето е по: " + "\"" + thisWord + "\"");
         for (int i = 0; i < list.size(); i++) {
             matcher = pattern.matcher(list.get(i));
             if (matcher.find()) {
