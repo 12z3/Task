@@ -9,13 +9,6 @@ import java.util.regex.Pattern;
 
 public class DocMake {
     public static void main(String[] args) throws FileNotFoundException {
-        // "Плащане на сметка","БЛАГОЙ НИКОЛОВ НИКОЛОВ ","6607342","ЕВН ЕЛ. ЕНЕРГИЯ -
-        // ЕЛ.КАНАЛИ ",
-        // "BG91STSA93000004594021","185,39 BGN","15.12.2023 г. 4:58:18 15.12.2023 г.
-        // 4:58:34","15.12.2023 г. 4:58:18",
-        // "Операцията е изпълнена 000000204","Аб.N. 1000321755","15.12.2023 ЕЛ ЕНЕРГИЯ"
-        // 3 - Търговец; 4- сметка; 11(7) - дата;
-        // String tmp = "This is a date 12.01.2024";
 
         File file = new File("/Users/blagojnikolov/Desktop/@tmp/reportDSK.csv");
         readFile(file);
