@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 
 public class regex {
     public static void main(String[] args) throws FileNotFoundException {
-        // "Плащане на сметка,БЛАГОЙ НИКОЛОВ НИКОЛОВ ,6607342,ЕВН ЕЛ. ЕНЕРГИЯ - ЕЛ.КАНАЛИ ,BG91STSA93000004594021,185,39"
         readFile();
     }
 
