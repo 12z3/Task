@@ -87,6 +87,7 @@ public class getData extends findMethods {
 
     // ! Търси колко пъти "some" се среща във всеки ред(Масив от Str) в листа "line"
     // * Виждаш какво връща метода */
+    // То хубаво, но се замисли какви ползи имаш от структурата Map ;)? Пренапиши го.
     protected static Map<Integer, String> findInLine(List<String[]> line, String some) {
         some.trim();
         System.out.println();
