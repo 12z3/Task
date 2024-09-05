@@ -96,6 +96,20 @@ public class nList<T> {
 	}
 
 
+	protected void printInfo() {
+		Node<T> node = this.top;
+		while (node != null) {
+			if (node.next != null) {
+				System.out.print(
+						node.getElement() + " -> " + node.next + " : " + node.next.getElement() + " -> ");
+				if (node.next.next != null) {
+					System.out.println(node.next.next.getElement());
+				}
+			}
+			node = node.next;
+		}
+	}
+
 	public static void main(String[] args) {
 		nList<Integer> list = new nList<>();
 		list.add(5);
@@ -110,5 +124,8 @@ public class nList<T> {
 				.addN(3)
 				.addN(4);
 		nList.print();
+
+		list.printInfo();
+		System.out.println("\nsize = " + list.size);
 	}
 }
