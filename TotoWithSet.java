@@ -92,7 +92,7 @@ public class TotoWithSet {
 			}
 			cnt++;
 		}
-		System.out.println(cnt + " <- ");
+		System.out.println("Attempt:  " + cnt + " <- ");
 		return input;
 	}
 
