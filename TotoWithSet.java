@@ -4,18 +4,23 @@ import java.util.*;
 
 public class TotoWithSet {
 	public static void main(String[] args) {
-		List<List<Integer>> suppose = digitsGenerator(3);
-		printRes(suppose);
+		play();
+	}
 
-		for (List<Integer> row : suppose) {
-			System.out.print(checkMatchesByRow(row, suppose.get(0)) + "   ");
-		}
+	private static void play() {
+//		List<List<Integer>> suppose = digitsGenerator(3);
+//		printRes(suppose);
+		List<Integer> officialRs = new ArrayList<>(List.of(5, 19, 21, 22, 47, 48));
+		double officialRsStd = stdOfRow(officialRs);
 
-		//System.out.println(stdOfRow(suppose.get(0)));
+//		for (List<Integer> row : suppose) {
+//			System.out.print(checkMatchesByRow(row, officialRs) + "   ");
+//		}
+//		System.out.println();
 
-		System.out.println();
-		printRes(generatorByMatches(suppose, 8));
-
+		List<List<Integer>> res = generatorByMatches(officialRs, 8, 12.5);
+		printRes(res);
+		TestStd(res);
 	}
 
 	private static void printRes(List<List<Integer>> suppose) {
@@ -60,7 +65,7 @@ public class TotoWithSet {
 	}
 
 
-	private static List<List<Integer>> generatorByStd(List<Integer> lastDraw, double std) {
+	private static List<List<Integer>> generatorByStd(double std) {
 		int cnt = 0;
 		double tmpStd = Integer.MIN_VALUE;
 		List<Integer> tmpRow;
@@ -81,19 +86,21 @@ public class TotoWithSet {
 	}
 
 
-	private static List<List<Integer>> generatorByMatches(List<List<Integer>> input, int matchesSum) {
-		int tmpSum = 0, cnt = 0;
-
+	private static List<List<Integer>> generatorByMatches(List<Integer> officialRes,
+														  int matchesSum, double std) {
+		List<List<Integer>> suppose = null;
+		int tmpSum = 0, attempt = 0;
 		while (tmpSum <= matchesSum) {
 			tmpSum = 0;
-			input = generatorByStd(new ArrayList<>(List.of(6, 14, 17, 21, 30, 32)), 11);
-			for (List<Integer> row : input) {
-				tmpSum += checkMatchesByRow(row, new ArrayList<>(List.of(6, 14, 17, 21, 30, 32)));
+			suppose = generatorByStd(std);
+			for (List<Integer> row : suppose) {
+				tmpSum += checkMatchesByRow(row, officialRes);
 			}
-			cnt++;
+			attempt++;
 		}
-		System.out.println("Attempt:  " + cnt + " <- ");
-		return input;
+		System.out.println();
+		System.out.println("Attempt:  " + attempt + " <- ");
+		return suppose;
 	}
 
 	// Всяко едно число от row дали се съдържа в officialResult?
@@ -120,5 +127,14 @@ public class TotoWithSet {
 			avrSums += x;
 		}
 		return Math.sqrt(avrSums / row.size());
+	}
+
+	private static void TestStd(List<List<Integer>> tmp) {
+		System.out.print("Stds: ");
+		for (int i = 0; i < tmp.size(); i++) {
+			if (i < 2) {
+				System.out.print(stdOfRow(tmp.get(i)) + " | ");
+			} else System.out.print(stdOfRow(tmp.get(i)));
+		}
 	}
 }
