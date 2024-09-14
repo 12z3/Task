@@ -17,10 +17,12 @@ public class TotoWithSet {
 //			System.out.print(checkMatchesByRow(row, officialRs) + "   ");
 //		}
 //		System.out.println();
-
+		long  start = System.nanoTime();
 		List<List<Integer>> res = generatorByMatches(officialRs, 8, 12.5);
 		printRes(res);
 		TestStd(res);
+		double duration = (System.nanoTime() - start) / Math.pow(10, 9);
+		System.out.printf("\nduration: %.2f s", duration);
 	}
 
 	private static void printRes(List<List<Integer>> suppose) {
@@ -65,6 +67,7 @@ public class TotoWithSet {
 	}
 
 
+	// Генерира три масива чиито илементи имат средноквадратично отклонение = std
 	private static List<List<Integer>> generatorByStd(double std) {
 		int cnt = 0;
 		double tmpStd = Integer.MIN_VALUE;
@@ -86,6 +89,8 @@ public class TotoWithSet {
 	}
 
 
+	// Генерира три масива чиито средноквадратично отклонение = std && сумарно и за трите масива броя на съвпаденията
+	// в последният тираж е = matchesSum.
 	private static List<List<Integer>> generatorByMatches(List<Integer> officialRes,
 														  int matchesSum, double std) {
 		List<List<Integer>> suppose = null;
@@ -103,7 +108,7 @@ public class TotoWithSet {
 		return suppose;
 	}
 
-	// Всяко едно число от row дали се съдържа в officialResult?
+	// Проверка дали всяко едно число от row се съдържа в officialResult?
 	private static int checkMatchesByRow(List<Integer> row, List<Integer> officialResult) {
 		int matches = 0;
 		for (Integer elOfRow : row) {
@@ -117,6 +122,7 @@ public class TotoWithSet {
 		return matches;
 	}
 
+	// Генерира масив чиито средноквадратично отклонение е = std
 	private static double stdOfRow(List<Integer> row) {
 		double avrByRow, sum = 0, avrSums = 0;
 
